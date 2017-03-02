@@ -19,6 +19,7 @@ package com.sample.andremion.musicplayer.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -29,15 +30,18 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.model.MediaEntity;
-import com.sample.andremion.musicplayer.music.MusicContent;
 import com.sample.andremion.musicplayer.musicUtils.utils;
-import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
+import com.sample.andremion.musicplayer.view.sweetAlertDialog.SweetAlertDialog;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -49,9 +53,10 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @EActivity(R.layout.content_list)
 public class MainActivity extends PlayerActivity {
-    String TAG = "WWWWWW";
+    String TAG = "MainActivity";
     @ViewById(R.id.cover)
     View mCoverView;
     @ViewById(R.id.title)
@@ -70,6 +75,9 @@ public class MainActivity extends PlayerActivity {
     TextView displayName;
     @ViewById
     TextView displayAuthor;
+    @ViewById
+    ImageView btnRefresh;
+
     private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE=0x123;
     private List<MediaEntity> mListMedia = new ArrayList<>();
     public RecyclerViewAdapter mAdapter;
@@ -88,6 +96,8 @@ public class MainActivity extends PlayerActivity {
 
     @AfterViews
     void afterView(){
+        btnRefresh.setFocusable(true);
+        btnRefresh.setFocusableInTouchMode(true);
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerViewAdapter(mListMedia);
@@ -147,7 +157,39 @@ public class MainActivity extends PlayerActivity {
     @Background
     void bindService(){
         while(!mBound){
+            Log.e("wait","等待服务初始化完毕");
         }
         update(mListMedia,0);
+    }
+
+    @Click(R.id.btn_refresh)
+    void btnRefresh(){
+        Log.e(TAG,"点击");
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText("Are you sure?")
+                    .setContentText("You want to exit the player?")
+                    .setCancelText("No,cancel!")
+                    .setConfirmText("Yes,i do!")
+                    .showCancelButton(true)
+                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismiss();
+                        }
+                    })
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            finish();
+                        }
+                    })
+                    .show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

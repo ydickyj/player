@@ -103,15 +103,14 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
         <ImageView
-            android:id="@+id/options"
+            android:id="@+id/btn_refresh"
             android:layout_width="@dimen/design_fab_size_mini"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/design_fab_size_mini"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/btn_refresh_background"
             android:clickable="true"
-            android:src="@drawable/ic_more_vert_white_24dp"/>
-
+            />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -134,6 +133,7 @@
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:onClick="onFabClick"
         android:scaleType="center"
+        android:nextFocusDown="@id/btn_refresh"
         android:src="@drawable/ic_play_animatable"
         android:transitionName="@string/transition_name_fab"
         app:fabSize="mini"/>

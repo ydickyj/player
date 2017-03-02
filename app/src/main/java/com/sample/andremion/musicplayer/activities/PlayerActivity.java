@@ -29,6 +29,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
@@ -158,4 +159,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
            mUpdateProgressHandler.sendEmptyMessage(0);
             Log.e("123","1231");
     }
+
+
 }

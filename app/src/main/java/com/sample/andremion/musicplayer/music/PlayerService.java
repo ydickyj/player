@@ -108,11 +108,18 @@ public class PlayerService extends Service {
         }catch (Exception e){
             Log.e("niu",""+e);
         }
-
     }
 
     public void pause() {
-        mp.pause();
+        if (mp == null){
+            Log.e(TAG,"播放器未初始化");
+        }else {
+            try{
+                mp.pause();
+            }catch (Exception e){
+                Log.e(TAG,""+e);
+            }
+        }
     }
 
     public void stop() {
@@ -165,7 +172,7 @@ public class PlayerService extends Service {
         mListMedia = new ArrayList<>();
         mListMedia.addAll(listMedia);
         musicIndex = mMusicIndex;
-        Log.e("hint", "" + mListMedia.get(musicIndex).getPath());
+//        Log.e("hint", "" + mListMedia.get(musicIndex).getPath());
         try {
             mp.reset();
             mp.setDataSource(mListMedia.get(musicIndex).getPath());
