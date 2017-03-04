@@ -56,7 +56,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 case 0:
                     final int position = mService.getPosition();
                     final int mDuration = mService.getDuration();
-                    Log.e("position:",""+position+"12321   "+mDuration);
+//                    Log.e("position:",""+position+"12321   "+mDuration);
                     final String name = mService.getDisplayName();
                     final String author = mService.getDisplayAuthor();
                     onUpdateProgress(position, mDuration,name,author);
@@ -76,7 +76,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             // We've bound to PlayerService, cast the IBinder and get PlayerService instance
             PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
             mService = binder.getService();
-            Log.e("12312",""+mService);
+//            Log.e("12312",""+mService);
             mBound = true;
             onBind();
         }
@@ -93,7 +93,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mTimeView.setText(utils.IntToStrTime(position));
         }
         if (mDurationView != null) {
-            Log.e("12312",""+utils.IntToStrTime((duration/ 1000))+ "   "+duration);
+//            Log.e("12312",""+utils.IntToStrTime((duration/ 1000))+ "   "+duration);
             mDurationView.setText(utils.IntToStrTime(duration));
         }
         if (mProgressView != null) {
@@ -133,6 +133,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             unbindService(mConnection);
             mBound = false;
         }
+        Log.e("onDestroy","yes");
         super.onDestroy();
     }
 
@@ -154,7 +155,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
     public void update(List<MediaEntity> mListMedia,int dex){
-            Log.e("123","123");
             mService.update(mListMedia,dex);
            mUpdateProgressHandler.sendEmptyMessage(0);
             Log.e("123","1231");

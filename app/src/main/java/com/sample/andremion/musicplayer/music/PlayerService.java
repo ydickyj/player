@@ -25,6 +25,7 @@ import android.util.Log;
 
 import com.sample.andremion.musicplayer.model.MediaEntity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class PlayerService extends Service {
     private final IBinder mBinder = new LocalBinder();
     private int musicIndex = 0;
     public static MediaPlayer mp = new MediaPlayer();
+    private boolean mMediaPlayerIsReady = false;
 
     public PlayerService() {
 
@@ -48,22 +50,22 @@ public class PlayerService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
-        if (mp != null) {
+        if (mMediaPlayerIsReady) {
+            mMediaPlayerIsReady = false;
             mp.release();
-            Log.e("1231","12321");
+            Log.e("1231", "12321");
         }
         return super.onUnbind(intent);
     }
 
 
     public int getPosition() {
-        if (mp != null && mListMedia.size() != 0) {
+        if (mMediaPlayerIsReady && mListMedia.size() != 0) {
             try {
                 return mp.getCurrentPosition();
             } catch (Exception e) {
                 Log.e("Exception", "" + e);
             }
-
         }
         return 0;
     }
@@ -103,27 +105,31 @@ public class PlayerService extends Service {
     }
 
     public void play() {
-        try{
-            mp.start();
-        }catch (Exception e){
-            Log.e("niu",""+e);
+        if (mMediaPlayerIsReady) {
+            try {
+                mp.start();
+            } catch (Exception e) {
+                Log.e("niu", "" + e);
+            }
+        } else {
+            Log.e(TAG, "播放器未初始化");
         }
     }
 
     public void pause() {
-        if (mp == null){
-            Log.e(TAG,"播放器未初始化");
-        }else {
-            try{
+        if (!mMediaPlayerIsReady) {
+            Log.e(TAG, "播放器未初始化");
+        } else {
+            try {
                 mp.pause();
-            }catch (Exception e){
-                Log.e(TAG,""+e);
+            } catch (Exception e) {
+                Log.e(TAG, "" + e);
             }
         }
     }
 
     public void stop() {
-        if (mp != null) {
+        if (mMediaPlayerIsReady) {
             mp.stop();
             try {
                 mp.prepare();
@@ -135,7 +141,7 @@ public class PlayerService extends Service {
     }
 
     public void nextMusic() {
-        if (mp != null && musicIndex < mListMedia.size()) {
+        if (mMediaPlayerIsReady && musicIndex < mListMedia.size()) {
             mp.stop();
             try {
                 mp.reset();
@@ -152,7 +158,7 @@ public class PlayerService extends Service {
     }
 
     public void preMusic() {
-        if (mp != null && musicIndex > 0) {
+        if (mMediaPlayerIsReady && musicIndex > 0) {
             mp.stop();
             try {
                 mp.reset();
@@ -172,14 +178,18 @@ public class PlayerService extends Service {
         mListMedia = new ArrayList<>();
         mListMedia.addAll(listMedia);
         musicIndex = mMusicIndex;
-//        Log.e("hint", "" + mListMedia.get(musicIndex).getPath());
-        try {
-            mp.reset();
-            mp.setDataSource(mListMedia.get(musicIndex).getPath());
-            mp.prepare();
-        } catch (Exception e) {
-            Log.e("hint", "can't get to the song");
-            e.printStackTrace();
+        if (mListMedia.size() == 0) {
+            mMediaPlayerIsReady = false;
+        } else {
+            try {
+                mp = new MediaPlayer();
+                mp.setDataSource(mListMedia.get(musicIndex).getPath());
+                mp.prepare();
+            } catch (IOException e) {
+                Log.e("hint", "can't get to the song IOException" + e);
+                e.printStackTrace();
+            }
+            mMediaPlayerIsReady = true;
         }
     }
 }
