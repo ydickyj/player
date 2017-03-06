@@ -24,19 +24,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.listener.ProgressListener;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
+import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
 
 
 @EActivity(R.layout.content_detail)
-public class DetailActivity extends PlayerActivity {
+public class DetailActivity extends PlayerActivity  {
     String TAG = DetailActivity.class.getName();
     @ViewById(R.id.cover)
     MusicCoverView mCoverView;
@@ -46,7 +47,8 @@ public class DetailActivity extends PlayerActivity {
     TextView displayAuthor;
     @ViewById
     LyricView lyricView;
-
+    @ViewById
+    ProgressView mProgressView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,20 +57,25 @@ public class DetailActivity extends PlayerActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
 
 
-
+        mProgressView.setProgressListener(new ProgressListener() {
+            @Override
+            public void onProgressListener(boolean isFinish) {
+                forwardMusic();
+            }
+        });
         mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
             @Override
             public void onMorphEnd(MusicCoverView coverView) {
                 // Nothing to do
                 Log.e(TAG, "onMorphEnd");
-                forwardMusic();
+
             }
 
             @Override
             public void onRotateEnd(MusicCoverView coverView) {
+                Log.e(TAG, "onRotateEnd");
                 supportFinishAfterTransition();
             }
         });
@@ -82,14 +89,12 @@ public class DetailActivity extends PlayerActivity {
                 Log.e(TAG,""+getPosition());
 //                lyricView.updateIndex(getPosition());
 
-
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-
         onFabClick(null);
     }
 
@@ -123,4 +128,6 @@ public class DetailActivity extends PlayerActivity {
     void nextMusic(){
         next();
     }
+
+
 }

@@ -17,6 +17,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -291,11 +292,13 @@ public class LyricView extends View {
             reset();
             return;
         } else if (file.getPath().equals(mCurrentLyricFilePath)) {
-            return;
+            Log.e(TAG,mCurrentLyricFilePath);
+//            return;
         } else {
             mCurrentLyricFilePath = file.getPath();
             reset();
         }
+        Log.e(TAG,"成功加载");
         try {
 
             FileInputStream fis = new FileInputStream(file);

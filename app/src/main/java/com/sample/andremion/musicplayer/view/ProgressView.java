@@ -29,8 +29,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.listener.MyItemClickListener;
+import com.sample.andremion.musicplayer.listener.ProgressListener;
 
-public class ProgressView extends View {
+public class ProgressView extends View  {
 
     private static final float STROKE_SIZE = 4;
     private static final float START_ANGLE = 135;
@@ -48,6 +50,10 @@ public class ProgressView extends View {
     private int mProgress;
     private int mMax;
     private float mMorph;
+    private ProgressListener mListener;
+    /**
+     * @param listener
+     */
 
     public ProgressView(Context context) {
         this(context, null, 0);
@@ -88,14 +94,20 @@ public class ProgressView extends View {
             progress = 0;
         }
 
-        if (progress > mMax) {
+        if (progress >= mMax) {
             progress = mMax;
+            if (mListener!=null){
+                mListener.onProgressListener(true);
+            }
         }
 
         if (progress != mProgress) {
             mProgress = progress;
             invalidate();
         }
+    }
+    public void setProgressListener(ProgressListener listener) {
+        this.mListener = listener;
     }
 
     public int getMax() {

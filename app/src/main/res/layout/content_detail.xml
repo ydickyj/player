@@ -154,7 +154,7 @@
 
         <com.sample.andremion.musicplayer.view.LyricView
             android:visibility="gone"
-            android:background="@color/colorPane"
+            android:background="@color/colorLyricView"
             android:layout_weight = "1"
             android:id="@+id/lyricView"
             android:layout_width="0dp"

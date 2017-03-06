@@ -111,6 +111,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             Log.e("TAG", lrcFile.exists() + "");
             if (lrcFile.exists()) {
                 if (!Objects.equals(mOldName, lrcFile.getName())) {
+                    Log.e("TAG","setLyricFile");
                     mLyricView.setLyricFile(lrcFile);
                     mOldName = lrcFile.getName();
                 }
@@ -154,6 +155,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             unbindService(mConnection);
             mBound = false;
         }
+        mUpdateProgressHandler.removeMessages(0);
         Log.e("onDestroy", "yes");
         super.onDestroy();
     }
