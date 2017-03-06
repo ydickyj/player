@@ -48,6 +48,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -83,10 +84,10 @@ public class MainActivity extends PlayerActivity {
     ImageView btnRefresh;
 
     private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
+    private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
     public RecyclerViewAdapter mAdapter;
-    private int sendNum = 0;
     private MyFirstReceiver mReceiver = new MyFirstReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -106,6 +107,9 @@ public class MainActivity extends PlayerActivity {
 
     @AfterViews
     void afterView() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading");
+        pDialog.setCancelable(true);
         IntentFilter filter = new IntentFilter();
         filter.addAction("scanFlag");
         registerReceiver(mReceiver, filter);
@@ -116,6 +120,26 @@ public class MainActivity extends PlayerActivity {
         mAdapter = new RecyclerViewAdapter(mListMedia);
         recyclerView.setAdapter(mAdapter);
         checkPermission();
+    }
+
+    //    判断权限
+    void checkPermission() {
+        if (Build.VERSION.SDK_INT >= 19) {//判断当前系统的版本
+            int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+            int checkReadStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+            int checkMountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
+            //判断是否需要 向用户解释，为什么要申请该权限
+            ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
+            Log.e(TAG, "" + checkMountPermission);
+            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE);
+            } else {
+                btnRefresh();//定义好的获取权限后的处理的事件
+            }
+        } else {
+            btnRefresh();
+        }
     }
 
     @Background
@@ -147,41 +171,9 @@ public class MainActivity extends PlayerActivity {
         } else {
             bindService();
         }
-    }
-
-    //    判断权限
-    void checkPermission() {
-        if (Build.VERSION.SDK_INT >= 19) {//判断当前系统的版本
-            int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
-            int checkReadStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
-            int checkMountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
-            //判断是否需要 向用户解释，为什么要申请该权限
-            ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
-            Log.e(TAG, "" + checkMountPermission);
-            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE);
-            } else {
-                scanSdCard();//定义好的获取权限后的处理的事件
-            }
-        } else {
-            scanSdCard();
+        if(pDialog.isShowing()){
+            pDialog.dismiss();
         }
-    }
-
-    @Background
-    void bindService() {
-        while (!mBound) {
-            Log.e("wait", "等待服务初始化完毕");
-        }
-        update(mListMedia, 0);
-    }
-
-    @Click(R.id.btn_refresh)
-    void btnRefresh() {
-        Log.e(TAG, "点击");
-        sendNum = 0;
-        scanSdCard();
     }
 
     @Click
@@ -195,6 +187,51 @@ public class MainActivity extends PlayerActivity {
                 new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)),
                 new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)));
         ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
+    }
+
+    @Click(R.id.btn_refresh)
+    void btnRefresh() {
+        Log.e(TAG, "点击");
+        pDialog.show();
+        scanSdCard();
+    }
+
+    @ItemClick(R.id.tracks)
+    void rvTracks(int position){
+
+    }
+
+    @Background
+    public void scanSdCard() {
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        ArrayList<String> strListMusic = folderScan(filePath, null);
+        Log.e("音乐列表长度", "" + strListMusic.size());
+        if (strListMusic.size() != 0) {
+            for (int i = 0; i < strListMusic.size(); i++) {
+                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + strListMusic.get(i))));
+            }
+//            try {
+//                Thread.sleep(20 * (strListMusic.size()));
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            if (!pDialog.isShowing()){
+                return;
+            }
+            Log.e(TAG, "scanFlag");
+            sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
+        } else {
+            mListMedia.clear();
+            update();
+        }
+    }
+
+    @Background
+    void bindService() {
+        while (!mBound) {
+            Log.e("wait", "等待服务初始化完毕");
+        }
+        update(mListMedia, 0);
     }
 
     @Override
@@ -225,24 +262,5 @@ public class MainActivity extends PlayerActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private void scanSdCard() {
-        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        ArrayList<String> strListMusic = folderScan(filePath, null);
-        Log.e("音乐列表长度", "" + strListMusic.size());
-        if (strListMusic.size() != 0) {
-            for (int i = 0; i < strListMusic.size(); i++) {
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + strListMusic.get(i))));
-            }
-            try {
-                Thread.sleep(500 * (strListMusic.size()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG, "scanFlag");
-            sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
-        } else {
-            mListMedia.clear();
-            update();
-        }
-    }
+
 }
