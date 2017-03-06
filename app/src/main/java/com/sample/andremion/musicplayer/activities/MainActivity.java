@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.broadcastReceiver.MyFirstReceiver;
+import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.musicUtils.utils;
 import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
@@ -48,10 +49,10 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -60,7 +61,7 @@ import static com.sample.andremion.musicplayer.musicUtils.utils.folderScan;
 
 
 @EActivity(R.layout.content_list)
-public class MainActivity extends PlayerActivity {
+public class MainActivity extends PlayerActivity implements MyItemClickListener {
     String TAG = "MainActivity";
     @ViewById(R.id.cover)
     View mCoverView;
@@ -118,6 +119,7 @@ public class MainActivity extends PlayerActivity {
         assert recyclerView != null;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerViewAdapter(mListMedia);
+        mAdapter.setOnItemClickListener(this);
         recyclerView.setAdapter(mAdapter);
         checkPermission();
     }
@@ -171,7 +173,7 @@ public class MainActivity extends PlayerActivity {
         } else {
             bindService();
         }
-        if(pDialog.isShowing()){
+        if (pDialog.isShowing()) {
             pDialog.dismiss();
         }
     }
@@ -196,15 +198,11 @@ public class MainActivity extends PlayerActivity {
         scanSdCard();
     }
 
-    @ItemClick(R.id.tracks)
-    void rvTracks(int position){
-
-    }
 
     @Background
     public void scanSdCard() {
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        ArrayList<String> strListMusic = folderScan(filePath, null);
+        ArrayList<String> strListMusic = utils.folderScan(filePath);
         Log.e("音乐列表长度", "" + strListMusic.size());
         if (strListMusic.size() != 0) {
             for (int i = 0; i < strListMusic.size(); i++) {
@@ -215,7 +213,7 @@ public class MainActivity extends PlayerActivity {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-            if (!pDialog.isShowing()){
+            if (!pDialog.isShowing()) {
                 return;
             }
             Log.e(TAG, "scanFlag");
@@ -263,4 +261,20 @@ public class MainActivity extends PlayerActivity {
     }
 
 
+    @Override
+    public void onItemClick(View view, int postion) {
+        if (mBound) {
+            update(mListMedia, postion);
+        } else {
+            bindService();
+        }
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
+                new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
+                new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
+                new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
+                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)),
+                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)));
+        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
+    }
 }

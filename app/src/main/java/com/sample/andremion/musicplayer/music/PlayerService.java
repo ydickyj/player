@@ -36,6 +36,7 @@ public class PlayerService extends Service {
     // Binder given to clients
     private final IBinder mBinder = new LocalBinder();
     private int musicIndex = 0;
+    private int lyricIndex = 0;
     public static MediaPlayer mp = new MediaPlayer();
     private boolean mMediaPlayerIsReady = false;
 
@@ -174,7 +175,28 @@ public class PlayerService extends Service {
         }
     }
 
+    public void forwardMusic() {
+        int pos = mp.getCurrentPosition();
+        pos += 1500; // milliseconds
+        if (pos >= mp.getDuration()) {
+            mp.seekTo(mp.getDuration());
+        } else {
+            mp.seekTo(pos);
+        }
+    }
+
+    public void rewindMusic() {
+        int pos = mp.getCurrentPosition();
+        pos -= 500; // milliseconds
+        if (pos <= 0) {
+            mp.seekTo(0);
+        } else {
+            mp.seekTo(pos);
+        }
+    }
+
     public void update(List<MediaEntity> listMedia, int mMusicIndex) {
+        lyricIndex = 0;
         mListMedia = new ArrayList<>();
         mListMedia.addAll(listMedia);
         musicIndex = mMusicIndex;
@@ -191,5 +213,13 @@ public class PlayerService extends Service {
             }
             mMediaPlayerIsReady = true;
         }
+    }
+
+    public void upLyricIndex(int index) {
+        lyricIndex = index;
+    }
+
+    public int getLyricIndex() {
+        return lyricIndex;
     }
 }

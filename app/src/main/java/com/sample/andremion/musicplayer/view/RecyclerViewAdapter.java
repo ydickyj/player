@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.listener.MyItemClickListener;
+import com.sample.andremion.musicplayer.listener.MyItemLongClickListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.MusicContent.MusicItem;
 
@@ -34,13 +36,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
 //    private final List<MusicItem> mValues;
 
     private final List<MediaEntity> mValues;
 
     private List<Integer> listId = new ArrayList<>();
+
+    private MyItemClickListener mItemClickListener;
+    private MyItemLongClickListener mItemLongClickListener;
 
     public RecyclerViewAdapter(List<MediaEntity> items) {
         mValues = items;
@@ -56,36 +61,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.content_list_item, parent, false);
         view.setFocusable(true);
-        return new ViewHolder(view);
+        return new MyViewHolder(view, mItemClickListener, mItemLongClickListener);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        int max=5;
-        int min=0;
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        int max = 5;
+        int min = 0;
         Random random = new Random();
-        int s = random.nextInt(max)%(max-min+1) + min;
+        int s = random.nextInt(max) % (max - min + 1) + min;
         holder.mItem = mValues.get(position);
-        Log.e("tag",holder.mItem.getAlbums()+"");
+        Log.e("RecyclerViewAdapter", "专辑封面:" + holder.mItem.getAlbums());
         Drawable img = Drawable.createFromPath(holder.mItem.getAlbums());
-        if (holder.mItem.getAlbums()==null){
+        if (holder.mItem.getAlbums() == null) {
             holder.mCoverView.setImageResource(listId.get(1));
-        }else {
+        } else {
             holder.mCoverView.setImageDrawable(img);
         }
         holder.mTitleView.setText(holder.mItem.getDisplay_name());
         holder.mArtistView.setText(holder.mItem.getArtist());
         holder.mDurationView.setText(holder.mItem.getDurationStr());
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Nothing to do
-            }
-        });
+//        holder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Nothing to do
+//            }
+//        });
     }
 
     @Override
@@ -93,22 +98,81 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mValues.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView mCoverView;
-        public final TextView mTitleView;
-        public final TextView mArtistView;
-        public final TextView mDurationView;
-        public MediaEntity mItem;
+    /**
+     * @param listener
+     */
+    public void setOnItemClickListener(MyItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
 
-        public ViewHolder(View view) {
+    public void setOnItemLongClickListener(MyItemLongClickListener listener) {
+        this.mItemLongClickListener = listener;
+    }
+
+//    public static class ViewHolder extends RecyclerView.ViewHolder {
+//        public final View mView;
+//        public final ImageView mCoverView;
+//        public final TextView mTitleView;
+//        public final TextView mArtistView;
+//        public final TextView mDurationView;
+//        public MediaEntity mItem;
+//
+//        public ViewHolder(View view) {
+//            super(view);
+//            mView = view;
+//            mCoverView = (ImageView) view.findViewById(R.id.cover);
+//            mTitleView = (TextView) view.findViewById(R.id.title);
+//            mArtistView = (TextView) view.findViewById(R.id.artist);
+//            mDurationView = (TextView) view.findViewById(R.id.duration);
+//        }
+//    }
+
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+
+        public View mView;
+        public ImageView mCoverView;
+        public TextView mTitleView;
+        public TextView mArtistView;
+        public TextView mDurationView;
+        public MediaEntity mItem;
+        private MyItemClickListener mListener;
+        private MyItemLongClickListener mLongClickListener;
+
+        public MyViewHolder(View view, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
             super(view);
             mView = view;
             mCoverView = (ImageView) view.findViewById(R.id.cover);
             mTitleView = (TextView) view.findViewById(R.id.title);
             mArtistView = (TextView) view.findViewById(R.id.artist);
             mDurationView = (TextView) view.findViewById(R.id.duration);
+            this.mListener = listener;
+            this.mLongClickListener = longClickListener;
+            view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
         }
+
+        /**
+         * 点击监听
+         */
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) {
+                mListener.onItemClick(v, getPosition());
+            }
+        }
+
+        /**
+         * 长按监听
+         */
+        @Override
+        public boolean onLongClick(View arg0) {
+            if (mLongClickListener != null) {
+                mLongClickListener.onItemLongClick(arg0, getPosition());
+            }
+            return true;
+        }
+
     }
 
 

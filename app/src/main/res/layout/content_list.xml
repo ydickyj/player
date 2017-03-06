@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fillViewport="true"
+    >
 
     <com.andremion.music.MusicCoverView
         android:id="@+id/cover"
@@ -114,13 +115,15 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_alignParentBottom="true"
         android:id="@+id/tracks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/playlist"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/content_list_item"
         android:focusableInTouchMode="true"
+        android:fillViewport="true"
         />
 
     <android.support.design.widget.FloatingActionButton

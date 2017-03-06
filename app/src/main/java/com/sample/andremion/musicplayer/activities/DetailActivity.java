@@ -17,26 +17,35 @@
 package com.sample.andremion.musicplayer.activities;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.transition.Transition;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.andremion.music.MusicCoverView;
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.view.LyricView;
+import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
 
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.File;
+
+
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
-
+    String TAG = DetailActivity.class.getName();
     @ViewById(R.id.cover)
     MusicCoverView mCoverView;
     @ViewById
     TextView displayName;
     @ViewById
     TextView displayAuthor;
+    @ViewById
+    LyricView lyricView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +56,15 @@ public class DetailActivity extends PlayerActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+
+
         mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
             @Override
             public void onMorphEnd(MusicCoverView coverView) {
                 // Nothing to do
+                Log.e(TAG, "onMorphEnd");
+                forwardMusic();
             }
 
             @Override
@@ -64,18 +78,49 @@ public class DetailActivity extends PlayerActivity {
             public void onTransitionEnd(Transition transition) {
                 play();
                 mCoverView.start();
+                lyricView.setVisibility(View.VISIBLE);
+                Log.e(TAG,""+getPosition());
+//                lyricView.updateIndex(getPosition());
+
+
             }
         });
     }
 
     @Override
     public void onBackPressed() {
+
         onFabClick(null);
     }
 
     public void onFabClick(View view) {
+        lyricView.setVisibility(View.GONE);
         pause();
         mCoverView.stop();
     }
 
+    @Click(R.id.repeat)
+    void repeat(){
+
+    }
+    @Click(R.id.shuffle)
+    void shuffle(){
+
+    }
+    @Click(R.id.previous)
+    void previousSong(){
+        preMusic();
+    }
+    @Click(R.id.rewind)
+    void rewindSong(){
+        rewindMusic();
+    }
+    @Click(R.id.forward)
+    void forward(){
+        forwardMusic();
+    }
+    @Click(R.id.next)
+    void nextMusic(){
+        next();
+    }
 }

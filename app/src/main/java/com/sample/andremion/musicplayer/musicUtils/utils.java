@@ -116,13 +116,9 @@ public class utils {
         return format.format(date);
     }
 
-    public static ArrayList<String>folderScan(String path,List<String> oldMusicList) {
-        ArrayList<String> mStrList = new ArrayList<>();
-        if (oldMusicList == null){
-            mStrList = new ArrayList<>();
-        }else {
-            mStrList.addAll(oldMusicList);
-        }
+    public static ArrayList<String>folderScan(String path) {
+        ArrayList<String> mStrList;
+        mStrList = new ArrayList<>();
         File file = new File(path);
         if (file.exists() && file.isDirectory()) {
             File[] array = new File[]{};
@@ -138,7 +134,7 @@ public class utils {
                             mStrList.add(f.getAbsolutePath());
                         }
                     } else {//FOLDER TYPE
-                        mStrList.addAll(folderScan(f.getAbsolutePath(),mStrList));
+                        mStrList.addAll(folderScan(f.getAbsolutePath()));
                     }
                 }
         }

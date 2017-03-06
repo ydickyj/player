@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -36,9 +37,12 @@ import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
 import com.sample.andremion.musicplayer.musicUtils.utils;
+import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.ProgressView;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class PlayerActivity extends AppCompatActivity {
 
@@ -49,17 +53,19 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private TextView mName;
     private TextView mAuthor;
     private ProgressView mProgressView;
+    private LyricView mLyricView;
+    private String mOldName;
     private final Handler mUpdateProgressHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     final int position = mService.getPosition();
                     final int mDuration = mService.getDuration();
 //                    Log.e("position:",""+position+"12321   "+mDuration);
                     final String name = mService.getDisplayName();
                     final String author = mService.getDisplayAuthor();
-                    onUpdateProgress(position, mDuration,name,author);
+                    onUpdateProgress(position, mDuration, name, author);
                     sendEmptyMessageDelayed(0, DateUtils.SECOND_IN_MILLIS);
                     break;
             }
@@ -100,10 +106,24 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mProgressView.setMax(duration);
             mProgressView.setProgress(position);
         }
-        if (mAuthor!=null){
+        if (mLyricView != null) {
+            File lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, getCurrentName().length() - 4) + ".lrc");
+            Log.e("TAG", lrcFile.exists() + "");
+            if (lrcFile.exists()) {
+                if (!Objects.equals(mOldName, lrcFile.getName())) {
+                    mLyricView.setLyricFile(lrcFile);
+                    mOldName = lrcFile.getName();
+                }
+            } else {
+                mOldName = null;
+                mLyricView.setLyricFile(null);
+            }
+            mLyricView.setCurrentTimeMillis(position);
+        }
+        if (mAuthor != null) {
             mAuthor.setText(author);
         }
-        if (mName != null){
+        if (mName != null) {
             mName.setText(name);
         }
     }
@@ -122,8 +142,9 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mTimeView = (TextView) findViewById(R.id.time);
         mDurationView = (TextView) findViewById(R.id.duration);
         mProgressView = (ProgressView) findViewById(R.id.progress);
-        mName = (TextView)findViewById(R.id.display_name);
-        mAuthor=(TextView)findViewById(R.id.display_author);
+        mName = (TextView) findViewById(R.id.display_name);
+        mAuthor = (TextView) findViewById(R.id.display_author);
+        mLyricView = (LyricView) findViewById(R.id.lyricView);
     }
 
     @Override
@@ -133,13 +154,12 @@ public abstract class PlayerActivity extends AppCompatActivity {
             unbindService(mConnection);
             mBound = false;
         }
-        Log.e("onDestroy","yes");
+        Log.e("onDestroy", "yes");
         super.onDestroy();
     }
 
     private void onBind() {
         mUpdateProgressHandler.sendEmptyMessage(0);
-
     }
 
     private void onUnbind() {
@@ -154,11 +174,42 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.pause();
     }
 
-    public void update(List<MediaEntity> mListMedia,int dex){
-            mService.update(mListMedia,dex);
-           mUpdateProgressHandler.sendEmptyMessage(0);
-            Log.e("123","1231");
+    public void next() {
+        mService.nextMusic();
     }
 
+    public void preMusic() {
+        mService.preMusic();
+    }
+
+    public void forwardMusic() {
+        mService.forwardMusic();
+    }
+
+    public void rewindMusic() {
+        mService.rewindMusic();
+    }
+
+    public String getCurrentName() {
+        return mService.getDisplayName();
+    }
+
+    public void update(List<MediaEntity> mListMedia, int dex) {
+        mService.update(mListMedia, dex);
+        mUpdateProgressHandler.sendEmptyMessage(0);
+        Log.e("123", "1231");
+    }
+
+    public void saveLrcIndex(int index) {
+        mService.upLyricIndex(index);
+    }
+
+    public long getPosition() {
+        return (long) mService.getPosition();
+    }
+
+    public int getLrcIndex() {
+        return mService.getLyricIndex();
+    }
 
 }
