@@ -24,6 +24,7 @@ import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -32,7 +33,7 @@ import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.listener.ProgressListener;
 
-public class ProgressView extends View  {
+public class ProgressView extends View {
 
     private static final float STROKE_SIZE = 4;
     private static final float START_ANGLE = 135;
@@ -51,9 +52,6 @@ public class ProgressView extends View  {
     private int mMax;
     private float mMorph;
     private ProgressListener mListener;
-    /**
-     * @param listener
-     */
 
     public ProgressView(Context context) {
         this(context, null, 0);
@@ -93,11 +91,14 @@ public class ProgressView extends View  {
         if (progress < 0) {
             progress = 0;
         }
-
-        if (progress >= mMax) {
+        Log.e("progress", "progress:" + progress + "max:" + mMax);
+        if (progress >= (mMax - 5000)) {
             progress = mMax;
-            if (mListener!=null){
+            if (mListener != null) {
                 mListener.onProgressListener(true);
+
+            } else {
+                Log.e("mListenr", "listener is null");
             }
         }
 
@@ -106,6 +107,7 @@ public class ProgressView extends View  {
             invalidate();
         }
     }
+
     public void setProgressListener(ProgressListener listener) {
         this.mListener = listener;
     }

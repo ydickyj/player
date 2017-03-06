@@ -30,10 +30,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.listener.ProgressListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
 import com.sample.andremion.musicplayer.musicUtils.utils;
@@ -55,6 +55,8 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private ProgressView mProgressView;
     private LyricView mLyricView;
     private String mOldName;
+    private boolean isRepeat;
+    private boolean isRandom;
     private final Handler mUpdateProgressHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -107,25 +109,55 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mProgressView.setProgress(position);
         }
         if (mLyricView != null) {
-            File lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, getCurrentName().length() - 4) + ".lrc");
-            Log.e("TAG", lrcFile.exists() + "");
-            if (lrcFile.exists()) {
-                if (!Objects.equals(mOldName, lrcFile.getName())) {
-                    Log.e("TAG","setLyricFile");
-                    mLyricView.setLyricFile(lrcFile);
-                    mOldName = lrcFile.getName();
-                }
+            File lrcFile;
+            if (getCurrentName().length() < 4) {
+                lrcFile = null;
             } else {
-                mOldName = null;
-                mLyricView.setLyricFile(null);
+                Log.e("getCurrentName", "" + (getCurrentName().length()));
+                lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, (name.length() - 4)) + ".lrc");
+                if (lrcFile.exists()) {
+                    if (!Objects.equals(mOldName, lrcFile.getName())) {
+                        Log.e("TAG", "setLyricFile");
+                        mLyricView.setLyricFile(lrcFile);
+                        mOldName = lrcFile.getName();
+                    }
+                } else {
+                    mOldName = null;
+                    mLyricView.setLyricFile(null);
+                }
+                mLyricView.setCurrentTimeMillis(position);
             }
-            mLyricView.setCurrentTimeMillis(position);
+            Log.e("TAG", lrcFile.exists() + "");
+
         }
         if (mAuthor != null) {
             mAuthor.setText(author);
         }
         if (mName != null) {
             mName.setText(name);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mProgressView != null) {
+            mProgressView.setProgressListener(new ProgressListener() {
+                @Override
+                public void onProgressListener(boolean isFinish) {
+                    if (isFinish) {
+                        Log.e("playMode","isRepeat:"+isRepeat+" israndom：" +isRandom);
+                        if (isRepeat){
+                            mService.reMusic();
+                        }else if (isRandom){
+                            mService.randomMusic();
+                        }else {
+                            mService.nextMusic();
+                        }
+                        Log.e("123", "nextMusic");
+                    }
+                }
+            });
         }
     }
 
@@ -192,6 +224,13 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.rewindMusic();
     }
 
+    public void setRepeatPlayMode(boolean isOrNo){
+        isRepeat = isOrNo;
+    }
+
+    public void setRandomPlayMode(boolean isOrNo){
+        isRandom = isOrNo;
+    }
     public String getCurrentName() {
         return mService.getDisplayName();
     }

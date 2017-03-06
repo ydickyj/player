@@ -99,7 +99,7 @@ public class utils {
         if (minute <= 0 && second <= 30) {
             return false;
         }
-        if (size <= 1024 * 1024) {
+        if (size <= 1024 * 512) {
             return false;
         }
         return true;

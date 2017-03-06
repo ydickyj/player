@@ -16,15 +16,15 @@
 
 package com.sample.andremion.musicplayer.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
-import com.sample.andremion.musicplayer.listener.ProgressListener;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.ProgressView;
@@ -35,9 +35,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 
-
 @EActivity(R.layout.content_detail)
-public class DetailActivity extends PlayerActivity  {
+public class DetailActivity extends PlayerActivity {
     String TAG = DetailActivity.class.getName();
     @ViewById(R.id.cover)
     MusicCoverView mCoverView;
@@ -47,30 +46,28 @@ public class DetailActivity extends PlayerActivity  {
     TextView displayAuthor;
     @ViewById
     LyricView lyricView;
-    @ViewById
+    @ViewById(R.id.progress)
     ProgressView mProgressView;
+    @ViewById
+    ImageView repeat;
+    @ViewById
+    ImageView shuffle;
+
+    private int repSumClick = 0;
+    private int ranSumClick = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     protected void onResume() {
-
-
-        mProgressView.setProgressListener(new ProgressListener() {
-            @Override
-            public void onProgressListener(boolean isFinish) {
-                forwardMusic();
-            }
-        });
+        super.onResume();
         mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
             @Override
             public void onMorphEnd(MusicCoverView coverView) {
                 // Nothing to do
                 Log.e(TAG, "onMorphEnd");
-
             }
 
             @Override
@@ -79,19 +76,18 @@ public class DetailActivity extends PlayerActivity  {
                 supportFinishAfterTransition();
             }
         });
-
         getWindow().getSharedElementEnterTransition().addListener(new TransitionAdapter() {
             @Override
             public void onTransitionEnd(Transition transition) {
                 play();
                 mCoverView.start();
                 lyricView.setVisibility(View.VISIBLE);
-                Log.e(TAG,""+getPosition());
-//                lyricView.updateIndex(getPosition());
+                Log.e(TAG, "" + getPosition());
 
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {
@@ -105,27 +101,54 @@ public class DetailActivity extends PlayerActivity  {
     }
 
     @Click(R.id.repeat)
-    void repeat(){
-
+    void repeat() {
+        repSumClick++;
+        if (repSumClick > 1) {
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
+            setRepeatPlayMode(false);
+            setRandomPlayMode(false);
+            repSumClick = 0;
+        } else {
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
+            setRepeatPlayMode(true);
+            setRandomPlayMode(false);
+        }
     }
+
     @Click(R.id.shuffle)
-    void shuffle(){
-
+    void shuffle() {
+        ranSumClick++;
+        if (ranSumClick>1){
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
+            setRandomPlayMode(false);
+            setRepeatPlayMode(false);
+            ranSumClick = 0;
+        }else {
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
+            setRandomPlayMode(true);
+            setRepeatPlayMode(false);
+        }
     }
+
     @Click(R.id.previous)
-    void previousSong(){
+    void previousSong() {
         preMusic();
     }
+
     @Click(R.id.rewind)
-    void rewindSong(){
+    void rewindSong() {
         rewindMusic();
     }
+
     @Click(R.id.forward)
-    void forward(){
+    void forward() {
         forwardMusic();
     }
+
     @Click(R.id.next)
-    void nextMusic(){
+    void nextMusic() {
         next();
     }
 

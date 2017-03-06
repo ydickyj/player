@@ -28,6 +28,7 @@ import com.sample.andremion.musicplayer.model.MediaEntity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PlayerService extends Service {
 
@@ -158,6 +159,42 @@ public class PlayerService extends Service {
         }
     }
 
+    public void reMusic() {
+        if (mMediaPlayerIsReady && musicIndex < mListMedia.size()) {
+            mp.stop();
+            try {
+                mp.reset();
+                mp.setDataSource(mListMedia.get(musicIndex).getPath());
+                mp.prepare();
+                mp.seekTo(0);
+                mp.start();
+            } catch (Exception e) {
+                Log.d("hint", "can't jump repeat music");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void randomMusic() {
+        int max = mListMedia.size() - 1;
+        int min = 0;
+        Random random = new Random();
+        musicIndex = random.nextInt(max) % (max - min + 1) + min;
+        if (mMediaPlayerIsReady && musicIndex < mListMedia.size()) {
+            mp.stop();
+            try {
+                mp.reset();
+                mp.setDataSource(mListMedia.get(musicIndex).getPath());
+                mp.prepare();
+                mp.seekTo(0);
+                mp.start();
+            } catch (Exception e) {
+                Log.d("hint", "can't jump random music");
+                e.printStackTrace();
+            }
+        }
+    }
     public void preMusic() {
         if (mMediaPlayerIsReady && musicIndex > 0) {
             mp.stop();
@@ -187,7 +224,7 @@ public class PlayerService extends Service {
 
     public void rewindMusic() {
         int pos = mp.getCurrentPosition();
-        pos -= 500; // milliseconds
+        pos -= 1500; // milliseconds
         if (pos <= 0) {
             mp.seekTo(0);
         } else {
