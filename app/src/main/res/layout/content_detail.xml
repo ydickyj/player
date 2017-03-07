@@ -23,10 +23,8 @@
                 android:layout_centerHorizontal="true"
                 app:layout_marginTopPercent="10%"/>
             <com.sample.andremion.musicplayer.view.MusicCoverView
-            android:layout_centerInParent="true"
-                android:id="@+id/cover"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/music_cover"
                 android:scaleType="centerInside"
                 android:src="@drawable/album_cover_daft_punk"
                 android:transitionName="@string/transition_name_cover"
@@ -55,7 +53,7 @@
             <Space
                 android:id="@+id/timers_anchor"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cover"
+                android:layout_below="@id/music_cover"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="25%"/>
 

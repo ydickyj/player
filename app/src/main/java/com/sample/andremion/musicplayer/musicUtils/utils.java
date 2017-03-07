@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by Administrator on 2017/2/28.
@@ -41,7 +42,9 @@ public class utils {
                             MediaStore.Audio.Media.DURATION,
                             MediaStore.Audio.Media.ARTIST,
                             MediaStore.Audio.Media.DATA,
-                            MediaStore.Audio.Media.SIZE},
+                            MediaStore.Audio.Media.SIZE,
+                            MediaStore.Audio.Media.ALBUM_ID
+                    },
                     selection, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
             if(cursor == null) {
                 Log.e(TAG, "The getMediaList cursor is null.");
@@ -64,12 +67,12 @@ public class utils {
                 mediaEntity.duration = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
                 mediaEntity.size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE));
                 mediaEntity.durationStr = IntToStrTime(mediaEntity.duration);
-
                 if (!checkIsMusic(mediaEntity.duration, mediaEntity.size)) {
                     continue;
                 }
                 mediaEntity.artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                 mediaEntity.path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+                mediaEntity.albums = getAlbumArt(context,cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
                 mediaList.add(mediaEntity);
             }
         } catch (Exception e) {
@@ -130,7 +133,8 @@ public class utils {
                 for (File f : array) {
                     if (f.isFile()) {//FILE TYPE
                         String name = f.getName();
-                        if (name.endsWith(".mp4") || name.endsWith(".mp3") || name.endsWith(".jpg")) {
+//                        name.endsWith(".mp4") name.endsWith(".jpg")
+                        if (name.endsWith(".mp3")) {
                             mStrList.add(f.getAbsolutePath());
                         }
                     } else {//FOLDER TYPE
@@ -139,5 +143,33 @@ public class utils {
                 }
         }
         return mStrList;
+    }
+
+    public int getRandom(int inMax,int inMin){
+        Random random = new Random();
+        return random.nextInt(inMax) % (inMax - inMin + 1) + inMin;
+    }
+
+    /**
+     *
+     * 功能 通过album_id查找 album_art 如果找不到返回null
+     *
+     * @param album_id
+     * @return album_art
+     */
+    private static String getAlbumArt(Context mContext, int album_id) {
+        String mUriAlbums = "content://media/external/audio/albums";
+        String[] projection = new String[] { "album_art" };
+        Cursor cur = mContext.getContentResolver().query(
+                Uri.parse(mUriAlbums + "/" + Integer.toString(album_id)),
+                projection, null, null, null);
+        String album_art = null;
+        if (cur.getCount() > 0 && cur.getColumnCount() > 0) {
+            cur.moveToNext();
+            album_art = cur.getString(0);
+        }
+        cur.close();
+        cur = null;
+        return album_art;
     }
 }

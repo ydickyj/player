@@ -38,7 +38,7 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
     String TAG = DetailActivity.class.getName();
-    @ViewById(R.id.cover)
+    @ViewById(R.id.music_cover)
     MusicCoverView mCoverView;
     @ViewById
     TextView displayName;
@@ -55,6 +55,7 @@ public class DetailActivity extends PlayerActivity {
 
     private int repSumClick = 0;
     private int ranSumClick = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,33 +104,40 @@ public class DetailActivity extends PlayerActivity {
     @Click(R.id.repeat)
     void repeat() {
         repSumClick++;
+        Log.e(TAG, "repSumClick" + repSumClick);
         if (repSumClick > 1) {
             repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
             setRepeatPlayMode(false);
             setRandomPlayMode(false);
             repSumClick = 0;
+
         } else {
             repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp));
             shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
             setRepeatPlayMode(true);
             setRandomPlayMode(false);
+            ranSumClick = 0;
         }
+        Log.e(TAG, "repSumClick" + repSumClick);
     }
 
     @Click(R.id.shuffle)
     void shuffle() {
         ranSumClick++;
-        if (ranSumClick>1){
+        Log.e(TAG, "ranSumClick" + ranSumClick);
+        if (ranSumClick > 1) {
             shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
             setRandomPlayMode(false);
             setRepeatPlayMode(false);
             ranSumClick = 0;
-        }else {
+        } else {
             shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp));
             repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
             setRandomPlayMode(true);
             setRepeatPlayMode(false);
+            repSumClick = 0;
         }
+        Log.e(TAG, "ranSumClick" + ranSumClick);
     }
 
     @Click(R.id.previous)

@@ -35,11 +35,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.broadcastReceiver.MyFirstReceiver;
 import com.sample.andremion.musicplayer.listener.MyItemClickListener;
+import com.sample.andremion.musicplayer.listener.MyItemOnFocusChangeListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.musicUtils.utils;
 import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
@@ -63,7 +65,7 @@ import static com.sample.andremion.musicplayer.musicUtils.utils.folderScan;
 @EActivity(R.layout.content_list)
 public class MainActivity extends PlayerActivity implements MyItemClickListener {
     String TAG = "MainActivity";
-    @ViewById(R.id.cover)
+    @ViewById(R.id.music_cover)
     View mCoverView;
     @ViewById(R.id.title)
     View mTitleView;
@@ -83,12 +85,15 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     TextView displayAuthor;
     @ViewById
     ImageView btnRefresh;
+    @ViewById
+    TextView tvCounter;
 
     private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
     public RecyclerViewAdapter mAdapter;
+    public boolean onCreate = false;
     private MyFirstReceiver mReceiver = new MyFirstReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -104,23 +109,33 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Override
     protected void onResume() {
         super.onResume();
+        onResumeUpdate();
     }
 
     @AfterViews
     void afterView() {
-        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Loading");
-        pDialog.setCancelable(true);
         IntentFilter filter = new IntentFilter();
         filter.addAction("scanFlag");
         registerReceiver(mReceiver, filter);
         btnRefresh.setFocusable(true);
         btnRefresh.setFocusableInTouchMode(true);
         assert recyclerView != null;
+        // improve performance if you know that changes in content do not change the size of the RecyclerView
+        //如果确定每个item的内容不会改变RecyclerView的大小，设置这个选项可以提高性能
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerViewAdapter(mListMedia);
         mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnFocusChangeListener(new MyItemOnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    Log.e("1231",v.toString()+"121ss:"+v.getVerticalScrollbarPosition());
+                }
+            }
+        });
         recyclerView.setAdapter(mAdapter);
+        onCreate = true;
         checkPermission();
     }
 
@@ -149,24 +164,31 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         Log.e(TAG, "扫描中");
         mListMedia.clear();
         mListMedia.addAll(utils.getAllMediaList(getApplicationContext(), null));
-        ArrayList<MediaEntity> temporaryList = new ArrayList<>();
-        for (int i = 0; i < mListMedia.size(); i++) {
-            for (int a = 0; i < mListScreen.size(); a++) {
-                if (Objects.equals(mListMedia.get(i).getPath(), mListScreen.get(a))) {
-                    temporaryList.add(mListMedia.get(i));
-                    break;
+        if (!onCreate){
+            ArrayList<MediaEntity> temporaryList = new ArrayList<>();
+            for (int i = 0; i < mListMedia.size(); i++) {
+                for (int a = 0; a < mListScreen.size(); a++) {
+                    if (Objects.equals(mListMedia.get(i).getPath(), mListScreen.get(a))) {
+                        temporaryList.add(mListMedia.get(i));
+                        break;
+                    }
                 }
+                Log.e("路径", mListMedia.get(i).getPath());
             }
-            Log.e("路径", mListMedia.get(i).getPath());
+            mListMedia.clear();
+            mListMedia.addAll(temporaryList);
+        }else {
+            onCreate = false;
         }
-        mListMedia.clear();
-        mListMedia.addAll(temporaryList);
         Log.e(TAG, "扫描结束");
         update();
     }
 
     @UiThread
     void update() {
+        if (tvCounter!=null){
+            tvCounter.setText(""+mListMedia.size()+" songs");
+        }
         mAdapter.notifyDataSetChanged();
         if (mBound) {
             update(mListMedia, 0);
@@ -174,7 +196,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             bindService();
         }
         if (pDialog.isShowing()) {
-            pDialog.dismiss();
+            pDialog.dismissWithAnimation();
         }
     }
 
@@ -194,6 +216,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Click(R.id.btn_refresh)
     void btnRefresh() {
         Log.e(TAG, "点击");
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("Loading");
+        pDialog.setCancelable(true);
         pDialog.show();
         scanSdCard();
     }
@@ -208,11 +233,11 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             for (int i = 0; i < strListMusic.size(); i++) {
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + strListMusic.get(i))));
             }
-//            try {
-//                Thread.sleep(20 * (strListMusic.size()));
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Thread.sleep(100 * (strListMusic.size()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (!pDialog.isShowing()) {
                 return;
             }

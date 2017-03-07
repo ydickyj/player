@@ -8,8 +8,8 @@
     android:fillViewport="true"
     >
 
-    <com.andremion.music.MusicCoverView
-        android:id="@+id/cover"
+    <com.sample.andremion.musicplayer.view.MusicCoverView
+        android:id="@+id/music_cover"
         android:layout_width="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/album_cover_daft_punk"
@@ -30,7 +30,7 @@
         android:id="@+id/pane_anchor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/cover"
+        android:layout_alignBottom="@id/music_cover"
         android:orientation="vertical"
         android:padding="@dimen/activity_vertical_margin">
 
@@ -83,7 +83,7 @@
         android:id="@+id/playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cover"
+        android:layout_below="@id/music_cover"
         android:gravity="center_vertical"
         android:padding="@dimen/activity_vertical_margin"
         android:transitionGroup="true">
@@ -96,7 +96,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <TextView
-            android:id="@+id/counter"
+            android:id="@+id/tv_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
@@ -118,7 +118,7 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/tracks"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/playlist"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/content_list_item"
@@ -130,7 +130,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/cover"
+        android:layout_alignBottom="@+id/music_cover"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/fab_vertical_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"

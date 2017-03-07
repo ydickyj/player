@@ -195,6 +195,7 @@ public class PlayerService extends Service {
             }
         }
     }
+
     public void preMusic() {
         if (mMediaPlayerIsReady && musicIndex > 0) {
             mp.stop();
@@ -256,7 +257,13 @@ public class PlayerService extends Service {
         lyricIndex = index;
     }
 
-    public int getLyricIndex() {
-        return lyricIndex;
+    public String getMusicAlbums() {
+        if (musicIndex < mListMedia.size() && mListMedia.size() != 0) {
+            return mListMedia.get(musicIndex).albums;
+        }else {
+            return  null;
+        }
+
+
     }
 }

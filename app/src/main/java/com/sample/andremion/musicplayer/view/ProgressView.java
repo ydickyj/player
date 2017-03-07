@@ -91,12 +91,11 @@ public class ProgressView extends View {
         if (progress < 0) {
             progress = 0;
         }
-        Log.e("progress", "progress:" + progress + "max:" + mMax);
+//        Log.e("progress", "progress:" + progress + "max:" + mMax);
         if (progress >= (mMax - 5000)) {
             progress = mMax;
             if (mListener != null) {
                 mListener.onProgressListener(true);
-
             } else {
                 Log.e("mListenr", "listener is null");
             }

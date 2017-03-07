@@ -20,6 +20,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,6 +32,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
@@ -38,6 +41,7 @@ import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
 import com.sample.andremion.musicplayer.musicUtils.utils;
 import com.sample.andremion.musicplayer.view.LyricView;
+import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.ProgressView;
 
 import java.io.File;
@@ -54,9 +58,13 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private TextView mAuthor;
     private ProgressView mProgressView;
     private LyricView mLyricView;
+    private MusicCoverView mMusicCoverView;
     private String mOldName;
+    private String mOldAlbums;
     private boolean isRepeat;
     private boolean isRandom;
+    private int msgWhat =0;
+
     private final Handler mUpdateProgressHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,11 +72,21 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 case 0:
                     final int position = mService.getPosition();
                     final int mDuration = mService.getDuration();
-//                    Log.e("position:",""+position+"12321   "+mDuration);
+                    Log.e("position:",""+position+" Duration   "+mDuration);
                     final String name = mService.getDisplayName();
                     final String author = mService.getDisplayAuthor();
-                    onUpdateProgress(position, mDuration, name, author);
-                    sendEmptyMessageDelayed(0, DateUtils.SECOND_IN_MILLIS);
+                    onUpdateProgress(position, mDuration, name, author, mService.getMusicAlbums());
+
+                    sendEmptyMessageDelayed(msgWhat, DateUtils.SECOND_IN_MILLIS);
+                    break;
+                case 1:
+                    final int endPosition = mService.getPosition();
+                    final int endDuration = mService.getDuration();
+                    final String endName = mService.getDisplayName();
+                    final String endAuthor = mService.getDisplayAuthor();
+                    Log.e("position:","end");
+                    Log.e("position:",""+endPosition+" Duration   "+endDuration);
+                    onUpdateProgress(endPosition, endDuration, endName, endAuthor, mService.getMusicAlbums());
                     break;
             }
 
@@ -96,7 +114,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
         }
     };
 
-    private void onUpdateProgress(int position, int duration, String name, String author) {
+    private void onUpdateProgress(int position, int duration, String name, String author, String Ablums) {
         if (mTimeView != null) {
             mTimeView.setText(utils.IntToStrTime(position));
         }
@@ -105,6 +123,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mDurationView.setText(utils.IntToStrTime(duration));
         }
         if (mProgressView != null) {
+            Log.e("123","mProgressView");
             mProgressView.setMax(duration);
             mProgressView.setProgress(position);
         }
@@ -113,7 +132,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             if (getCurrentName().length() < 4) {
                 lrcFile = null;
             } else {
-                Log.e("getCurrentName", "" + (getCurrentName().length()));
+//                Log.e("getCurrentName", "" + (getCurrentName().length()));
                 lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, (name.length() - 4)) + ".lrc");
                 if (lrcFile.exists()) {
                     if (!Objects.equals(mOldName, lrcFile.getName())) {
@@ -127,14 +146,27 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 }
                 mLyricView.setCurrentTimeMillis(position);
             }
-            Log.e("TAG", lrcFile.exists() + "");
-
+//            Log.e("TAG", lrcFile.exists() + "");
         }
         if (mAuthor != null) {
             mAuthor.setText(author);
         }
         if (mName != null) {
             mName.setText(name);
+        }
+        if (mMusicCoverView != null) {
+            if (!Objects.equals(mOldAlbums, Ablums)) {
+                mOldAlbums = Ablums;
+                Matrix matrix = new Matrix();
+                matrix.postScale(6, 6);
+                Drawable img = Drawable.createFromPath(Ablums);
+                if (img == null) {
+                    mMusicCoverView.setImageDrawable(getResources().getDrawable(R.drawable.album_cover_the_1975));
+                } else {
+                    mMusicCoverView.setImageDrawable(img);
+                }
+//                mMusicCoverView.setImageMatrix(matrix);
+            }
         }
     }
 
@@ -146,15 +178,15 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 @Override
                 public void onProgressListener(boolean isFinish) {
                     if (isFinish) {
-                        Log.e("playMode","isRepeat:"+isRepeat+" israndom：" +isRandom);
-                        if (isRepeat){
+//                        Log.e("playMode","isRepeat:"+isRepeat+" israndom：" +isRandom);
+                        if (isRepeat) {
                             mService.reMusic();
-                        }else if (isRandom){
+                        } else if (isRandom) {
                             mService.randomMusic();
-                        }else {
+                        } else {
                             mService.nextMusic();
                         }
-                        Log.e("123", "nextMusic");
+//                        Log.e("123", "nextMusic");
                     }
                 }
             });
@@ -178,6 +210,8 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mName = (TextView) findViewById(R.id.display_name);
         mAuthor = (TextView) findViewById(R.id.display_author);
         mLyricView = (LyricView) findViewById(R.id.lyricView);
+        mMusicCoverView = (MusicCoverView) findViewById(R.id.music_cover);
+        mMusicCoverView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 
     @Override
@@ -193,7 +227,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
     private void onBind() {
-        mUpdateProgressHandler.sendEmptyMessage(0);
+        mUpdateProgressHandler.sendEmptyMessage(1);
     }
 
     private void onUnbind() {
@@ -202,9 +236,14 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public void play() {
         mService.play();
+        msgWhat = 0;
+        mUpdateProgressHandler.sendEmptyMessage(msgWhat);
     }
 
     public void pause() {
+        mUpdateProgressHandler.removeMessages(0);
+        msgWhat = 1;
+        mUpdateProgressHandler.sendEmptyMessage(msgWhat);
         mService.pause();
     }
 
@@ -224,21 +263,29 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.rewindMusic();
     }
 
-    public void setRepeatPlayMode(boolean isOrNo){
+    public void setRepeatPlayMode(boolean isOrNo) {
         isRepeat = isOrNo;
     }
 
-    public void setRandomPlayMode(boolean isOrNo){
+    public void setRandomPlayMode(boolean isOrNo) {
         isRandom = isOrNo;
     }
+
     public String getCurrentName() {
         return mService.getDisplayName();
     }
 
     public void update(List<MediaEntity> mListMedia, int dex) {
         mService.update(mListMedia, dex);
-        mUpdateProgressHandler.sendEmptyMessage(0);
+        mUpdateProgressHandler.sendEmptyMessage(1);
         Log.e("123", "1231");
+    }
+
+    public void onResumeUpdate(){
+        if (mBound){
+            mUpdateProgressHandler.sendEmptyMessage(1);
+        }
+
     }
 
     public void saveLrcIndex(int index) {
@@ -249,8 +296,5 @@ public abstract class PlayerActivity extends AppCompatActivity {
         return (long) mService.getPosition();
     }
 
-    public int getLrcIndex() {
-        return mService.getLyricIndex();
-    }
 
 }

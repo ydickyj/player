@@ -18,7 +18,6 @@ package com.sample.andremion.musicplayer.view;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +28,11 @@ import android.widget.TextView;
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.listener.MyItemLongClickListener;
+import com.sample.andremion.musicplayer.listener.MyItemOnFocusChangeListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
-import com.sample.andremion.musicplayer.music.MusicContent.MusicItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
@@ -46,6 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private MyItemClickListener mItemClickListener;
     private MyItemLongClickListener mItemLongClickListener;
+    private MyItemOnFocusChangeListener itemOnFocusChangeListener;
 
     public RecyclerViewAdapter(List<MediaEntity> items) {
         mValues = items;
@@ -65,19 +64,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.content_list_item, parent, false);
         view.setFocusable(true);
-        return new MyViewHolder(view, mItemClickListener, mItemLongClickListener);
+        return new MyViewHolder(view, mItemClickListener, mItemLongClickListener, itemOnFocusChangeListener);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        int max = 5;
-        int min = 0;
-        Random random = new Random();
-        int s = random.nextInt(max) % (max - min + 1) + min;
+
+//        holder.mView.setFocusable(true);
         holder.mItem = mValues.get(position);
         Log.e("RecyclerViewAdapter", "专辑封面:" + holder.mItem.getAlbums());
         Drawable img = Drawable.createFromPath(holder.mItem.getAlbums());
-        if (holder.mItem.getAlbums() == null) {
+        if (img == null) {
             holder.mCoverView.setImageResource(listId.get(1));
         } else {
             holder.mCoverView.setImageDrawable(img);
@@ -109,6 +106,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mItemLongClickListener = listener;
     }
 
+    public void setOnFocusChangeListener(MyItemOnFocusChangeListener listener){
+        this.itemOnFocusChangeListener = listener;
+    }
 //    public static class ViewHolder extends RecyclerView.ViewHolder {
 //        public final View mView;
 //        public final ImageView mCoverView;
@@ -128,7 +128,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //    }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener ,View.OnFocusChangeListener{
 
         public View mView;
         public ImageView mCoverView;
@@ -138,8 +138,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MediaEntity mItem;
         private MyItemClickListener mListener;
         private MyItemLongClickListener mLongClickListener;
+        private MyItemOnFocusChangeListener itemOnFocusChangeListener;
 
-        public MyViewHolder(View view, MyItemClickListener listener, MyItemLongClickListener longClickListener) {
+        public MyViewHolder(View view, MyItemClickListener listener, MyItemLongClickListener longClickListener,MyItemOnFocusChangeListener onFocusChangeListener) {
             super(view);
             mView = view;
             mCoverView = (ImageView) view.findViewById(R.id.cover);
@@ -148,8 +149,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mDurationView = (TextView) view.findViewById(R.id.duration);
             this.mListener = listener;
             this.mLongClickListener = longClickListener;
+            this.itemOnFocusChangeListener = onFocusChangeListener;
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
+            view.setOnFocusChangeListener(this);
         }
 
         /**
@@ -171,6 +174,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 mLongClickListener.onItemLongClick(arg0, getPosition());
             }
             return true;
+        }
+
+        /**
+         * 焦点监听
+         */
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if (itemOnFocusChangeListener!=null){
+                itemOnFocusChangeListener.onFocusChange(v,hasFocus);
+            }
         }
 
     }
