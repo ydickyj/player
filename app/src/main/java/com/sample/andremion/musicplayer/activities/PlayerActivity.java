@@ -211,7 +211,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mAuthor = (TextView) findViewById(R.id.display_author);
         mLyricView = (LyricView) findViewById(R.id.lyricView);
         mMusicCoverView = (MusicCoverView) findViewById(R.id.music_cover);
-        mMusicCoverView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_XY );
     }
 
     @Override

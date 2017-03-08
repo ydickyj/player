@@ -4,8 +4,8 @@
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.andremion/musiccoverview/1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.andremion/musiccoverview/1.0.0/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.andremion/musiccoverview/1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/3ac62d72abf29e78b6f155d2fc53ab414c826b02/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/3ac62d72abf29e78b6f155d2fc53ab414c826b02/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

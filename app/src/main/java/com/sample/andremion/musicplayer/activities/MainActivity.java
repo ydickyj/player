@@ -44,6 +44,7 @@ import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.listener.MyItemOnFocusChangeListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.musicUtils.utils;
+import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
 import com.sample.andremion.musicplayer.view.sweetAlertDialog.SweetAlertDialog;
 
@@ -55,6 +56,8 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -89,6 +92,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     TextView tvCounter;
 
     private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
+    private int intentIndex = -1;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
@@ -102,6 +106,10 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                     mListScreen = intent.getStringArrayListExtra("musicList");
                     scanMusicFile();
                     break;
+                case Intent.ACTION_VIEW:
+                    intent.getDataString();
+                    Log.e("ACTION_VIEW", intent.getDataString());
+                    break;
             }
         }
     };
@@ -114,6 +122,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @AfterViews
     void afterView() {
+
+
+        ((MusicCoverView) mCoverView).setScaleType(ImageView.ScaleType.CENTER_CROP);
         IntentFilter filter = new IntentFilter();
         filter.addAction("scanFlag");
         registerReceiver(mReceiver, filter);
@@ -129,8 +140,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         mAdapter.setOnFocusChangeListener(new MyItemOnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
-                    Log.e("1231",v.toString()+"121ss:"+v.getVerticalScrollbarPosition());
+                if (hasFocus) {
+                    Log.e("1231", v.toString() + "121ss:" + v.getVerticalScrollbarPosition());
                 }
             }
         });
@@ -164,7 +175,42 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         Log.e(TAG, "扫描中");
         mListMedia.clear();
         mListMedia.addAll(utils.getAllMediaList(getApplicationContext(), null));
-        if (!onCreate){
+        if (getIntent().getDataString() != null && onCreate) {
+            Intent intent = getIntent();
+            intent.getDataString();
+            try {
+                String path = URLDecoder.decode(intent.getDataString(), "utf-8");//关键啊 ！
+                Log.e("ACTION_VIEW", path);
+                path = path.substring(7, path.length());
+                File mFile = new File(path);
+                for (int i = 0; i < mListMedia.size(); i++) {
+                    if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                        intentIndex = i;
+                        break;
+                    }
+                }
+                if (intentIndex == -1) {
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(URLDecoder.decode(intent.getDataString(), "utf-8"))));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mListMedia.clear();
+                    mListMedia.addAll(utils.getAllMediaList(getApplicationContext(), null));
+                    for (int i = 0; i < mListMedia.size(); i++) {
+                        if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                            intentIndex = i;
+                            break;
+                        }
+                    }
+                    Log.e("your 被我解决了吧",""+intentIndex);
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!onCreate) {
             ArrayList<MediaEntity> temporaryList = new ArrayList<>();
             for (int i = 0; i < mListMedia.size(); i++) {
                 for (int a = 0; a < mListScreen.size(); a++) {
@@ -177,7 +223,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             }
             mListMedia.clear();
             mListMedia.addAll(temporaryList);
-        }else {
+        } else {
             onCreate = false;
         }
         Log.e(TAG, "扫描结束");
@@ -186,8 +232,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @UiThread
     void update() {
-        if (tvCounter!=null){
-            tvCounter.setText(""+mListMedia.size()+" songs");
+        if (tvCounter != null) {
+            tvCounter.setText("" + mListMedia.size() + " songs");
         }
         mAdapter.notifyDataSetChanged();
         if (mBound) {
@@ -197,6 +243,11 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         }
         if (pDialog.isShowing()) {
             pDialog.dismissWithAnimation();
+        }
+        if (intentIndex != -1) {
+            update(mListMedia, intentIndex);
+            intentIndex = -1;
+            fab(null);
         }
     }
 
@@ -220,7 +271,12 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                 .setTitleText("Loading");
         pDialog.setCancelable(true);
         pDialog.show();
-        scanSdCard();
+        if (onCreate) {
+            scanMusicFile();
+        } else {
+            scanSdCard();
+        }
+
     }
 
 

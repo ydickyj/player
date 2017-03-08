@@ -172,4 +172,18 @@ public class utils {
         cur = null;
         return album_art;
     }
+
+         public static String replaceSpace(StringBuffer str) {
+                 String str1=str.toString();
+                char[] charArray = str1.toCharArray();
+                StringBuilder sBuilder = new StringBuilder();
+                for (char c : charArray) {
+                         if(c==' ') {
+                             sBuilder.append("%20");
+                            }else {
+                                sBuilder.append(c);
+                            }
+                    }
+             return sBuilder.toString();
+            }
 }

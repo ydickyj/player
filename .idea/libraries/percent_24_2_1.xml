@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="percent-24.2.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/percent/24.2.1/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/percent/24.2.1/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/9e3edd99f540fe53b40ec38998f22453b1dc1b6b/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/9e3edd99f540fe53b40ec38998f22453b1dc1b6b/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

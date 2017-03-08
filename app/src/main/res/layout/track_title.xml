@@ -23,6 +23,7 @@
         android:id="@+id/display_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="Daft Punk"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="?android:attr/textColorSecondary"/>
