@@ -19,7 +19,6 @@ import static com.sample.andremion.musicplayer.view.NumberProgressBar.ProgressTe
 
 /**
  * Created by daimajia on 14-4-30.
- *
  */
 public class NumberProgressBar extends View {
 
@@ -71,8 +70,8 @@ public class NumberProgressBar extends View {
     private String mPrefix = "";
 
 
-    private final int default_text_color = Color.rgb(66, 145, 241);
-    private final int default_reached_color = Color.rgb(66, 145, 241);
+    private final int default_text_color = Color.rgb(255, 255, 255);
+    private final int default_reached_color = Color.rgb(255, 255, 255);
     private final int default_unreached_color = Color.rgb(204, 204, 204);
     private final float default_progress_text_offset;
     private final float default_text_size;
@@ -102,6 +101,11 @@ public class NumberProgressBar extends View {
      * The width of the text that to be drawn.
      */
     private float mDrawTextWidth;
+
+    /**
+     * The size of the text that to be drawn.
+     */
+    private float mDrawTextSize;
 
     /**
      * The drawn text start.
@@ -290,35 +294,32 @@ public class NumberProgressBar extends View {
         mCurrentDrawText = String.format("%d", getProgress() * 100 / getMax());
         mCurrentDrawText = mPrefix + mCurrentDrawText + mSuffix;
         mDrawTextWidth = mTextPaint.measureText(mCurrentDrawText);
-
+        mDrawTextSize = mTextPaint.getFontSpacing();
         if (getProgress() == 0) {
             mDrawReachedBar = false;
             mDrawTextStart = getPaddingLeft();
         } else {
             mDrawReachedBar = true;
-            mReachedRectF.left = getPaddingLeft();
-            mReachedRectF.top = getHeight() / 2.0f - mReachedBarHeight / 2.0f;
-            mReachedRectF.right = (getWidth() - getPaddingLeft() - getPaddingRight()) / (getMax() * 1.0f) * getProgress() - mOffset + getPaddingLeft();
-            mReachedRectF.bottom = getHeight() / 2.0f + mReachedBarHeight / 2.0f;
-            mDrawTextStart = (mReachedRectF.right + mOffset);
+            mReachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
+            mReachedRectF.top = (getHeight() - getPaddingBottom() - getPaddingTop()) - ((getHeight() - getPaddingBottom() - getPaddingTop()) / (getMax() * 1.0f) * getProgress() + getPaddingBottom());
+            mReachedRectF.right = getWidth() / 2.0f + mReachedBarHeight;
+            mReachedRectF.bottom = getHeight() - getPaddingBottom();
+            mDrawTextEnd = (mReachedRectF.top - mOffset);
         }
-
-        mDrawTextEnd = (int) ((getHeight() / 2.0f) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2.0f));
-
-        if ((mDrawTextStart + mDrawTextWidth) >= getWidth() - getPaddingRight()) {
-            mDrawTextStart = getWidth() - getPaddingRight() - mDrawTextWidth;
-            mReachedRectF.right = mDrawTextStart - mOffset;
+        mDrawTextStart = (int) ((getWidth() / 2.0f) - (4 * mReachedBarHeight));
+        if ((mDrawTextEnd + mDrawTextSize) >= getHeight() - getPaddingTop()) {
+            mDrawTextEnd = (getPaddingTop() + mDrawTextSize);
+            mReachedRectF.top = (mDrawTextEnd - mOffset);
         }
-
-        float unreachedBarStart = mDrawTextStart + mDrawTextWidth + mOffset;
-        if (unreachedBarStart >= getWidth() - getPaddingRight()) {
+        float unreachedBarStart = mDrawTextEnd - (2 * mDrawTextSize / 3) - mOffset;
+        if (unreachedBarStart >= getHeight() - getPaddingTop()) {
             mDrawUnreachedBar = false;
         } else {
             mDrawUnreachedBar = true;
-            mUnreachedRectF.left = unreachedBarStart;
-            mUnreachedRectF.right = getWidth() - getPaddingRight();
-            mUnreachedRectF.top = getHeight() / 2.0f + -mUnreachedBarHeight / 2.0f;
-            mUnreachedRectF.bottom = getHeight() / 2.0f + mUnreachedBarHeight / 2.0f;
+            mUnreachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
+            mUnreachedRectF.right = getWidth() / 2.0f + mUnreachedBarHeight;
+            mUnreachedRectF.top = getPaddingTop();
+            mUnreachedRectF.bottom = unreachedBarStart;
         }
     }
 
@@ -432,7 +433,7 @@ public class NumberProgressBar extends View {
             setProgress(getProgress() + by);
         }
 
-        if(mListener != null){
+        if (mListener != null) {
             mListener.onProgressChange(getProgress(), getMax());
         }
     }
@@ -503,7 +504,7 @@ public class NumberProgressBar extends View {
         return mIfDrawText;
     }
 
-    public void setOnProgressBarListener(OnProgressBarListener listener){
+    public void setOnProgressBarListener(OnProgressBarListener listener) {
         mListener = listener;
     }
 }
