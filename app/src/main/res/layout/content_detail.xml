@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <LinearLayout
-    android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="2">
+
         <android.support.percent.PercentRelativeLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
             <include
                 android:id="@+id/title"
                 layout="@layout/track_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                app:layout_marginTopPercent="10%"/>
+                app:layout_marginTopPercent="10%" />
+
             <com.sample.andremion.musicplayer.view.MusicCoverView
-                android:layout_centerInParent="true"
                 android:id="@+id/music_cover"
+                android:layout_centerInParent="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/album_cover_daft_punk"
                 android:transitionName="@string/transition_name_cover"
                 app:layout_heightPercent="45%"
                 app:layout_widthPercent="100%"
-                app:shape="circle"
-                />
+                app:shape="circle" />
 
             <com.sample.andremion.musicplayer.view.ProgressView
                 android:id="@+id/progress"
                 android:layout_centerInParent="true"
                 android:transitionName="@string/transition_name_progress"
                 app:layout_aspectRatio="100%"
-                app:layout_heightPercent="46%"/>
+                app:layout_heightPercent="48%" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
@@ -48,14 +48,14 @@
                 android:onClick="onFabClick"
                 android:scaleType="center"
                 android:src="@drawable/ic_pause_animatable"
-                android:transitionName="@string/transition_name_fab"/>
+                android:transitionName="@string/transition_name_fab" />
 
             <Space
                 android:id="@+id/timers_anchor"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/music_cover"
                 android:layout_centerHorizontal="true"
-                app:layout_widthPercent="25%"/>
+                app:layout_widthPercent="25%" />
 
             <TextView
                 android:id="@+id/time"
@@ -65,7 +65,7 @@
                 android:layout_toStartOf="@id/timers_anchor"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:transitionName="@string/transition_name_time"
-                tools:text="02:30"/>
+                tools:text="02:30" />
 
             <TextView
                 android:id="@+id/duration"
@@ -75,7 +75,7 @@
                 android:layout_toEndOf="@id/timers_anchor"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:transitionName="@string/transition_name_duration"
-                tools:text="04:30"/>
+                tools:text="04:30" />
 
             <LinearLayout
                 android:id="@+id/ordering"
@@ -91,20 +91,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:src="@drawable/ic_repeat_white_24dp"/>
+                    android:src="@drawable/ic_repeat_white_24dp" />
 
                 <Space
                     android:layout_width="@dimen/activity_horizontal_margin"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:id="@+id/shuffle"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.Button.Borderless"
 
                     android:clickable="true"
-                    android:src="@drawable/ic_shuffle_white_24dp"/>
+                    android:src="@drawable/ic_shuffle_white_24dp" />
                 <!--android:background="?attr/selectableItemBackgroundBorderless"-->
                 <!--android:background="?attr/selectableItemBackgroundBorderless"-->
             </LinearLayout>
@@ -123,42 +123,40 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_skip_previous_white_24dp"/>
+                    android:src="@drawable/ic_skip_previous_white_24dp" />
 
                 <ImageView
                     android:id="@+id/rewind"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_fast_rewind_white_24dp"/>
+                    android:src="@drawable/ic_fast_rewind_white_24dp" />
 
                 <ImageView
                     android:id="@+id/forward"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_fast_forward_white_24dp"/>
+                    android:src="@drawable/ic_fast_forward_white_24dp" />
 
                 <ImageView
                     android:id="@+id/next"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_skip_next_white_24dp"/>
+                    android:src="@drawable/ic_skip_next_white_24dp" />
 
             </LinearLayout>
         </android.support.percent.PercentRelativeLayout>
 
         <com.sample.andremion.musicplayer.view.LyricView
-            android:visibility="gone"
-            android:background="@color/colorLyricView"
-            android:layout_weight = "1"
             android:id="@+id/lyricView"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorLyricView"
+            android:visibility="gone" />
     </LinearLayout>
-
-
 
 
 </com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout>

@@ -80,6 +80,14 @@ public class PlayerService extends Service {
         }
     }
 
+    public String getPath() {
+        if (mListMedia.size() != 0) {
+            return mListMedia.get(musicIndex).getPath();
+        } else {
+            return null;
+        }
+    }
+
     public String getDisplayName() {
         if (mListMedia.size() != 0) {
             return mListMedia.get(musicIndex).getDisplay_name();

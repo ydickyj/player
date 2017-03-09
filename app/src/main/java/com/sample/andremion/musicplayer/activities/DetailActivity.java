@@ -15,11 +15,10 @@
  */
 
 package com.sample.andremion.musicplayer.activities;
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +32,8 @@ import com.sample.andremion.musicplayer.view.TransitionAdapter;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import me.shaohui.bottomdialog.BottomDialog;
 
 
 @EActivity(R.layout.content_detail)
@@ -55,7 +56,7 @@ public class DetailActivity extends PlayerActivity {
 
     private int repSumClick = 0;
     private int ranSumClick = 0;
-
+    BottomDialog newBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +85,9 @@ public class DetailActivity extends PlayerActivity {
                 mCoverView.start();
                 lyricView.setVisibility(View.VISIBLE);
                 Log.e(TAG, "" + getPosition());
-
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {
@@ -160,5 +159,17 @@ public class DetailActivity extends PlayerActivity {
         next();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode){
+            case KeyEvent.KEYCODE_MENU:
+                BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog).show();
+                break;
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
 
 }

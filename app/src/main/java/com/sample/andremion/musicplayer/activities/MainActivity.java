@@ -152,7 +152,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     //    判断权限
     void checkPermission() {
-        if (Build.VERSION.SDK_INT >= 19) {//判断当前系统的版本
+        if (Build.VERSION.SDK_INT >= 23) {//判断当前系统的版本
             int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
             int checkReadStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
             int checkMountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
@@ -345,7 +345,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Override
     public void onItemClick(View view, int postion) {
         if (mBound) {
-            update(mListMedia, postion);
+            if (!Objects.equals(mListMedia.get(postion).getPath(), getCurrentPath())){
+                update(mListMedia, postion);
+            }
         } else {
             bindService();
         }

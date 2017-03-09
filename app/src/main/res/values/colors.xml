@@ -5,5 +5,5 @@
     <color name="colorAccent">#FD4848</color>
     <color name="colorPane">#33C2CAC9</color>
     <color name="colorLyricView">#303030</color>
-
+    <color name="mixer_black">#6FFFFFFF</color>
 </resources>

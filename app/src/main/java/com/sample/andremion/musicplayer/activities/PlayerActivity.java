@@ -211,7 +211,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mAuthor = (TextView) findViewById(R.id.display_author);
         mLyricView = (LyricView) findViewById(R.id.lyricView);
         mMusicCoverView = (MusicCoverView) findViewById(R.id.music_cover);
-        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_XY );
+        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_CENTER );
     }
 
     @Override
@@ -273,6 +273,9 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public String getCurrentName() {
         return mService.getDisplayName();
+    }
+    public String getCurrentPath() {
+        return mService.getPath();
     }
 
     public void update(List<MediaEntity> mListMedia, int dex) {
