@@ -15,17 +15,22 @@
  */
 
 package com.sample.andremion.musicplayer.activities;
+
 import android.os.Bundle;
+import android.text.AlteredCharSequence;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
+import com.sample.andremion.musicplayer.view.NumberProgressBar;
 import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
 
@@ -57,6 +62,7 @@ public class DetailActivity extends PlayerActivity {
     private int repSumClick = 0;
     private int ranSumClick = 0;
     BottomDialog newBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,14 +168,120 @@ public class DetailActivity extends PlayerActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        switch (keyCode){
+        switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
-                BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog).show();
+                BottomDialog m = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
+
+                m.setViewListener(new BottomDialog.ViewListener() {
+                    @Override
+                    public void bindView(View v) {
+                        initView(v);
+                    }
+                });
+                m.show();
                 break;
         }
 
         return super.onKeyDown(keyCode, event);
 
+    }
+
+    private void initView(View v) {
+        TextView mE = (TextView) v.findViewById(R.id.eq);
+
+        final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
+        Button bassAddBtn = (Button) v.findViewById(R.id.add_button_bass);
+        Button bassReduceBtn = (Button) v.findViewById(R.id.reduce_button_bass);
+
+        final NumberProgressBar mediumProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_medium_bass);
+        Button mediumAddBtn = (Button) v.findViewById(R.id.add_button_medium_bass);
+        Button mediumReduceBtn = (Button) v.findViewById(R.id.reduce_button_medium_bass);
+
+        final NumberProgressBar mediantProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_mediant);
+        Button mediantAddBtn = (Button) v.findViewById(R.id.add_button_mediant);
+        Button mediantReduceBtn = (Button) v.findViewById(R.id.reduce_button_mediant);
+
+        final NumberProgressBar msProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_mezzo_soprano);
+        Button msAddBtn = (Button) v.findViewById(R.id.add_button_mezzo_soprano);
+        Button msReduceBtn = (Button) v.findViewById(R.id.reduce_button_mezzo_soprano);
+
+        final NumberProgressBar altProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_alt);
+        Button altAddBtn = (Button) v.findViewById(R.id.add_button_alt);
+        Button altReduceBtn = (Button) v.findViewById(R.id.reduce_alt);
+
+        bassAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = bassProgress.getProgress() + 1;
+                bassProgress.setProgress(newPosition);
+            }
+        });
+
+        mediumAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = mediumProgress.getProgress() + 1;
+                mediumProgress.setProgress(newPosition);
+            }
+        });
+        mediantAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = mediantProgress.getProgress() + 1;
+                mediantProgress.setProgress(newPosition);
+            }
+        });
+        msAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = msProgress.getProgress() + 1;
+                msProgress.setProgress(newPosition);
+            }
+        });
+        altAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = altProgress.getProgress() + 1;
+                altProgress.setProgress(newPosition);
+            }
+        });
+
+        bassReduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = bassProgress.getProgress() - 1;
+                bassProgress.setProgress(newPosition);
+            }
+        });
+
+        mediumReduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = mediumProgress.getProgress() - 1;
+                mediumProgress.setProgress(newPosition);
+            }
+        });
+        mediantReduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = mediantProgress.getProgress() - 1;
+                mediantProgress.setProgress(newPosition);
+            }
+        });
+        msReduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = msProgress.getProgress() - 1;
+                msProgress.setProgress(newPosition);
+            }
+        });
+        altReduceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newPosition = altProgress.getProgress() - 1;
+                altProgress.setProgress(newPosition);
+            }
+        });
     }
 
 }

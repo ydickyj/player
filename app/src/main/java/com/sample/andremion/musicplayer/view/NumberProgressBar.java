@@ -70,9 +70,13 @@ public class NumberProgressBar extends View {
     private String mPrefix = "";
 
 
-    private final int default_text_color = Color.rgb(255, 255, 255);
-    private final int default_reached_color = Color.rgb(255, 255, 255);
-    private final int default_unreached_color = Color.rgb(204, 204, 204);
+    private final int default_text_color = Color.rgb(250, 80, 2);
+    private final int default_luminescence_color = Color.parseColor("#6b3626");
+    private final int default_luminescence_color_background = Color.parseColor("#ab4215");
+    private final int default_line_color_background = Color.parseColor("#37383c");
+    private final int default_line_color = Color.parseColor("#1a1b1d");
+    private final int default_reached_color = Color.rgb(250, 80, 2);
+    private final int default_unreached_color = Color.rgb(31, 31, 31);
     private final float default_progress_text_offset;
     private final float default_text_size;
     private final float default_reached_bar_height;
@@ -125,6 +129,22 @@ public class NumberProgressBar extends View {
     /**
      * The Paint of the reached area.
      */
+    private Paint mReachedBarLuminescenceBackgroundPaint;
+    /**
+     * The Paint of the reached area background.
+     */
+
+    private Paint mReachedBarBackgroundPaint;
+    /**
+     * The Paint of the reached area background.
+     */
+
+    private Paint mLinePaint;
+    private Paint mLineBackgroundPaint;
+    /**
+     * The Paint of the reached area background.
+     */
+
     private Paint mReachedBarPaint;
     /**
      * The Paint of the unreached area.
@@ -143,7 +163,11 @@ public class NumberProgressBar extends View {
      * Reached bar area rect.
      */
     private RectF mReachedRectF = new RectF(0, 0, 0, 0);
-
+    /**
+     * Reached bar area rect.
+     */
+    private RectF mReachedRectBackgroundF = new RectF(0, 0, 0, 0);
+    private RectF mLine = new RectF(0, 0, 0, 0);
     /**
      * The progress text offset.
      */
@@ -244,8 +268,34 @@ public class NumberProgressBar extends View {
         return result;
     }
 
+    private void initializePainters() {
+        mReachedBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mReachedBarPaint.setColor(mReachedBarColor);
+
+        mReachedBarBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mReachedBarBackgroundPaint.setColor(default_luminescence_color);
+
+        mReachedBarLuminescenceBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mReachedBarLuminescenceBackgroundPaint.setColor(default_luminescence_color_background);
+
+        mUnreachedBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mUnreachedBarPaint.setColor(mUnreachedBarColor);
+
+        mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mLinePaint.setColor(default_line_color_background);
+
+        mLineBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mLineBackgroundPaint.setColor(default_line_color);
+
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(mTextSize);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
+
+
         if (mIfDrawText) {
             calculateDrawRectF();
         } else {
@@ -253,6 +303,64 @@ public class NumberProgressBar extends View {
         }
 
         if (mDrawReachedBar) {
+
+            for (int i = 0; i < 5; i++) {
+                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+                if (i == 4) {
+                    mLine.top = mLine.top - 3;
+                } else if (i == 0) {
+                    mLine.top = mLine.top + 3;
+                }
+                mLine.bottom = mLine.top + 4;
+                mLine.left = 0;
+                mLine.right = mReachedRectF.left - 10;
+                canvas.drawRect(mLine, mLinePaint);
+            }
+            for (int i = 0; i < 5; i++) {
+                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+                if (i == 4) {
+                    mLine.top = mLine.top - 3;
+                } else if (i == 0) {
+                    mLine.top = mLine.top + 3;
+                }
+                mLine.bottom = mLine.top + 3;
+                mLine.left = 0;
+                mLine.right = mReachedRectF.left - 10;
+                canvas.drawRect(mLine, mLineBackgroundPaint);
+            }
+            for (int i = 0; i < 5; i++) {
+                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+                if (i == 4) {
+                    mLine.top = mLine.top - 3;
+                } else if (i == 0) {
+                    mLine.top = mLine.top + 3;
+                }
+                mLine.bottom = mLine.top + 4;
+                mLine.left = mReachedRectF.right + 10;
+                mLine.right = getWidth() - getPaddingRight();
+                canvas.drawRect(mLine, mLinePaint);
+            }
+            for (int i = 0; i < 5; i++) {
+                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+                if (i == 4) {
+                    mLine.top = mLine.top - 3;
+                } else if (i == 0) {
+                    mLine.top = mLine.top + 3;
+                }
+                mLine.bottom = mLine.top + 3;
+                mLine.left = mReachedRectF.right + 10;
+                mLine.right = getWidth() - getPaddingRight();
+                canvas.drawRect(mLine, mLineBackgroundPaint);
+            }
+
+            mReachedRectBackgroundF.right = mReachedRectF.right + 2;
+            mReachedRectBackgroundF.top = mReachedRectF.top;
+            mReachedRectBackgroundF.left = mReachedRectF.left;
+            mReachedRectBackgroundF.bottom = mReachedRectF.bottom;
+            canvas.drawRect(mReachedRectBackgroundF, mReachedBarBackgroundPaint);
+            mReachedRectBackgroundF.right = mReachedRectF.right - 2;
+            mReachedRectBackgroundF.left = mReachedRectF.left - 2;
+            canvas.drawRect(mReachedRectBackgroundF, mReachedBarLuminescenceBackgroundPaint);
             canvas.drawRect(mReachedRectF, mReachedBarPaint);
         }
 
@@ -262,18 +370,6 @@ public class NumberProgressBar extends View {
 
         if (mIfDrawText)
             canvas.drawText(mCurrentDrawText, mDrawTextStart, mDrawTextEnd, mTextPaint);
-    }
-
-    private void initializePainters() {
-        mReachedBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mReachedBarPaint.setColor(mReachedBarColor);
-
-        mUnreachedBarPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mUnreachedBarPaint.setColor(mUnreachedBarColor);
-
-        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(mTextColor);
-        mTextPaint.setTextSize(mTextSize);
     }
 
 
@@ -317,7 +413,7 @@ public class NumberProgressBar extends View {
         } else {
             mDrawUnreachedBar = true;
             mUnreachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
-            mUnreachedRectF.right = getWidth() / 2.0f + mUnreachedBarHeight;
+            mUnreachedRectF.right = getWidth() / 2.0f + mUnreachedBarHeight + 2;
             mUnreachedRectF.top = getPaddingTop();
             mUnreachedRectF.bottom = unreachedBarStart;
         }

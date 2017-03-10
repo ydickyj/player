@@ -5,249 +5,475 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/mixer_background"
+    android:orientation="horizontal"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:weightSum="2">
 
     <LinearLayout
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/equalizer_icon" />
+
+            <TextView
+                android:id="@+id/eq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/mixer_margin_big"
+                android:text="@string/equalizer"
+                android:textSize="48sp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:background="@drawable/mixer_background_inside"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="bar bass" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="(60hz)" />
-
-            <com.sample.andremion.musicplayer.view.NumberProgressBar
-                android:id="@+id/number_progress_bar_bass"
-                android:layout_width="@dimen/mixer_progress_with"
-                android:layout_height="@dimen/mixer_progress_height"
-                android:layout_gravity="center"
-                custom:progress_current="80"
-                custom:progress_max="100" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/add_button_bass"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_add_background" />
-
-
-                <Button
-                    android:id="@+id/reduce_button_bass"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="medium bass" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="(230hz)" />
-
-            <com.sample.andremion.musicplayer.view.NumberProgressBar
-                android:id="@+id/number_progress_bar_medium_bass"
-                android:layout_width="@dimen/mixer_progress_with"
-                android:layout_height="@dimen/mixer_progress_height"
                 android:layout_gravity="center"
-                custom:progress_current="80"
-                custom:progress_max="100" />
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_margin="@dimen/mixer_margin"
+                android:weightSum="3"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/add_button_medium_bass"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
 
-                <Button
-                    android:id="@+id/reduce_button_medium_bass"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
+                    android:gravity="center"
+                    android:text="15"
+                    android:textColor="@color/mixer_inside_text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="@dimen/mixer_margin"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/mixer_inside_text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="@dimen/mixer_margin"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="-15"
+                    android:textColor="@color/mixer_inside_text" />
+
+
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="mediant" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="(910hz)" />
-
-            <com.sample.andremion.musicplayer.view.NumberProgressBar
-                android:id="@+id/number_progress_mediant"
-                android:layout_width="@dimen/mixer_progress_with"
-                android:layout_height="@dimen/mixer_progress_height"
-                android:layout_gravity="center"
-                custom:progress_current="80"
-                custom:progress_max="100" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/add_button_mediant"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
-
-                <Button
-                    android:id="@+id/reduce_button_mediant"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="mezzo soprano" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="(3600hz)" />
-
-            <com.sample.andremion.musicplayer.view.NumberProgressBar
-                android:id="@+id/number_progress_bar_mezzo_soprano"
-                android:layout_width="@dimen/mixer_progress_with"
-                android:layout_height="@dimen/mixer_progress_height"
                 android:layout_gravity="center"
-                custom:progress_current="80"
-                custom:progress_max="100" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/add_button_mezzo_soprano"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
-
-                <Button
-                    android:id="@+id/reduce_button_mezzo_soprano"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="alt" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="(14000hz)" />
+                <!--水平了的所有文字的垂直布局-->
+                <LinearLayout
+                    android:id="@+id/horizontal_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
 
-            <com.sample.andremion.musicplayer.view.NumberProgressBar
-                android:id="@+id/number_progress_alt"
-                android:layout_width="@dimen/mixer_progress_with"
-                android:layout_height="@dimen/mixer_progress_height"
-                android:layout_gravity="center"
-                custom:progress_current="80"
-                custom:progress_max="100" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="bar bass"
+                            android:textColor="@color/mixer_inside_text" />
 
-                <Button
-                    android:id="@+id/add_button_alt"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:gravity="center"
+                            android:text="(60hz)"
+                            android:textColor="@color/mixer_inside_text" />
 
-                <Button
-                    android:id="@+id/reduce_alt"
-                    style="@style/dialog_blue_button"
-                    android:background="@drawable/btn_confirm_background"
-                    android:text="@string/dialog_ok" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="medium bass"
+                            android:textColor="@color/mixer_inside_text" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:gravity="center"
+                            android:text="(230hz)"
+                            android:textColor="@color/mixer_inside_text" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="mediant"
+                            android:textColor="@color/mixer_inside_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:gravity="center"
+                            android:text="(910hz)"
+                            android:textColor="@color/mixer_inside_text" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="mezzo soprano"
+                            android:textColor="@color/mixer_inside_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:gravity="center"
+                            android:text="(3600hz)"
+                            android:textColor="@color/mixer_inside_text" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="alt"
+                            android:textColor="@color/mixer_inside_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:gravity="center"
+                            android:text="(14000hz)"
+                            android:textColor="@color/mixer_inside_text" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--水平了的所有进度条的垂直布局-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/mixer_margin_big"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.sample.andremion.musicplayer.view.NumberProgressBar
+                            android:id="@+id/number_progress_bar_bass"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/mixer_progress_height"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/mixer_margin"
+                            custom:progress_current="80"
+                            custom:progress_max="100" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_top_line" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_line" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/reduce_button_bass"
+                                style="@style/mixer_reduce_button" />
+
+                            <Button
+                                android:id="@+id/add_button_bass"
+                                style="@style/mixer_add_button" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.sample.andremion.musicplayer.view.NumberProgressBar
+                            android:id="@+id/number_progress_bar_medium_bass"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/mixer_progress_height"
+                            android:layout_gravity="center"
+                            custom:progress_current="80"
+                            custom:progress_max="100" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_top_line" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_line" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/reduce_button_medium_bass"
+                                style="@style/mixer_reduce_button" />
+
+                            <Button
+                                android:id="@+id/add_button_medium_bass"
+                                style="@style/mixer_add_button" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.sample.andremion.musicplayer.view.NumberProgressBar
+                            android:id="@+id/number_progress_mediant"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/mixer_progress_height"
+                            android:layout_gravity="center"
+                            custom:progress_current="80"
+                            custom:progress_max="100" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_top_line" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_line" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/reduce_button_mediant"
+                                style="@style/mixer_reduce_button" />
+
+                            <Button
+                                android:id="@+id/add_button_mediant"
+                                style="@style/mixer_add_button" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.sample.andremion.musicplayer.view.NumberProgressBar
+                            android:id="@+id/number_progress_bar_mezzo_soprano"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/mixer_progress_height"
+                            android:layout_gravity="center"
+                            custom:progress_current="80"
+                            custom:progress_max="100" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_top_line" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_line" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/reduce_button_mezzo_soprano"
+                                style="@style/mixer_reduce_button" />
+
+                            <Button
+                                android:id="@+id/add_button_mezzo_soprano"
+                                style="@style/mixer_add_button" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.sample.andremion.musicplayer.view.NumberProgressBar
+                            android:id="@+id/number_progress_alt"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/mixer_progress_height"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="@dimen/mixer_margin"
+                            custom:progress_current="80"
+                            custom:progress_max="100" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_top_line" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/mixer_margin"
+                            android:background="@color/mixer_background_line" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/reduce_alt"
+                                style="@style/mixer_reduce_button" />
+
+                            <Button
+                                android:id="@+id/add_button_alt"
+                                style="@style/mixer_add_button" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
+
 
     </LinearLayout>
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Bee Music</string>
-
+    <string name="equalizer">EQUALIZER</string>
     <string name="transition_name_title" translatable="false">title</string>
     <string name="transition_name_cover" translatable="false">cover</string>
     <string name="transition_name_time" translatable="false">time</string>

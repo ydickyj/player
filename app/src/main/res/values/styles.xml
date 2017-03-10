@@ -169,4 +169,17 @@
         <item name="progress_reached_bar_height">1.5dp</item>
         <item name="progress_unreached_bar_height">0.75dp</item>
     </style>
+
+    <style name="mixer_reduce_button" parent="android:Widget.Button">
+        <item name="android:layout_width">@dimen/mixer_btn</item>
+        <item name="android:layout_height">@dimen/mixer_btn</item>
+        <item name="android:background">@drawable/btn_reduce_background</item>
+        <item name="android:layout_margin">@dimen/mixer_margin</item>
+    </style>
+    <style name="mixer_add_button" parent="android:Widget.Button">
+        <item name="android:layout_width">@dimen/mixer_btn</item>
+        <item name="android:layout_height">@dimen/mixer_btn</item>
+        <item name="android:background">@drawable/btn_add_background</item>
+        <item name="android:layout_margin">@dimen/mixer_margin</item>
+    </style>
 </resources>

@@ -6,4 +6,11 @@
     <color name="colorPane">#33C2CAC9</color>
     <color name="colorLyricView">#303030</color>
     <color name="mixer_black">#6FFFFFFF</color>
+    <color name="mixer_inside_black">#5F303030</color>
+    <color name="mixer_inside_text">#696a6e</color>
+    <color name="mixer_background">#bF292c31</color>
+
+    <color name="mixer_background_top_line">#171b1e</color>
+    <color name="mixer_background_line">#313538</color>
+
 </resources>

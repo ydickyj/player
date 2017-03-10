@@ -6,6 +6,9 @@
     <dimen name="cover_size_mini">40dp</dimen>
     <dimen name="fab_vertical_margin">-25dp</dimen>
 
-    <dimen name="mixer_progress_with">58dp</dimen>
-    <dimen name="mixer_progress_height">300dp</dimen>
+    <dimen name="mixer_progress_height">250dp</dimen>
+    <dimen name="mixer_btn">30dp</dimen>
+
+    <dimen name="mixer_margin">5dp</dimen>
+    <dimen name="mixer_margin_big">10dp</dimen>
 </resources>
