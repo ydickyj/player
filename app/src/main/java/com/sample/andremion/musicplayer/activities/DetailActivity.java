@@ -171,7 +171,6 @@ public class DetailActivity extends PlayerActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
                 BottomDialog m = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
-
                 m.setViewListener(new BottomDialog.ViewListener() {
                     @Override
                     public void bindView(View v) {
@@ -190,30 +189,42 @@ public class DetailActivity extends PlayerActivity {
         TextView mE = (TextView) v.findViewById(R.id.eq);
 
         final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
+        bassProgress.setMax(getEqualizerMax());
+        bassProgress.setProgress(getBandLeve((short) 0));
         Button bassAddBtn = (Button) v.findViewById(R.id.add_button_bass);
         Button bassReduceBtn = (Button) v.findViewById(R.id.reduce_button_bass);
+
 
         final NumberProgressBar mediumProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_medium_bass);
         Button mediumAddBtn = (Button) v.findViewById(R.id.add_button_medium_bass);
         Button mediumReduceBtn = (Button) v.findViewById(R.id.reduce_button_medium_bass);
+        mediumProgress.setMax(getEqualizerMax());
+        mediumProgress.setProgress(getBandLeve((short) 1));
 
         final NumberProgressBar mediantProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_mediant);
         Button mediantAddBtn = (Button) v.findViewById(R.id.add_button_mediant);
         Button mediantReduceBtn = (Button) v.findViewById(R.id.reduce_button_mediant);
+        mediantProgress.setMax(getEqualizerMax());
+        mediantProgress.setProgress(getBandLeve((short) 2));
 
         final NumberProgressBar msProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_mezzo_soprano);
         Button msAddBtn = (Button) v.findViewById(R.id.add_button_mezzo_soprano);
         Button msReduceBtn = (Button) v.findViewById(R.id.reduce_button_mezzo_soprano);
+        msProgress.setMax(getEqualizerMax());
+        msProgress.setProgress(getBandLeve((short) 3));
 
         final NumberProgressBar altProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_alt);
         Button altAddBtn = (Button) v.findViewById(R.id.add_button_alt);
         Button altReduceBtn = (Button) v.findViewById(R.id.reduce_alt);
+        altProgress.setMax(getEqualizerMax());
+        altProgress.setProgress(getBandLeve((short) 3));
 
         bassAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int newPosition = bassProgress.getProgress() + 1;
                 bassProgress.setProgress(newPosition);
+                setBandLevel((short) 0, newPosition);
             }
         });
 
@@ -222,6 +233,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = mediumProgress.getProgress() + 1;
                 mediumProgress.setProgress(newPosition);
+                setBandLevel((short) 1, newPosition);
             }
         });
         mediantAddBtn.setOnClickListener(new View.OnClickListener() {
@@ -229,6 +241,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = mediantProgress.getProgress() + 1;
                 mediantProgress.setProgress(newPosition);
+                setBandLevel((short) 2, newPosition);
             }
         });
         msAddBtn.setOnClickListener(new View.OnClickListener() {
@@ -236,6 +249,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = msProgress.getProgress() + 1;
                 msProgress.setProgress(newPosition);
+                setBandLevel((short) 3, newPosition);
             }
         });
         altAddBtn.setOnClickListener(new View.OnClickListener() {
@@ -243,6 +257,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = altProgress.getProgress() + 1;
                 altProgress.setProgress(newPosition);
+                setBandLevel((short) 4, newPosition);
             }
         });
 
@@ -251,6 +266,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = bassProgress.getProgress() - 1;
                 bassProgress.setProgress(newPosition);
+                setBandLevel((short) 0, newPosition);
             }
         });
 
@@ -259,6 +275,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = mediumProgress.getProgress() - 1;
                 mediumProgress.setProgress(newPosition);
+                setBandLevel((short) 1, newPosition);
             }
         });
         mediantReduceBtn.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +283,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = mediantProgress.getProgress() - 1;
                 mediantProgress.setProgress(newPosition);
+                setBandLevel((short) 2, newPosition);
             }
         });
         msReduceBtn.setOnClickListener(new View.OnClickListener() {
@@ -273,6 +291,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = msProgress.getProgress() - 1;
                 msProgress.setProgress(newPosition);
+                setBandLevel((short) 3, newPosition);
             }
         });
         altReduceBtn.setOnClickListener(new View.OnClickListener() {
@@ -280,6 +299,7 @@ public class DetailActivity extends PlayerActivity {
             public void onClick(View v) {
                 int newPosition = altProgress.getProgress() - 1;
                 altProgress.setProgress(newPosition);
+                setBandLevel((short) 4, newPosition);
             }
         });
     }

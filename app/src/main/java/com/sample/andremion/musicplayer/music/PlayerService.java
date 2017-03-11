@@ -19,6 +19,10 @@ package com.sample.andremion.musicplayer.music;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.audiofx.BassBoost;
+import android.media.audiofx.Equalizer;
+import android.media.audiofx.PresetReverb;
+import android.media.audiofx.Visualizer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -30,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class PlayerService extends Service {
 
     private static final String TAG = PlayerService.class.getSimpleName();
@@ -40,9 +45,26 @@ public class PlayerService extends Service {
     private int lyricIndex = 0;
     public static MediaPlayer mp = new MediaPlayer();
     private boolean mMediaPlayerIsReady = false;
+    // 定义系统的频谱
+    private Visualizer mVisualizer;
+    // 定义系统的均衡器
+    private Equalizer mEqualizer;
+    // 定义系统的重低音控制器
+    private BassBoost mBass;
+    // 定义系统的预设音场控制器
+    private PresetReverb mPresetReverb;
+    private List<Short> reverbNames = new ArrayList<Short>();
+    private List<String> reverbVals = new ArrayList<String>();
 
     public PlayerService() {
-
+        // 初始化示波器
+        setupVisualizer();
+        // 初始化均衡控制器
+        setupEqualizer();
+//        // 初始化重低音控制器
+//        setupBassBoost();
+//        // 初始化预设音场控制器
+//        setupPresetReverb();
     }
 
     @Override
@@ -55,7 +77,13 @@ public class PlayerService extends Service {
         if (mMediaPlayerIsReady) {
             mMediaPlayerIsReady = false;
             mp.release();
-            Log.e("1231", "12321");
+            // 释放所有对象
+            mVisualizer.release();
+            mEqualizer.release();
+            mPresetReverb.release();
+            mBass.release();
+
+            Log.e(TAG, "释放所有对象");
         }
         return super.onUnbind(intent);
     }
@@ -258,6 +286,7 @@ public class PlayerService extends Service {
                 e.printStackTrace();
             }
             mMediaPlayerIsReady = true;
+            setupEqualizer();
         }
     }
 
@@ -268,10 +297,161 @@ public class PlayerService extends Service {
     public String getMusicAlbums() {
         if (musicIndex < mListMedia.size() && mListMedia.size() != 0) {
             return mListMedia.get(musicIndex).albums;
-        }else {
-            return  null;
+        } else {
+            return null;
         }
 
 
     }
+
+    /**
+     * 初始化频谱
+     */
+    private void setupVisualizer() {
+        if (mMediaPlayerIsReady) {
+            mVisualizer = new Visualizer(mp.getAudioSessionId());
+            //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
+            mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+            // 为mVisualizer设置监听器
+        /*
+         * Visualizer.setDataCaptureListener(OnDataCaptureListener listener, int rate, boolean waveform, boolean fft
+         *
+         *      listener，表监听函数，匿名内部类实现该接口，该接口需要实现两个函数
+                rate， 表示采样的周期，即隔多久采样一次，联系前文就是隔多久采样128个数据
+                iswave，是波形信号
+                isfft，是FFT信号，表示是获取波形信号还是频域信号
+
+         */
+            mVisualizer.setDataCaptureListener(
+                    new Visualizer.OnDataCaptureListener() {
+                        //这个回调应该采集的是快速傅里叶变换有关的数据
+                        @Override
+                        public void onFftDataCapture(Visualizer visualizer,
+                                                     byte[] fft, int samplingRate) {
+                        }
+
+                        //这个回调应该采集的是波形数据
+                        @Override
+                        public void onWaveFormDataCapture(Visualizer visualizer,
+                                                          byte[] waveform, int samplingRate) {
+                            // 用waveform波形数据更新mVisualizerView组件
+//                        mVisualizerView.updateVisualizer(waveform);
+                        }
+                    }, Visualizer.getMaxCaptureRate() / 2, true, false);
+        }
+    }
+
+    /**
+     * 初始化均衡控制器
+     */
+    private void setupEqualizer() {
+        if (mMediaPlayerIsReady) {
+            // 以MediaPlayer的AudioSessionId创建Equalizer
+            // 相当于设置Equalizer负责控制该MediaPlayer
+            mEqualizer = new Equalizer(0, mp.getAudioSessionId());
+            // 启用均衡控制效果
+            mEqualizer.setEnabled(true);
+            // 获取均衡控制器支持最小值和最大值
+            final short minEQLevel = mEqualizer.getBandLevelRange()[0];//第一个下标为最低的限度范围
+            short maxEQLevel = mEqualizer.getBandLevelRange()[1];  // 第二个下标为最高的限度范围
+            // 获取均衡控制器支持的所有频率
+            short brands = mEqualizer.getNumberOfBands();
+            for (short i = 0; i < brands; i++) {
+                // 显示均衡控制器的最小值
+                Log.e("maxEQLevel", (minEQLevel / 100) + " dB" + " brands.size:" + brands);
+                // 显示均衡控制器的最大值
+                Log.e("maxEQLevel", (maxEQLevel / 100) + " dB");
+            }
+        }else {
+            Log.e(TAG,"播放器未准备完成");
+        }
+    }
+
+    public short getBandLeve(short index) {
+        if (mEqualizer != null) {
+            return mEqualizer.getBandLevel(index);
+        } else {
+            return 0;
+        }
+    }
+
+    public short getEqualizerMax() {
+        if (mEqualizer != null) {
+            return mEqualizer.getBandLevelRange()[1];
+        } else {
+            return 0;
+        }
+    }
+
+    public short getEqualizerMin() {
+        if (mEqualizer != null) {
+            return mEqualizer.getBandLevelRange()[0];
+        } else {
+            return 0;
+        }
+    }
+
+    public void setBandLevel(short brand, int progress) {
+        if (mEqualizer != null) {
+            // 设置该频率的均衡值
+            mEqualizer.setBandLevel(brand,
+                    (short) (progress + mEqualizer.getBandLevelRange()[0]));
+        } else {
+            Log.e(TAG, "均衡器未初始化");
+        }
+    }
+
+    /**
+     * 初始化重低音控制器
+     */
+//    private void setupBassBoost() {
+//        // 以MediaPlayer的AudioSessionId创建BassBoost
+//        // 相当于设置BassBoost负责控制该MediaPlayer
+//        mBass = new BassBoost(0, mPlayer.getAudioSessionId());
+//        // 设置启用重低音效果
+//        mBass.setEnabled(true);
+//        bar.setMax(1000);
+//        bar.setProgress(0);
+//        // 为SeekBar的拖动事件设置事件监听器
+//        // 设置重低音的强度
+//        mBass.setStrength((short) progress);
+//    }
+//
+//    /**
+//     * 初始化预设音场控制器
+//     */
+//    private void setupPresetReverb() {
+//        // 以MediaPlayer的AudioSessionId创建PresetReverb
+//        // 相当于设置PresetReverb负责控制该MediaPlayer
+//        mPresetReverb = new PresetReverb(0,
+//                mPlayer.getAudioSessionId());
+//        // 设置启用预设音场控制
+//        mPresetReverb.setEnabled(true);
+//
+//        // 获取系统支持的所有预设音场
+//        for (short i = 0; i < mEqualizer.getNumberOfPresets(); i++) {
+//            reverbNames.add(i);
+//            reverbVals.add(mEqualizer.getPresetName(i));
+//        }
+//        // 使用Spinner做为音场选择工具
+//        Spinner sp = new Spinner(this);
+//        sp.setAdapter(new ArrayAdapter<String>(MediaPlayerTest.this,
+//                android.R.layout.simple_spinner_item, reverbVals));
+//        // 为Spinner的列表项选中事件设置监听器
+//        sp.setOnItemSelectedListener(new Spinner
+//                .OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> arg0
+//                    , View arg1, int arg2, long arg3) {
+//                // 设定音场
+//                mPresetReverb.setPreset(reverbNames.get(arg2));
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> arg0) {
+//            }
+//        });
+//        layout.addView(sp);
+//    }
+
 }

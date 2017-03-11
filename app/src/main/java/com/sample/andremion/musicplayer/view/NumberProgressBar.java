@@ -294,79 +294,22 @@ public class NumberProgressBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-
         if (mIfDrawText) {
             calculateDrawRectF();
         } else {
             calculateDrawRectFWithoutProgressText();
         }
-
-        if (mDrawReachedBar) {
-
-            for (int i = 0; i < 5; i++) {
-                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
-                if (i == 4) {
-                    mLine.top = mLine.top - 3;
-                } else if (i == 0) {
-                    mLine.top = mLine.top + 3;
-                }
-                mLine.bottom = mLine.top + 4;
-                mLine.left = 0;
-                mLine.right = mReachedRectF.left - 10;
-                canvas.drawRect(mLine, mLinePaint);
-            }
-            for (int i = 0; i < 5; i++) {
-                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
-                if (i == 4) {
-                    mLine.top = mLine.top - 3;
-                } else if (i == 0) {
-                    mLine.top = mLine.top + 3;
-                }
-                mLine.bottom = mLine.top + 3;
-                mLine.left = 0;
-                mLine.right = mReachedRectF.left - 10;
-                canvas.drawRect(mLine, mLineBackgroundPaint);
-            }
-            for (int i = 0; i < 5; i++) {
-                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
-                if (i == 4) {
-                    mLine.top = mLine.top - 3;
-                } else if (i == 0) {
-                    mLine.top = mLine.top + 3;
-                }
-                mLine.bottom = mLine.top + 4;
-                mLine.left = mReachedRectF.right + 10;
-                mLine.right = getWidth() - getPaddingRight();
-                canvas.drawRect(mLine, mLinePaint);
-            }
-            for (int i = 0; i < 5; i++) {
-                mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
-                if (i == 4) {
-                    mLine.top = mLine.top - 3;
-                } else if (i == 0) {
-                    mLine.top = mLine.top + 3;
-                }
-                mLine.bottom = mLine.top + 3;
-                mLine.left = mReachedRectF.right + 10;
-                mLine.right = getWidth() - getPaddingRight();
-                canvas.drawRect(mLine, mLineBackgroundPaint);
-            }
-
-            mReachedRectBackgroundF.right = mReachedRectF.right + 2;
-            mReachedRectBackgroundF.top = mReachedRectF.top;
-            mReachedRectBackgroundF.left = mReachedRectF.left;
-            mReachedRectBackgroundF.bottom = mReachedRectF.bottom;
-            canvas.drawRect(mReachedRectBackgroundF, mReachedBarBackgroundPaint);
-            mReachedRectBackgroundF.right = mReachedRectF.right - 2;
-            mReachedRectBackgroundF.left = mReachedRectF.left - 2;
-            canvas.drawRect(mReachedRectBackgroundF, mReachedBarLuminescenceBackgroundPaint);
-            canvas.drawRect(mReachedRectF, mReachedBarPaint);
-        }
-
-        if (mDrawUnreachedBar) {
-            canvas.drawRect(mUnreachedRectF, mUnreachedBarPaint);
-        }
+        drawBackground(canvas);
+        mReachedRectBackgroundF.right = mReachedRectF.right + 2;
+        mReachedRectBackgroundF.top = mReachedRectF.top;
+        mReachedRectBackgroundF.left = mReachedRectF.left;
+        mReachedRectBackgroundF.bottom = mReachedRectF.bottom;
+        canvas.drawRect(mReachedRectBackgroundF, mReachedBarBackgroundPaint);
+        mReachedRectBackgroundF.right = mReachedRectF.right - 2;
+        mReachedRectBackgroundF.left = mReachedRectF.left - 2;
+        canvas.drawRect(mReachedRectBackgroundF, mReachedBarLuminescenceBackgroundPaint);
+        canvas.drawRect(mReachedRectF, mReachedBarPaint);
+        canvas.drawRect(mUnreachedRectF, mUnreachedBarPaint);
 
         if (mIfDrawText)
             canvas.drawText(mCurrentDrawText, mDrawTextStart, mDrawTextEnd, mTextPaint);
@@ -393,17 +336,23 @@ public class NumberProgressBar extends View {
         mDrawTextSize = mTextPaint.getFontSpacing();
         if (getProgress() == 0) {
             mDrawReachedBar = false;
-            mDrawTextStart = getPaddingLeft();
+            mDrawTextStart = getHeight();
         } else {
             mDrawReachedBar = true;
             mReachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
-            mReachedRectF.top = (getHeight() - getPaddingBottom() - getPaddingTop()) - ((getHeight() - getPaddingBottom() - getPaddingTop()) / (getMax() * 1.0f) * getProgress() + getPaddingBottom());
+            float realHeight = getHeight() - getPaddingBottom() - getPaddingTop();
+            int realMax = getMax();
+            int realProgress = getProgress();
+            float proportion = ((float) realProgress / (float) realMax);
+            float reachedRealHeight = realHeight * proportion;
+            float result = realHeight - reachedRealHeight;
+            mReachedRectF.top = result;
             mReachedRectF.right = getWidth() / 2.0f + mReachedBarHeight;
             mReachedRectF.bottom = getHeight() - getPaddingBottom();
             mDrawTextEnd = (mReachedRectF.top - mOffset);
         }
         mDrawTextStart = (int) ((getWidth() / 2.0f) - (4 * mReachedBarHeight));
-        if ((mDrawTextEnd + mDrawTextSize) >= getHeight() - getPaddingTop()) {
+        if ((mDrawTextEnd - mDrawTextSize) <= 0) {
             mDrawTextEnd = (getPaddingTop() + mDrawTextSize);
             mReachedRectF.top = (mDrawTextEnd - mOffset);
         }
@@ -416,6 +365,57 @@ public class NumberProgressBar extends View {
             mUnreachedRectF.right = getWidth() / 2.0f + mUnreachedBarHeight + 2;
             mUnreachedRectF.top = getPaddingTop();
             mUnreachedRectF.bottom = unreachedBarStart;
+        }
+    }
+
+    private void drawBackground(Canvas canvas) {
+        for (int i = 0; i < 5; i++) {
+            mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+            if (i == 4) {
+                mLine.top = mLine.top - 3;
+            } else if (i == 0) {
+                mLine.top = mLine.top + 3;
+            }
+            mLine.bottom = mLine.top + 4;
+            mLine.left = 0;
+            mLine.right = mReachedRectF.left - 10;
+            canvas.drawRect(mLine, mLinePaint);
+        }
+        for (int i = 0; i < 5; i++) {
+            mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+            if (i == 4) {
+                mLine.top = mLine.top - 3;
+            } else if (i == 0) {
+                mLine.top = mLine.top + 3;
+            }
+            mLine.bottom = mLine.top + 3;
+            mLine.left = 0;
+            mLine.right = mReachedRectF.left - 10;
+            canvas.drawRect(mLine, mLineBackgroundPaint);
+        }
+        for (int i = 0; i < 5; i++) {
+            mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+            if (i == 4) {
+                mLine.top = mLine.top - 3;
+            } else if (i == 0) {
+                mLine.top = mLine.top + 3;
+            }
+            mLine.bottom = mLine.top + 4;
+            mLine.left = mReachedRectF.right + 10;
+            mLine.right = getWidth() - getPaddingRight();
+            canvas.drawRect(mLine, mLinePaint);
+        }
+        for (int i = 0; i < 5; i++) {
+            mLine.top = (((getHeight() - getPaddingTop()) * i) / 4.0f);
+            if (i == 4) {
+                mLine.top = mLine.top - 3;
+            } else if (i == 0) {
+                mLine.top = mLine.top + 3;
+            }
+            mLine.bottom = mLine.top + 3;
+            mLine.left = mReachedRectF.right + 10;
+            mLine.right = getWidth() - getPaddingRight();
+            canvas.drawRect(mLine, mLineBackgroundPaint);
         }
     }
 

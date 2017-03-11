@@ -63,7 +63,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private String mOldAlbums;
     private boolean isRepeat;
     private boolean isRandom;
-    private int msgWhat =0;
+    private int msgWhat = 0;
 
     private final Handler mUpdateProgressHandler = new Handler() {
         @Override
@@ -72,7 +72,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 case 0:
                     final int position = mService.getPosition();
                     final int mDuration = mService.getDuration();
-                    Log.e("position:",""+position+" Duration   "+mDuration);
+                    Log.e("position:", "" + position + " Duration   " + mDuration);
                     final String name = mService.getDisplayName();
                     final String author = mService.getDisplayAuthor();
                     onUpdateProgress(position, mDuration, name, author, mService.getMusicAlbums());
@@ -84,8 +84,8 @@ public abstract class PlayerActivity extends AppCompatActivity {
                     final int endDuration = mService.getDuration();
                     final String endName = mService.getDisplayName();
                     final String endAuthor = mService.getDisplayAuthor();
-                    Log.e("position:","end");
-                    Log.e("position:",""+endPosition+" Duration   "+endDuration);
+                    Log.e("position:", "end");
+                    Log.e("position:", "" + endPosition + " Duration   " + endDuration);
                     onUpdateProgress(endPosition, endDuration, endName, endAuthor, mService.getMusicAlbums());
                     break;
             }
@@ -123,7 +123,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mDurationView.setText(utils.IntToStrTime(duration));
         }
         if (mProgressView != null) {
-            Log.e("123","mProgressView");
+            Log.e("123", "mProgressView");
             mProgressView.setMax(duration);
             mProgressView.setProgress(position);
         }
@@ -211,7 +211,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mAuthor = (TextView) findViewById(R.id.display_author);
         mLyricView = (LyricView) findViewById(R.id.lyricView);
         mMusicCoverView = (MusicCoverView) findViewById(R.id.music_cover);
-        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_CENTER );
+        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_CENTER);
     }
 
     @Override
@@ -274,8 +274,25 @@ public abstract class PlayerActivity extends AppCompatActivity {
     public String getCurrentName() {
         return mService.getDisplayName();
     }
+
     public String getCurrentPath() {
         return mService.getPath();
+    }
+
+    public int getBandLeve(short index) {
+        return mService.getBandLeve(index)/10;
+    }
+
+    public int getEqualizerMax() {
+        return mService.getEqualizerMax()/10;
+    }
+
+    public short getgetEqualizerMin() {
+        return mService.getEqualizerMin();
+    }
+
+    public void setBandLevel(short brand, int progress) {
+        mService.setBandLevel(brand, progress);
     }
 
     public void update(List<MediaEntity> mListMedia, int dex) {
@@ -284,8 +301,8 @@ public abstract class PlayerActivity extends AppCompatActivity {
         Log.e("123", "1231");
     }
 
-    public void onResumeUpdate(){
-        if (mBound){
+    public void onResumeUpdate() {
+        if (mBound) {
             mUpdateProgressHandler.sendEmptyMessage(1);
         }
 
