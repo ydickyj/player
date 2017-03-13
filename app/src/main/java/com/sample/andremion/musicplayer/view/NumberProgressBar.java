@@ -334,27 +334,23 @@ public class NumberProgressBar extends View {
         mCurrentDrawText = mPrefix + mCurrentDrawText + mSuffix;
         mDrawTextWidth = mTextPaint.measureText(mCurrentDrawText);
         mDrawTextSize = mTextPaint.getFontSpacing();
-        if (getProgress() == 0) {
-            mDrawReachedBar = false;
-            mDrawTextStart = getHeight();
-        } else {
-            mDrawReachedBar = true;
-            mReachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
-            float realHeight = getHeight() - getPaddingBottom() - getPaddingTop();
-            int realMax = getMax();
-            int realProgress = getProgress();
-            float proportion = ((float) realProgress / (float) realMax);
-            float reachedRealHeight = realHeight * proportion;
-            float result = realHeight - reachedRealHeight;
-            mReachedRectF.top = result;
-            mReachedRectF.right = getWidth() / 2.0f + mReachedBarHeight;
-            mReachedRectF.bottom = getHeight() - getPaddingBottom();
-            mDrawTextEnd = (mReachedRectF.top - mOffset);
-        }
+
+        mDrawReachedBar = true;
+        mReachedRectF.left = getWidth() / 2.0f - mReachedBarHeight;
+        float realHeight = getHeight() - getPaddingBottom() - getPaddingTop();
+        int realMax = getMax();
+        int realProgress = getProgress();
+        float proportion = ((float) realProgress / (float) realMax);
+        float reachedRealHeight = realHeight * proportion;
+        mReachedRectF.top = realHeight - reachedRealHeight;
+        mReachedRectF.right = getWidth() / 2.0f + mReachedBarHeight;
+        mReachedRectF.bottom = getHeight() - getPaddingBottom();
+        mDrawTextEnd = (mReachedRectF.top - mOffset);
+
         mDrawTextStart = (int) ((getWidth() / 2.0f) - (4 * mReachedBarHeight));
         if ((mDrawTextEnd - mDrawTextSize) <= 0) {
             mDrawTextEnd = (getPaddingTop() + mDrawTextSize);
-            mReachedRectF.top = (mDrawTextEnd - mOffset);
+            mReachedRectF.top = (mDrawTextEnd + mOffset);
         }
         float unreachedBarStart = mDrawTextEnd - (2 * mDrawTextSize / 3) - mOffset;
         if (unreachedBarStart >= getHeight() - getPaddingTop()) {

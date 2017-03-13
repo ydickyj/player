@@ -280,11 +280,12 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
     public int getBandLeve(short index) {
-        return mService.getBandLeve(index)/10;
+
+        return (mService.getBandLeve(index) / 10) - (-150);
     }
 
     public int getEqualizerMax() {
-        return mService.getEqualizerMax()/10;
+        return mService.getEqualizerMax() / 10;
     }
 
     public short getgetEqualizerMin() {
@@ -293,6 +294,18 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public void setBandLevel(short brand, int progress) {
         mService.setBandLevel(brand, progress);
+    }
+
+    public List<Short> getReverbNames() {
+        return mService.getReverbNames();
+    }
+
+    public List<String> getReverbVals() {
+        return mService.getReverbVals();
+    }
+
+    public void setPresetReverbPreset(int index) {
+        mService.setPresetReverbPreset(index);
     }
 
     public void update(List<MediaEntity> mListMedia, int dex) {

@@ -9,8 +9,11 @@
     <color name="mixer_inside_black">#5F303030</color>
     <color name="mixer_inside_text">#696a6e</color>
     <color name="mixer_background">#bF292c31</color>
-
+    <color name="mixer_inside_white">#fff</color>
     <color name="mixer_background_top_line">#171b1e</color>
     <color name="mixer_background_line">#313538</color>
-
+    <color name="mixer_equalizer_btn">#46494e</color>
+    <color name="mixer_equalizer_btn_line">#27262b</color>
+    <color name="mixer_equalizer_btn_bg">#222327</color>
+    <color name="mixer_equalizer_btn_normal">#282b30</color>
 </resources>

@@ -17,13 +17,18 @@
 package com.sample.andremion.musicplayer.activities;
 
 import android.os.Bundle;
-import android.text.AlteredCharSequence;
+
 import android.transition.Transition;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -38,7 +43,18 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Handler;
+
 import me.shaohui.bottomdialog.BottomDialog;
+
+import static android.view.KeyEvent.*;
 
 
 @EActivity(R.layout.content_detail)
@@ -62,6 +78,7 @@ public class DetailActivity extends PlayerActivity {
     private int repSumClick = 0;
     private int ranSumClick = 0;
     BottomDialog newBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,10 +204,27 @@ public class DetailActivity extends PlayerActivity {
 
     private void initView(View v) {
         TextView mE = (TextView) v.findViewById(R.id.eq);
+        Spinner mSpinner = (Spinner) v.findViewById(R.id.mixer_sp);
+        List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+        HashMap map = new HashMap();
+        map.put("name","556665566123");
+        listems.add(map);
+        HashMap mapOne = new HashMap();
+        mapOne.put("name","1231");
+        listems.add(mapOne);
+        for (int i = 0 ;i<10;i++){
+            mapOne = new HashMap();
+            mapOne.put("name","你好"+i);
+            listems.add(mapOne);
+        }
+        mSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,getReverbVals()));
 
+//        mSpinner.setAdapter(new SimpleAdapter(this,listems,R.layout.mixer_sp_item,new String[]{"name"},new int[]{R.id.tv_spinner}));
         final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
-        bassProgress.setMax(getEqualizerMax());
-        bassProgress.setProgress(getBandLeve((short) 0));
+        int eqMax = getEqualizerMax();
+        int bandLeve = getBandLeve((short) 0);
+        bassProgress.setMax(eqMax * 2);
+        bassProgress.setProgress(bandLeve);
         Button bassAddBtn = (Button) v.findViewById(R.id.add_button_bass);
         Button bassReduceBtn = (Button) v.findViewById(R.id.reduce_button_bass);
 
@@ -217,91 +251,242 @@ public class DetailActivity extends PlayerActivity {
         Button altAddBtn = (Button) v.findViewById(R.id.add_button_alt);
         Button altReduceBtn = (Button) v.findViewById(R.id.reduce_alt);
         altProgress.setMax(getEqualizerMax());
-        altProgress.setProgress(getBandLeve((short) 3));
+        altProgress.setProgress(getBandLeve((short) 4));
 
-        bassAddBtn.setOnClickListener(new View.OnClickListener() {
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = bassProgress.getProgress() + 1;
-                bassProgress.setProgress(newPosition);
-                setBandLevel((short) 0, newPosition);
-            }
-        });
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        mediumAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int newPosition = mediumProgress.getProgress() + 1;
-                mediumProgress.setProgress(newPosition);
-                setBandLevel((short) 1, newPosition);
+                setPresetReverbPreset(getReverbNames().get(position));
+                bassProgress.setProgress(getBandLeve((short) 0));
+                mediumProgress.setProgress(getBandLeve((short) 1));
+                mediantProgress.setProgress(getBandLeve((short) 2));
+                msProgress.setProgress(getBandLeve((short) 3));
+                altProgress.setProgress(getBandLeve((short) 4));
             }
-        });
-        mediantAddBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                int newPosition = mediantProgress.getProgress() + 1;
-                mediantProgress.setProgress(newPosition);
-                setBandLevel((short) 2, newPosition);
-            }
-        });
-        msAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int newPosition = msProgress.getProgress() + 1;
-                msProgress.setProgress(newPosition);
-                setBandLevel((short) 3, newPosition);
-            }
-        });
-        altAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int newPosition = altProgress.getProgress() + 1;
-                altProgress.setProgress(newPosition);
-                setBandLevel((short) 4, newPosition);
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        bassReduceBtn.setOnClickListener(new View.OnClickListener() {
+        bassAddBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = bassProgress.getProgress() - 1;
-                bassProgress.setProgress(newPosition);
-                setBandLevel((short) 0, newPosition);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = bassProgress.getProgress();
+                if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = bassProgress.getProgress() + 1;
+                    bassProgress.setProgress(newPosition);
+                    Log.e(TAG, event.getAction() + "  " + keyCode + "  " + newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 0, newPosition);    //手指抬起时停止发送
+                }
+                return false;
             }
         });
 
-        mediumReduceBtn.setOnClickListener(new View.OnClickListener() {
+        bassReduceBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = mediumProgress.getProgress() - 1;
-                mediumProgress.setProgress(newPosition);
-                setBandLevel((short) 1, newPosition);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.e(TAG, event.getAction() + "  " + keyCode);
+                int newPosition = bassProgress.getProgress();
+                if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = bassProgress.getProgress() - 1;
+                    bassProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 0, newPosition);    //手指抬起时停止发送
+                }
+                return false;
             }
         });
-        mediantReduceBtn.setOnClickListener(new View.OnClickListener() {
+
+//        medium音段按钮
+//        mediumAddBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = mediumProgress.getProgress() + 1;
+//                mediumProgress.setProgress(newPosition);
+//                setBandLevel((short) 1, newPosition);
+//            }
+//        });
+//        mediumReduceBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = mediumProgress.getProgress() - 1;
+//                mediumProgress.setProgress(newPosition);
+//                setBandLevel((short) 1, newPosition);
+//            }
+//        });
+        mediumAddBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = mediantProgress.getProgress() - 1;
-                mediantProgress.setProgress(newPosition);
-                setBandLevel((short) 2, newPosition);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = mediumProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = mediumProgress.getProgress() + 1;
+                    mediumProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 1, newPosition);    //手指抬起时停止发送
+                }
+                return false;
             }
         });
-        msReduceBtn.setOnClickListener(new View.OnClickListener() {
+        mediumReduceBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = msProgress.getProgress() - 1;
-                msProgress.setProgress(newPosition);
-                setBandLevel((short) 3, newPosition);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = mediumProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = mediumProgress.getProgress() - 1;
+                    mediumProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 1, newPosition);    //手指抬起时停止发送
+                }
+                return false;
             }
         });
-        altReduceBtn.setOnClickListener(new View.OnClickListener() {
+
+//        mediant音段按钮
+//        mediantAddBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = mediantProgress.getProgress() + 1;
+//                mediantProgress.setProgress(newPosition);
+//                setBandLevel((short) 2, newPosition);
+//            }
+//        });
+//        mediantReduceBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = mediantProgress.getProgress() - 1;
+//                mediantProgress.setProgress(newPosition);
+//                setBandLevel((short) 2, newPosition);
+//            }
+//        });
+        mediantAddBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                int newPosition = altProgress.getProgress() - 1;
-                altProgress.setProgress(newPosition);
-                setBandLevel((short) 4, newPosition);
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = mediantProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = mediantProgress.getProgress() + 1;
+                    mediantProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 2, newPosition);    //手指抬起时停止发送
+                }
+                return false;
+            }
+        });
+        mediantReduceBtn.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = mediantProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = mediantProgress.getProgress() - 1;
+                    mediantProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 2, newPosition);    //手指抬起时停止发送
+                }
+                return false;
+            }
+        });
+
+//        ms音段按钮
+//        msAddBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = msProgress.getProgress() + 1;
+//                msProgress.setProgress(newPosition);
+//                setBandLevel((short) 3, newPosition);
+//            }
+//        });
+//        msReduceBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = msProgress.getProgress() - 1;
+//                msProgress.setProgress(newPosition);
+//                setBandLevel((short) 3, newPosition);
+//            }
+//        });
+        msAddBtn.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = msProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = msProgress.getProgress() + 1;
+                    msProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 3, newPosition);    //手指抬起时停止发送
+                }
+                return false;
+            }
+        });
+        msReduceBtn.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = msProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = msProgress.getProgress() - 1;
+                    msProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 3, newPosition);    //手指抬起时停止发送
+                }
+                return false;
+            }
+        });
+
+//        alt音段按钮
+//        altAddBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = altProgress.getProgress() + 1;
+//                altProgress.setProgress(newPosition);
+//                setBandLevel((short) 4, newPosition);
+//            }
+//        });
+//        altReduceBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int newPosition = altProgress.getProgress() - 1;
+//                altProgress.setProgress(newPosition);
+//                setBandLevel((short) 4, newPosition);
+//            }
+//        });
+        altAddBtn.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = altProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = altProgress.getProgress() + 1;
+                    altProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 4, newPosition);    //手指抬起时停止发送
+                }
+                return false;
+            }
+        });
+        altReduceBtn.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int newPosition = altProgress.getProgress();
+                if (event.getAction() == MotionEvent.ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    newPosition = altProgress.getProgress() - 1;
+                    altProgress.setProgress(newPosition);
+                    //手指按下时触发不停的发送消息
+                } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    setBandLevel((short) 4, newPosition);    //手指抬起时停止发送
+                }
+                return false;
             }
         });
     }
+
 
 }

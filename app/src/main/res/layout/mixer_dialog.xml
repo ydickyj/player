@@ -5,21 +5,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/mixer_background"
-    android:gravity="center"
     android:orientation="horizontal"
     android:padding="10dp"
     android:weightSum="2">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:weightSum="2"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -33,30 +34,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mixer_margin_big"
+                android:textColor="@color/mixer_inside_white"
                 android:text="@string/equalizer"
                 android:textSize="48sp" />
 
+
             <Switch
+                android:textColor="@color/mixer_inside_text"
+                android:thumbTextPadding="16dp"
+                android:textOff="@string/app_name"
+                android:textOn="@string/bottom_sheet_behavior"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/mixer_sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
-            </android.support.v7.widget.RecyclerView>
+            </Spinner>
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/mixer_background_inside"
@@ -68,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/mixer_margin"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="vertical"
             android:weightSum="3">
@@ -77,7 +88,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-
                 android:gravity="center"
                 android:text="15"
                 android:textColor="@color/mixer_inside_text" />
@@ -104,9 +114,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/mixer_margin_big"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -132,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="bar bass"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -140,7 +151,7 @@
                         android:layout_marginBottom="@dimen/mixer_margin"
                         android:gravity="center"
                         android:text="(60hz)"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                 </LinearLayout>
 
@@ -156,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="medium bass"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                     <TextView
                         android:id="@+id/textView"
@@ -165,7 +176,7 @@
                         android:layout_marginBottom="@dimen/mixer_margin"
                         android:gravity="center"
                         android:text="(230hz)"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -180,7 +191,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="mediant"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -188,7 +199,7 @@
                         android:layout_marginBottom="@dimen/mixer_margin"
                         android:gravity="center"
                         android:text="(910hz)"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -203,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="mezzo soprano"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -211,7 +222,7 @@
                         android:layout_marginBottom="@dimen/mixer_margin"
                         android:gravity="center"
                         android:text="(3600hz)"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -226,7 +237,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="alt"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -234,7 +245,7 @@
                         android:layout_marginBottom="@dimen/mixer_margin"
                         android:gravity="center"
                         android:text="(14000hz)"
-                        android:textColor="@color/mixer_inside_text" />
+                        android:textColor="@color/mixer_inside_white" />
                 </LinearLayout>
             </LinearLayout>
 

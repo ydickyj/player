@@ -32,6 +32,7 @@ import com.sample.andremion.musicplayer.model.MediaEntity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -287,6 +288,7 @@ public class PlayerService extends Service {
             }
             mMediaPlayerIsReady = true;
             setupEqualizer();
+            setupPresetReverb();
         }
     }
 
@@ -362,8 +364,8 @@ public class PlayerService extends Service {
                 // 显示均衡控制器的最大值
                 Log.e("maxEQLevel", (maxEQLevel / 100) + " dB");
             }
-        }else {
-            Log.e(TAG,"播放器未准备完成");
+        } else {
+            Log.e(TAG, "播放器未准备完成");
         }
     }
 
@@ -394,8 +396,9 @@ public class PlayerService extends Service {
     public void setBandLevel(short brand, int progress) {
         if (mEqualizer != null) {
             // 设置该频率的均衡值
+            Log.e(TAG, (progress * 10) + "  " + mEqualizer.getBandLevelRange()[0] + "");
             mEqualizer.setBandLevel(brand,
-                    (short) (progress + mEqualizer.getBandLevelRange()[0]));
+                    (short) ((progress * 10) + mEqualizer.getBandLevelRange()[0]));
         } else {
             Log.e(TAG, "均衡器未初始化");
         }
@@ -454,4 +457,58 @@ public class PlayerService extends Service {
 //        layout.addView(sp);
 //    }
 
+
+    /**
+     * 初始化预设音场控制器
+     */
+    private void setupPresetReverb() {
+        // 以MediaPlayer的AudioSessionId创建PresetReverb
+        // 相当于设置PresetReverb负责控制该MediaPlayer
+        mPresetReverb = new PresetReverb(0,
+                mp.getAudioSessionId());
+        // 设置启用预设音场控制
+        mPresetReverb.setEnabled(true);
+
+//        mPresetReverb.setPreset(reverbNames.get(arg2));
+    }
+
+    public List<Short> getReverbNames() {
+        reverbNames.clear();
+        if (mEqualizer != null) {
+            // 获取系统支持的所有预设音场
+            for (short i = 0; i < mEqualizer.getNumberOfPresets(); i++) {
+                if (Objects.equals(mEqualizer.getPresetName(i), "Jazz") || Objects.equals(mEqualizer.getPresetName(i), "Pop") || Objects.equals(mEqualizer.getPresetName(i), "Rock")) {
+                    Log.e(TAG, "bad parameter value");
+                } else {
+                    reverbNames.add(i);
+                }
+            }
+            return reverbNames;
+        } else {
+            return null;
+        }
+    }
+
+    public List<String> getReverbVals() {
+        reverbVals.clear();
+        if (mEqualizer != null) {
+            // 获取系统支持的所有预设音场
+            for (short i = 0; i < mEqualizer.getNumberOfPresets(); i++) {
+                if (Objects.equals(mEqualizer.getPresetName(i), "Jazz") || Objects.equals(mEqualizer.getPresetName(i), "Pop") || Objects.equals(mEqualizer.getPresetName(i), "Rock")) {
+                    Log.e(TAG, "bad parameter value");
+                } else {
+                    reverbVals.add(mEqualizer.getPresetName(i));
+                }
+            }
+            return reverbVals;
+        } else {
+            return null;
+        }
+    }
+
+    public void setPresetReverbPreset(int index) {
+        if (mPresetReverb != null) {
+            mPresetReverb.setPreset((short) index);
+        }
+    }
 }
