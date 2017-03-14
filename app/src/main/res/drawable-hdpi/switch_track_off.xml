@@ -7,5 +7,6 @@
     <corners
         android:radius="30dp">
     </corners>
+    <!-- 描边 -->
 
 </shape>

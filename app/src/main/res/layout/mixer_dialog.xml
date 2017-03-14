@@ -12,15 +12,15 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:weightSum="2"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="2">
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -34,42 +34,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/mixer_margin_big"
-                android:textColor="@color/mixer_inside_white"
                 android:text="@string/equalizer"
+                android:textColor="@color/mixer_inside_white"
                 android:textSize="48sp" />
 
-
             <Switch
-                android:textColor="@color/mixer_inside_text"
-                android:thumbTextPadding="16dp"
-                android:textOff="@string/app_name"
-                android:textOn="@string/bottom_sheet_behavior"
-                android:thumb="@drawable/switch_thumb"
-                android:track="@drawable/switch_background"
+                android:id="@+id/switch_eq"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:textColor="@color/mixer_inside_text"
+                android:thumb="@drawable/thumb"
+                android:thumbTextPadding="16dp"
+                android:track="@drawable/switch_background" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal">
+
             <Spinner
                 android:id="@+id/mixer_sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
             </Spinner>
+
+            <Button
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="reset" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:background="@drawable/mixer_background_inside"
         android:gravity="center"
         android:orientation="horizontal">
@@ -285,17 +293,26 @@
 
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/mixer_btn_width"
+                        android:layout_height="@dimen/mixer_btn_height"
+                        android:layout_marginStart="@dimen/mixer_margin"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/reduce_button_bass"
-                            style="@style/mixer_reduce_button" />
+                            style="@style/mixer_reduce_button"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/adjust_btn_background"
+
+
+                            />
 
                         <Button
                             android:id="@+id/add_button_bass"
-                            style="@style/mixer_add_button" />
+                            style="@style/mixer_add_button"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -330,17 +347,22 @@
                         android:background="@color/mixer_background_line" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/mixer_btn_width"
+                        android:layout_height="@dimen/mixer_btn_height"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/reduce_button_medium_bass"
-                            style="@style/mixer_reduce_button" />
+                            style="@style/mixer_reduce_button"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/adjust_btn_background" />
 
                         <Button
                             android:id="@+id/add_button_medium_bass"
-                            style="@style/mixer_add_button" />
+                            style="@style/mixer_add_button"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -375,17 +397,22 @@
                         android:background="@color/mixer_background_line" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/mixer_btn_width"
+                        android:layout_height="@dimen/mixer_btn_height"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/reduce_button_mediant"
-                            style="@style/mixer_reduce_button" />
+                            style="@style/mixer_reduce_button"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/adjust_btn_background" />
 
                         <Button
                             android:id="@+id/add_button_mediant"
-                            style="@style/mixer_add_button" />
+                            style="@style/mixer_add_button"
+                            android:visibility="gone" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -419,17 +446,22 @@
                         android:background="@color/mixer_background_line" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/mixer_btn_width"
+                        android:layout_height="@dimen/mixer_btn_height"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/reduce_button_mezzo_soprano"
-                            style="@style/mixer_reduce_button" />
+                            style="@style/mixer_reduce_button"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/adjust_btn_background" />
 
                         <Button
                             android:id="@+id/add_button_mezzo_soprano"
-                            style="@style/mixer_add_button" />
+                            style="@style/mixer_add_button"
+                            android:visibility="gone" />
 
 
                     </LinearLayout>
@@ -465,17 +497,23 @@
                         android:background="@color/mixer_background_line" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/mixer_btn_width"
+                        android:layout_height="@dimen/mixer_btn_height"
+                        android:layout_marginEnd="@dimen/mixer_margin"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/reduce_alt"
-                            style="@style/mixer_reduce_button" />
+                            style="@style/mixer_reduce_button"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:background="@drawable/adjust_btn_background" />
 
                         <Button
                             android:id="@+id/add_button_alt"
-                            style="@style/mixer_add_button" />
+                            style="@style/mixer_add_button"
+                            android:visibility="gone" />
 
                     </LinearLayout>
                 </LinearLayout>

@@ -39,12 +39,12 @@ import java.util.Random;
 public class PlayerService extends Service {
 
     private static final String TAG = PlayerService.class.getSimpleName();
-    List<MediaEntity> mListMedia = new ArrayList<>();
+    public static MediaPlayer mp = new MediaPlayer();
     // Binder given to clients
     private final IBinder mBinder = new LocalBinder();
+    List<MediaEntity> mListMedia = new ArrayList<>();
     private int musicIndex = 0;
     private int lyricIndex = 0;
-    public static MediaPlayer mp = new MediaPlayer();
     private boolean mMediaPlayerIsReady = false;
     // 定义系统的频谱
     private Visualizer mVisualizer;
@@ -131,18 +131,6 @@ public class PlayerService extends Service {
         return "空";
     }
 
-    /**
-     * Class used for the client Binder. Because we know this service always
-     * runs in the same process as its clients, we don't need to deal with IPC.
-     */
-    public class LocalBinder extends Binder {
-
-        public PlayerService getService() {
-            // Return this instance of PlayerService so clients can call public methods
-            return PlayerService.this;
-        }
-    }
-
     public void play() {
         if (mMediaPlayerIsReady) {
             try {
@@ -211,7 +199,6 @@ public class PlayerService extends Service {
             }
         }
     }
-
 
     public void randomMusic() {
         int max = mListMedia.size() - 1;
@@ -405,6 +392,20 @@ public class PlayerService extends Service {
     }
 
     /**
+     * 初始化预设音场控制器
+     */
+    private void setupPresetReverb() {
+        // 以MediaPlayer的AudioSessionId创建PresetReverb
+        // 相当于设置PresetReverb负责控制该MediaPlayer
+        mPresetReverb = new PresetReverb(0,
+                mp.getAudioSessionId());
+        // 设置启用预设音场控制
+        mPresetReverb.setEnabled(true);
+
+//        mPresetReverb.setPreset(reverbNames.get(arg2));
+    }
+
+    /**
      * 初始化重低音控制器
      */
 //    private void setupBassBoost() {
@@ -457,21 +458,6 @@ public class PlayerService extends Service {
 //        layout.addView(sp);
 //    }
 
-
-    /**
-     * 初始化预设音场控制器
-     */
-    private void setupPresetReverb() {
-        // 以MediaPlayer的AudioSessionId创建PresetReverb
-        // 相当于设置PresetReverb负责控制该MediaPlayer
-        mPresetReverb = new PresetReverb(0,
-                mp.getAudioSessionId());
-        // 设置启用预设音场控制
-        mPresetReverb.setEnabled(true);
-
-//        mPresetReverb.setPreset(reverbNames.get(arg2));
-    }
-
     public List<Short> getReverbNames() {
         reverbNames.clear();
         if (mEqualizer != null) {
@@ -491,6 +477,7 @@ public class PlayerService extends Service {
 
     public List<String> getReverbVals() {
         reverbVals.clear();
+
         if (mEqualizer != null) {
             // 获取系统支持的所有预设音场
             for (short i = 0; i < mEqualizer.getNumberOfPresets(); i++) {
@@ -511,4 +498,27 @@ public class PlayerService extends Service {
             mPresetReverb.setPreset((short) index);
         }
     }
+
+    public boolean getEqualizerEnabled() {
+        return mEqualizer != null && mEqualizer.getEnabled();
+    }
+
+    public void setEqualizerEnabled(Boolean isOpened) {
+        if (mEqualizer != null) {
+            mEqualizer.setEnabled(isOpened);
+        }
+    }
+
+    /**
+     * Class used for the client Binder. Because we know this service always
+     * runs in the same process as its clients, we don't need to deal with IPC.
+     */
+    public class LocalBinder extends Binder {
+
+        public PlayerService getService() {
+            // Return this instance of PlayerService so clients can call public methods
+            return PlayerService.this;
+        }
+    }
+
 }

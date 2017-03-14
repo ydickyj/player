@@ -10,28 +10,46 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="DetailActivity" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3a91c4c-6d7d-4410-87ec-9bd558730c2a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/MagicTextView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/SwitchView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb_test.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/switch_track_on.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mixer_sp_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_btn.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_bg_off.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/thumb.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_btn_background.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_pressed_bg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_pressed_bg_clicked.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_repeat_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_repeat_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_shuffle_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_shuffle_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_repeat_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_repeat_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_shuffle_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_shuffle_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_repeat_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_repeat_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_shuffle_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_shuffle_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_repeat_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_repeat_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_shuffle_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_shuffle_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_pressed24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_pressed24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_24dp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_pressed24dp.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_pressed24dp.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/common_dialog.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/common_dialog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/track_title.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/track_title.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
     </list>
     <ignored path="player.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,114 +81,73 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mixer_dialog.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml">
-          <provider selected="true" editor-type-id="android-designer2">
+      <file leaf-file-name="ic_repeat_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
-              <folding>
-                <element signature="e#1622#1640#0" expanded="true" />
-                <element signature="e#1672#1703#0" expanded="true" />
-                <element signature="e#1960#2408#0" expanded="false" />
-                <element signature="e#2435#20121#0" expanded="false" />
-                <element signature="e#2751#4121#0" expanded="false" />
-              </folding>
-            </state>
+        </entry>
+      </file>
+      <file leaf-file-name="ic_shuffle_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_shuffle_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="values.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.android/build-cache/906c9552b586805922e90da0bac9c6f302c0166e/output/res/values/values.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="223" column="18" selection-start-line="223" selection-start-column="18" selection-end-line="223" selection-end-column="18" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_shuffle_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_shuffle_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SwitchView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/SwitchView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
+      <file leaf-file-name="ic_shuffle_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_shuffle_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="btn_cancel_background.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_cancel_background.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_shuffle_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="btn_reduce_background.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_reduce_background.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="46" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_skip_previous_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_skip_previous_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ic_play_animatable.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_play_animatable.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="47" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_skip_previous_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_skip_previous_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="switch_track_off.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_skip_previous_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_skip_previous_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="switch_background.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_skip_previous_white_24dp.png" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_skip_previous_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="switch_thumb.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="switch_thumb_test.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb_test.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-              <folding />
-            </state>
+      <file leaf-file-name="ic_repeat_white_24dp.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_repeat_white_24dp.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -1859,10 +1836,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/broadcastReciver/MyFirstReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/broadcastReceiver/newFile.java" />
-        <option value="$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/io/File.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/MyItemLongClickListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/model/MyViewHolder.java" />
         <option value="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/sample/andremion/musicplayer/activities/MainActivity_.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/MusicCoverViewTransition.java" />
@@ -1878,13 +1851,11 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/content_list.xml" />
         <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/content_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/RecyclerViewAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/track_title.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/OnProgressBarListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/mixer_background.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/mixer_background_inside.xml" />
@@ -1892,24 +1863,30 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_refresh_background.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_reduce_background.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_add_background.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/mixer_sp_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/MagicTextView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/common_dialog.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/switch_track_on.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb_test.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/SwitchView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_bg.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_pressed_bg.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_pressed_bg_clicked.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_btn_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/track_title.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
       </list>
     </option>
   </component>
@@ -1944,6 +1921,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2002,6 +1985,28 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="mipmap" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic_launcher.png" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
@@ -2022,6 +2027,72 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="drawable" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic_skip_previous_white_24dp.png" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic_shuffle_white_24dp.png" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ic_repeat_white_24dp.png" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2134,12 +2205,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2151,18 +2216,18 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\workspace\player\app\src\main\res\drawable-hdpi" />
-      <recent name="D:\workspace\player\app\src\main\res\drawable-xxxhdpi" />
-      <recent name="D:\workspace\player\app\src\main\res\drawable-mdpi" />
-      <recent name="D:\workspace\player\app\src\main\res\layout" />
-      <recent name="D:\workspace\player\app\libs" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.sample.andremion.musicplayer.activities" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.sample.andremion.musicplayer.listener" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.sample.andremion.musicplayer.activities" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\player\app\src\main\res\drawable-xxxhdpi" />
+      <recent name="D:\workspace\player\app\src\main\res\drawable-hdpi" />
+      <recent name="D:\workspace\player\app\src\main\res\drawable-mdpi" />
+      <recent name="D:\workspace\player\app\src\main\res\layout" />
+      <recent name="D:\workspace\player\app\libs" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -2612,7 +2677,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489206092016</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="实现均衡器界面功能.">
+      <created>1489401807477</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1489401807477</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2624,8 +2696,8 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60758084" sideWeight="0.510661" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35340023" sideWeight="0.48933902" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35340023" sideWeight="0.5127932" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35340023" sideWeight="0.48720682" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5250836" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2653,6 +2725,24 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -2672,832 +2762,31 @@
     <MESSAGE value="增加跳转功能。&#10;数据库查询延时。" />
     <MESSAGE value="优化调音台界面中" />
     <MESSAGE value="增加均衡器界面." />
-    <option name="LAST_COMMIT_MESSAGE" value="增加均衡器界面." />
+    <MESSAGE value="实现均衡器界面功能." />
+    <option name="LAST_COMMIT_MESSAGE" value="实现均衡器界面功能." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java</url>
-          <line>226</line>
-          <properties />
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java</url>
-          <line>225</line>
-          <properties />
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java</url>
-          <line>234</line>
-          <properties />
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java</url>
-          <line>235</line>
-          <properties />
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="59" />
+      <option name="time" value="74" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="178" column="17" selection-start-line="178" selection-start-column="17" selection-end-line="178" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/widget/LinearLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/24.2.1/support-fragment-24.2.1-sources.jar!/android/support/v4/app/DialogFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.shaohui/bottomdialog/1.1.9/9be370f61ee7288490139da8a97503e6508110ef/bottomdialog-1.1.9-sources.jar!/me/shaohui/bottomdialog/BaseBottomDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1901#1902#0" expanded="false" />
-            <element signature="e#1926#1927#0" expanded="false" />
-            <element signature="e#1961#1962#0" expanded="false" />
-            <element signature="e#1995#1996#0" expanded="false" />
-            <element signature="e#2036#2037#0" expanded="false" />
-            <element signature="e#2063#2064#0" expanded="false" />
-            <element signature="e#2101#2102#0" expanded="false" />
-            <element signature="e#2127#2128#0" expanded="false" />
-            <element signature="e#2184#2185#0" expanded="false" />
-            <element signature="e#2239#2240#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/sweetAlertDialog/SweetAlertDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3575">
-          <caret line="168" column="8" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2626#2627#0" expanded="false" />
-            <element signature="e#2668#2669#0" expanded="false" />
-            <element signature="e#9451#9452#0" expanded="false" />
-            <element signature="e#9484#9485#0" expanded="false" />
-            <element signature="e#9534#9535#0" expanded="false" />
-            <element signature="e#9583#9584#0" expanded="false" />
-            <element signature="e#9621#9622#0" expanded="false" />
-            <element signature="e#9654#9655#0" expanded="false" />
-            <element signature="e#10401#10402#0" expanded="false" />
-            <element signature="e#10436#10437#0" expanded="false" />
-            <element signature="e#10757#10758#0" expanded="false" />
-            <element signature="e#10791#10792#0" expanded="false" />
-            <element signature="e#11084#11085#0" expanded="false" />
-            <element signature="e#11119#11120#0" expanded="false" />
-            <element signature="e#11414#11415#0" expanded="false" />
-            <element signature="e#11448#11449#0" expanded="false" />
-            <element signature="e#11755#11756#0" expanded="false" />
-            <element signature="e#11790#11791#0" expanded="false" />
-            <element signature="e#12596#12597#0" expanded="false" />
-            <element signature="e#12638#12639#0" expanded="false" />
-            <element signature="e#12784#12785#0" expanded="false" />
-            <element signature="e#12827#12828#0" expanded="false" />
-            <element signature="e#13643#13644#0" expanded="false" />
-            <element signature="e#13681#13682#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.shaohui/bottomdialog/1.1.9/9be370f61ee7288490139da8a97503e6508110ef/bottomdialog-1.1.9-sources.jar!/me/shaohui/bottomdialog/BottomDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2049#2050#0" expanded="false" />
-            <element signature="e#2082#2083#0" expanded="false" />
-            <element signature="e#2942#2943#0" expanded="false" />
-            <element signature="e#2975#2976#0" expanded="false" />
-            <element signature="e#3019#3020#0" expanded="false" />
-            <element signature="e#3049#3050#0" expanded="false" />
-            <element signature="e#3104#3105#0" expanded="false" />
-            <element signature="e#3143#3144#0" expanded="false" />
-            <element signature="e#3195#3196#0" expanded="false" />
-            <element signature="e#3222#3223#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/lang/Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/sample/andremion/musicplayer/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81475">
-          <caret line="3264" column="32" selection-start-line="3264" selection-start-column="32" selection-end-line="3264" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285575">
-          <caret line="11706" column="21" selection-start-line="11706" selection-start-column="21" selection-end-line="11706" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#929500#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#153277#153278#0" expanded="false" />
-            <element signature="e#153316#153317#0" expanded="false" />
-            <element signature="e#202205#202206#0" expanded="false" />
-            <element signature="e#202254#202255#0" expanded="false" />
-            <element signature="e#219709#219710#0" expanded="false" />
-            <element signature="e#219782#219783#0" expanded="false" />
-            <element signature="e#222250#222251#0" expanded="false" />
-            <element signature="e#222294#222295#0" expanded="false" />
-            <element signature="e#223815#223816#0" expanded="false" />
-            <element signature="e#223879#223880#0" expanded="false" />
-            <element signature="e#228570#228571#0" expanded="false" />
-            <element signature="e#228622#228623#0" expanded="false" />
-            <element signature="e#228835#228836#0" expanded="false" />
-            <element signature="e#228889#228890#0" expanded="false" />
-            <element signature="e#229411#229412#0" expanded="false" />
-            <element signature="e#229465#229466#0" expanded="false" />
-            <element signature="e#229910#229911#0" expanded="false" />
-            <element signature="e#229963#229964#0" expanded="false" />
-            <element signature="e#237535#237536#0" expanded="false" />
-            <element signature="e#237594#237595#0" expanded="false" />
-            <element signature="e#256811#256812#0" expanded="false" />
-            <element signature="e#256860#256861#0" expanded="false" />
-            <element signature="e#259122#259123#0" expanded="false" />
-            <element signature="e#259165#259166#0" expanded="false" />
-            <element signature="e#275284#275285#0" expanded="false" />
-            <element signature="e#275328#275329#0" expanded="false" />
-            <element signature="e#278139#278140#0" expanded="false" />
-            <element signature="e#278184#278185#0" expanded="false" />
-            <element signature="e#282052#282053#0" expanded="false" />
-            <element signature="e#282094#282095#0" expanded="false" />
-            <element signature="e#285544#285545#0" expanded="false" />
-            <element signature="e#285598#285599#0" expanded="false" />
-            <element signature="e#287352#287353#0" expanded="false" />
-            <element signature="e#287405#287406#0" expanded="false" />
-            <element signature="e#287658#287659#0" expanded="false" />
-            <element signature="e#287692#287693#0" expanded="false" />
-            <element signature="e#288924#288925#0" expanded="false" />
-            <element signature="e#288959#288960#0" expanded="false" />
-            <element signature="e#289473#289474#0" expanded="false" />
-            <element signature="e#289532#289533#0" expanded="false" />
-            <element signature="e#289783#289784#0" expanded="false" />
-            <element signature="e#289856#289857#0" expanded="false" />
-            <element signature="e#291799#291800#0" expanded="false" />
-            <element signature="e#291861#291862#0" expanded="false" />
-            <element signature="e#292843#292844#0" expanded="false" />
-            <element signature="e#292900#292901#0" expanded="false" />
-            <element signature="e#293632#293633#0" expanded="false" />
-            <element signature="e#293671#293672#0" expanded="false" />
-            <element signature="e#294011#294012#0" expanded="false" />
-            <element signature="e#294061#294062#0" expanded="false" />
-            <element signature="e#294362#294363#0" expanded="false" />
-            <element signature="e#294402#294403#0" expanded="false" />
-            <element signature="e#294747#294748#0" expanded="false" />
-            <element signature="e#294799#294800#0" expanded="false" />
-            <element signature="e#295091#295092#0" expanded="false" />
-            <element signature="e#295128#295129#0" expanded="false" />
-            <element signature="e#295458#295459#0" expanded="false" />
-            <element signature="e#295504#295505#0" expanded="false" />
-            <element signature="e#295802#295803#0" expanded="false" />
-            <element signature="e#295841#295842#0" expanded="false" />
-            <element signature="e#296181#296182#0" expanded="false" />
-            <element signature="e#296231#296232#0" expanded="false" />
-            <element signature="e#296538#296539#0" expanded="false" />
-            <element signature="e#296580#296581#0" expanded="false" />
-            <element signature="e#313127#313128#0" expanded="false" />
-            <element signature="e#313172#313173#0" expanded="false" />
-            <element signature="e#313636#313637#0" expanded="false" />
-            <element signature="e#313677#313678#0" expanded="false" />
-            <element signature="e#314785#314786#0" expanded="false" />
-            <element signature="e#314836#314837#0" expanded="false" />
-            <element signature="e#315129#315130#0" expanded="false" />
-            <element signature="e#315182#315183#0" expanded="false" />
-            <element signature="e#315449#315450#0" expanded="false" />
-            <element signature="e#315510#315511#0" expanded="false" />
-            <element signature="e#324009#324010#0" expanded="false" />
-            <element signature="e#324078#324079#0" expanded="false" />
-            <element signature="e#326835#326836#0" expanded="false" />
-            <element signature="e#326877#326878#0" expanded="false" />
-            <element signature="e#327931#327932#0" expanded="false" />
-            <element signature="e#327995#327996#0" expanded="false" />
-            <element signature="e#329227#329228#0" expanded="false" />
-            <element signature="e#329287#329288#0" expanded="false" />
-            <element signature="e#329752#329753#0" expanded="false" />
-            <element signature="e#329814#329815#0" expanded="false" />
-            <element signature="e#330117#330118#0" expanded="false" />
-            <element signature="e#330187#330188#0" expanded="false" />
-            <element signature="e#333643#333644#0" expanded="false" />
-            <element signature="e#333714#333715#0" expanded="false" />
-            <element signature="e#334212#334213#0" expanded="false" />
-            <element signature="e#334280#334281#0" expanded="false" />
-            <element signature="e#335523#335524#0" expanded="false" />
-            <element signature="e#335596#335597#0" expanded="false" />
-            <element signature="e#339144#339145#0" expanded="false" />
-            <element signature="e#339209#339210#0" expanded="false" />
-            <element signature="e#342715#342716#0" expanded="false" />
-            <element signature="e#342797#342798#0" expanded="false" />
-            <element signature="e#353822#353823#0" expanded="false" />
-            <element signature="e#353874#353875#0" expanded="false" />
-            <element signature="e#354827#354828#0" expanded="false" />
-            <element signature="e#354879#354880#0" expanded="false" />
-            <element signature="e#384145#384146#0" expanded="false" />
-            <element signature="e#384191#384192#0" expanded="false" />
-            <element signature="e#384397#384398#0" expanded="false" />
-            <element signature="e#384425#384426#0" expanded="false" />
-            <element signature="e#384505#384506#0" expanded="false" />
-            <element signature="e#384556#384557#0" expanded="false" />
-            <element signature="e#384634#384635#0" expanded="false" />
-            <element signature="e#384689#384690#0" expanded="false" />
-            <element signature="e#400048#400049#0" expanded="false" />
-            <element signature="e#400076#400077#0" expanded="false" />
-            <element signature="e#400511#400512#0" expanded="false" />
-            <element signature="e#400539#400540#0" expanded="false" />
-            <element signature="e#400968#400969#0" expanded="false" />
-            <element signature="e#400996#400997#0" expanded="false" />
-            <element signature="e#402154#402155#0" expanded="false" />
-            <element signature="e#402200#402201#0" expanded="false" />
-            <element signature="e#403610#403611#0" expanded="false" />
-            <element signature="e#403683#403684#0" expanded="false" />
-            <element signature="e#405218#405219#0" expanded="false" />
-            <element signature="e#405253#405254#0" expanded="false" />
-            <element signature="e#414612#414613#0" expanded="false" />
-            <element signature="e#414643#414644#0" expanded="false" />
-            <element signature="e#415347#415348#0" expanded="false" />
-            <element signature="e#415375#415376#0" expanded="false" />
-            <element signature="e#417459#417460#0" expanded="false" />
-            <element signature="e#417487#417488#0" expanded="false" />
-            <element signature="e#419567#419568#0" expanded="false" />
-            <element signature="e#419595#419596#0" expanded="false" />
-            <element signature="e#420230#420231#0" expanded="false" />
-            <element signature="e#420258#420259#0" expanded="false" />
-            <element signature="e#421228#421229#0" expanded="false" />
-            <element signature="e#421256#421257#0" expanded="false" />
-            <element signature="e#422382#422383#0" expanded="false" />
-            <element signature="e#422409#422410#0" expanded="false" />
-            <element signature="e#422981#422982#0" expanded="false" />
-            <element signature="e#423009#423010#0" expanded="false" />
-            <element signature="e#424731#424732#0" expanded="false" />
-            <element signature="e#424758#424759#0" expanded="false" />
-            <element signature="e#425690#425691#0" expanded="false" />
-            <element signature="e#425718#425719#0" expanded="false" />
-            <element signature="e#427518#427519#0" expanded="false" />
-            <element signature="e#427546#427547#0" expanded="false" />
-            <element signature="e#432642#432643#0" expanded="false" />
-            <element signature="e#432701#432702#0" expanded="false" />
-            <element signature="e#448781#448782#0" expanded="false" />
-            <element signature="e#448822#448823#0" expanded="false" />
-            <element signature="e#448930#448931#0" expanded="false" />
-            <element signature="e#448967#448968#0" expanded="false" />
-            <element signature="e#463034#463035#0" expanded="false" />
-            <element signature="e#463064#463065#0" expanded="false" />
-            <element signature="e#463346#463347#0" expanded="false" />
-            <element signature="e#463387#463388#0" expanded="false" />
-            <element signature="e#463667#463668#0" expanded="false" />
-            <element signature="e#463708#463709#0" expanded="false" />
-            <element signature="e#464088#464089#0" expanded="false" />
-            <element signature="e#464119#464120#0" expanded="false" />
-            <element signature="e#464485#464486#0" expanded="false" />
-            <element signature="e#464516#464517#0" expanded="false" />
-            <element signature="e#464719#464720#0" expanded="false" />
-            <element signature="e#464756#464757#0" expanded="false" />
-            <element signature="e#465940#465941#0" expanded="false" />
-            <element signature="e#465998#465999#0" expanded="false" />
-            <element signature="e#466773#466774#0" expanded="false" />
-            <element signature="e#466810#466811#0" expanded="false" />
-            <element signature="e#467098#467099#0" expanded="false" />
-            <element signature="e#467157#467158#0" expanded="false" />
-            <element signature="e#467935#467936#0" expanded="false" />
-            <element signature="e#467973#467974#0" expanded="false" />
-            <element signature="e#469385#469386#0" expanded="false" />
-            <element signature="e#469439#469440#0" expanded="false" />
-            <element signature="e#473334#473335#0" expanded="false" />
-            <element signature="e#473382#473383#0" expanded="false" />
-            <element signature="e#474582#474583#0" expanded="false" />
-            <element signature="e#474631#474632#0" expanded="false" />
-            <element signature="e#476058#476059#0" expanded="false" />
-            <element signature="e#476107#476108#0" expanded="false" />
-            <element signature="e#477610#477611#0" expanded="false" />
-            <element signature="e#477656#477657#0" expanded="false" />
-            <element signature="e#478784#478785#0" expanded="false" />
-            <element signature="e#478830#478831#0" expanded="false" />
-            <element signature="e#480002#480003#0" expanded="false" />
-            <element signature="e#480048#480049#0" expanded="false" />
-            <element signature="e#481441#481442#0" expanded="false" />
-            <element signature="e#481487#481488#0" expanded="false" />
-            <element signature="e#482749#482750#0" expanded="false" />
-            <element signature="e#482832#482833#0" expanded="false" />
-            <element signature="e#486081#486082#0" expanded="false" />
-            <element signature="e#486108#486109#0" expanded="false" />
-            <element signature="e#492355#492356#0" expanded="false" />
-            <element signature="e#492382#492383#0" expanded="false" />
-            <element signature="e#494536#494537#0" expanded="false" />
-            <element signature="e#494566#494567#0" expanded="false" />
-            <element signature="e#494736#494737#0" expanded="false" />
-            <element signature="e#494798#494799#0" expanded="false" />
-            <element signature="e#496895#496896#0" expanded="false" />
-            <element signature="e#496923#496924#0" expanded="false" />
-            <element signature="e#499099#499100#0" expanded="false" />
-            <element signature="e#499128#499129#0" expanded="false" />
-            <element signature="e#501368#501369#0" expanded="false" />
-            <element signature="e#501416#501417#0" expanded="false" />
-            <element signature="e#501797#501798#0" expanded="false" />
-            <element signature="e#501839#501840#0" expanded="false" />
-            <element signature="e#502202#502203#0" expanded="false" />
-            <element signature="e#502249#502250#0" expanded="false" />
-            <element signature="e#502628#502629#0" expanded="false" />
-            <element signature="e#502669#502670#0" expanded="false" />
-            <element signature="e#503044#503045#0" expanded="false" />
-            <element signature="e#503101#503102#0" expanded="false" />
-            <element signature="e#503492#503493#0" expanded="false" />
-            <element signature="e#503543#503544#0" expanded="false" />
-            <element signature="e#503792#503793#0" expanded="false" />
-            <element signature="e#503841#503842#0" expanded="false" />
-            <element signature="e#504689#504690#0" expanded="false" />
-            <element signature="e#504741#504742#0" expanded="false" />
-            <element signature="e#505955#505956#0" expanded="false" />
-            <element signature="e#506007#506008#0" expanded="false" />
-            <element signature="e#507082#507083#0" expanded="false" />
-            <element signature="e#507134#507135#0" expanded="false" />
-            <element signature="e#508181#508182#0" expanded="false" />
-            <element signature="e#508222#508223#0" expanded="false" />
-            <element signature="e#509426#509427#0" expanded="false" />
-            <element signature="e#509479#509480#0" expanded="false" />
-            <element signature="e#512584#512585#0" expanded="false" />
-            <element signature="e#512623#512624#0" expanded="false" />
-            <element signature="e#514297#514298#0" expanded="false" />
-            <element signature="e#514343#514344#0" expanded="false" />
-            <element signature="e#516609#516610#0" expanded="false" />
-            <element signature="e#516642#516643#0" expanded="false" />
-            <element signature="e#517946#517947#0" expanded="false" />
-            <element signature="e#517998#517999#0" expanded="false" />
-            <element signature="e#523027#523028#0" expanded="false" />
-            <element signature="e#523063#523064#0" expanded="false" />
-            <element signature="e#525230#525231#0" expanded="false" />
-            <element signature="e#525282#525283#0" expanded="false" />
-            <element signature="e#534592#534593#0" expanded="false" />
-            <element signature="e#534624#534625#0" expanded="false" />
-            <element signature="e#537860#537861#0" expanded="false" />
-            <element signature="e#537902#537903#0" expanded="false" />
-            <element signature="e#551268#551269#0" expanded="false" />
-            <element signature="e#551308#551309#0" expanded="false" />
-            <element signature="e#570142#570143#0" expanded="false" />
-            <element signature="e#570199#570200#0" expanded="false" />
-            <element signature="e#570886#570887#0" expanded="false" />
-            <element signature="e#570919#570920#0" expanded="false" />
-            <element signature="e#571688#571689#0" expanded="false" />
-            <element signature="e#571719#571720#0" expanded="false" />
-            <element signature="e#572486#572487#0" expanded="false" />
-            <element signature="e#572519#572520#0" expanded="false" />
-            <element signature="e#573167#573168#0" expanded="false" />
-            <element signature="e#573201#573202#0" expanded="false" />
-            <element signature="e#573954#573955#0" expanded="false" />
-            <element signature="e#573985#573986#0" expanded="false" />
-            <element signature="e#574735#574736#0" expanded="false" />
-            <element signature="e#574769#574770#0" expanded="false" />
-            <element signature="e#584192#584193#0" expanded="false" />
-            <element signature="e#584220#584221#0" expanded="false" />
-            <element signature="e#588849#588850#0" expanded="false" />
-            <element signature="e#588898#588899#0" expanded="false" />
-            <element signature="e#589531#589532#0" expanded="false" />
-            <element signature="e#589599#589600#0" expanded="false" />
-            <element signature="e#597764#597765#0" expanded="false" />
-            <element signature="e#597810#597811#0" expanded="false" />
-            <element signature="e#598001#598002#0" expanded="false" />
-            <element signature="e#598059#598060#0" expanded="false" />
-            <element signature="e#599741#599742#0" expanded="false" />
-            <element signature="e#599782#599783#0" expanded="false" />
-            <element signature="e#601829#601830#0" expanded="false" />
-            <element signature="e#601901#601902#0" expanded="false" />
-            <element signature="e#608482#608483#0" expanded="false" />
-            <element signature="e#608532#608533#0" expanded="false" />
-            <element signature="e#616486#616487#0" expanded="false" />
-            <element signature="e#616559#616560#0" expanded="false" />
-            <element signature="e#623598#623599#0" expanded="false" />
-            <element signature="e#623631#623632#0" expanded="false" />
-            <element signature="e#633325#633326#0" expanded="false" />
-            <element signature="e#633370#633371#0" expanded="false" />
-            <element signature="e#636879#636880#0" expanded="false" />
-            <element signature="e#636930#636931#0" expanded="false" />
-            <element signature="e#637130#637131#0" expanded="false" />
-            <element signature="e#637170#637171#0" expanded="false" />
-            <element signature="e#648274#648275#0" expanded="false" />
-            <element signature="e#648302#648303#0" expanded="false" />
-            <element signature="e#649019#649020#0" expanded="false" />
-            <element signature="e#649047#649048#0" expanded="false" />
-            <element signature="e#649369#649370#0" expanded="false" />
-            <element signature="e#649393#649394#0" expanded="false" />
-            <element signature="e#649718#649719#0" expanded="false" />
-            <element signature="e#649742#649743#0" expanded="false" />
-            <element signature="e#650061#650062#0" expanded="false" />
-            <element signature="e#650085#650086#0" expanded="false" />
-            <element signature="e#650413#650414#0" expanded="false" />
-            <element signature="e#650437#650438#0" expanded="false" />
-            <element signature="e#653051#653052#0" expanded="false" />
-            <element signature="e#653126#653127#0" expanded="false" />
-            <element signature="e#683223#683224#0" expanded="false" />
-            <element signature="e#683247#683248#0" expanded="false" />
-            <element signature="e#693551#693552#0" expanded="false" />
-            <element signature="e#693584#693585#0" expanded="false" />
-            <element signature="e#698472#698473#0" expanded="false" />
-            <element signature="e#698520#698521#0" expanded="false" />
-            <element signature="e#698565#698566#0" expanded="false" />
-            <element signature="e#698624#698625#0" expanded="false" />
-            <element signature="e#715137#715138#0" expanded="false" />
-            <element signature="e#715171#715172#0" expanded="false" />
-            <element signature="e#733139#733140#0" expanded="false" />
-            <element signature="e#733173#733174#0" expanded="false" />
-            <element signature="e#733459#733460#0" expanded="false" />
-            <element signature="e#733496#733497#0" expanded="false" />
-            <element signature="e#737332#737333#0" expanded="false" />
-            <element signature="e#737370#737371#0" expanded="false" />
-            <element signature="e#738894#738895#0" expanded="false" />
-            <element signature="e#738954#738955#0" expanded="false" />
-            <element signature="e#740527#740528#0" expanded="false" />
-            <element signature="e#740588#740589#0" expanded="false" />
-            <element signature="e#753879#753880#0" expanded="false" />
-            <element signature="e#753946#753947#0" expanded="false" />
-            <element signature="e#754303#754304#0" expanded="false" />
-            <element signature="e#754329#754330#0" expanded="false" />
-            <element signature="e#754604#754605#0" expanded="false" />
-            <element signature="e#754631#754632#0" expanded="false" />
-            <element signature="e#755075#755076#0" expanded="false" />
-            <element signature="e#755101#755102#0" expanded="false" />
-            <element signature="e#757594#757595#0" expanded="false" />
-            <element signature="e#757618#757619#0" expanded="false" />
-            <element signature="e#760723#760724#0" expanded="false" />
-            <element signature="e#760748#760749#0" expanded="false" />
-            <element signature="e#776516#776517#0" expanded="false" />
-            <element signature="e#776549#776550#0" expanded="false" />
-            <element signature="e#777349#777350#0" expanded="false" />
-            <element signature="e#777381#777382#0" expanded="false" />
-            <element signature="e#778114#778115#0" expanded="false" />
-            <element signature="e#778154#778155#0" expanded="false" />
-            <element signature="e#780391#780392#0" expanded="false" />
-            <element signature="e#780447#780448#0" expanded="false" />
-            <element signature="e#780800#780801#0" expanded="false" />
-            <element signature="e#780857#780858#0" expanded="false" />
-            <element signature="e#781534#781535#0" expanded="false" />
-            <element signature="e#781562#781563#0" expanded="false" />
-            <element signature="e#789637#789638#0" expanded="false" />
-            <element signature="e#789679#789680#0" expanded="false" />
-            <element signature="e#794664#794665#0" expanded="false" />
-            <element signature="e#794725#794726#0" expanded="false" />
-            <element signature="e#795244#795245#0" expanded="false" />
-            <element signature="e#795305#795306#0" expanded="false" />
-            <element signature="e#795838#795839#0" expanded="false" />
-            <element signature="e#795880#795881#0" expanded="false" />
-            <element signature="e#809248#809249#0" expanded="false" />
-            <element signature="e#809276#809277#0" expanded="false" />
-            <element signature="e#810445#810446#0" expanded="false" />
-            <element signature="e#810514#810515#0" expanded="false" />
-            <element signature="e#818395#818396#0" expanded="false" />
-            <element signature="e#818433#818434#0" expanded="false" />
-            <element signature="e#824952#824953#0" expanded="false" />
-            <element signature="e#825005#825006#0" expanded="false" />
-            <element signature="e#858803#858804#0" expanded="false" />
-            <element signature="e#858838#858839#0" expanded="false" />
-            <element signature="e#859209#859210#0" expanded="false" />
-            <element signature="e#859255#859256#0" expanded="false" />
-            <element signature="e#859314#859315#0" expanded="false" />
-            <element signature="e#859362#859363#0" expanded="false" />
-            <element signature="e#859744#859745#0" expanded="false" />
-            <element signature="e#859797#859798#0" expanded="false" />
-            <element signature="e#859864#859865#0" expanded="false" />
-            <element signature="e#859919#859920#0" expanded="false" />
-            <element signature="e#860301#860302#0" expanded="false" />
-            <element signature="e#860354#860355#0" expanded="false" />
-            <element signature="e#860413#860414#0" expanded="false" />
-            <element signature="e#860468#860469#0" expanded="false" />
-            <element signature="e#860850#860851#0" expanded="false" />
-            <element signature="e#860903#860904#0" expanded="false" />
-            <element signature="e#860962#860963#0" expanded="false" />
-            <element signature="e#861017#861018#0" expanded="false" />
-            <element signature="e#861343#861344#0" expanded="false" />
-            <element signature="e#861385#861386#0" expanded="false" />
-            <element signature="e#861444#861445#0" expanded="false" />
-            <element signature="e#861488#861489#0" expanded="false" />
-            <element signature="e#861814#861815#0" expanded="false" />
-            <element signature="e#861856#861857#0" expanded="false" />
-            <element signature="e#861915#861916#0" expanded="false" />
-            <element signature="e#861959#861960#0" expanded="false" />
-            <element signature="e#862285#862286#0" expanded="false" />
-            <element signature="e#862327#862328#0" expanded="false" />
-            <element signature="e#862386#862387#0" expanded="false" />
-            <element signature="e#862430#862431#0" expanded="false" />
-            <element signature="e#862791#862792#0" expanded="false" />
-            <element signature="e#862840#862841#0" expanded="false" />
-            <element signature="e#862899#862900#0" expanded="false" />
-            <element signature="e#862950#862951#0" expanded="false" />
-            <element signature="e#863317#863318#0" expanded="false" />
-            <element signature="e#863367#863368#0" expanded="false" />
-            <element signature="e#863426#863427#0" expanded="false" />
-            <element signature="e#863478#863479#0" expanded="false" />
-            <element signature="e#863845#863846#0" expanded="false" />
-            <element signature="e#863895#863896#0" expanded="false" />
-            <element signature="e#863954#863955#0" expanded="false" />
-            <element signature="e#864006#864007#0" expanded="false" />
-            <element signature="e#864358#864359#0" expanded="false" />
-            <element signature="e#864405#864406#0" expanded="false" />
-            <element signature="e#864464#864465#0" expanded="false" />
-            <element signature="e#864513#864514#0" expanded="false" />
-            <element signature="e#864865#864866#0" expanded="false" />
-            <element signature="e#864912#864913#0" expanded="false" />
-            <element signature="e#864971#864972#0" expanded="false" />
-            <element signature="e#865020#865021#0" expanded="false" />
-            <element signature="e#869863#869864#0" expanded="false" />
-            <element signature="e#869920#869921#0" expanded="false" />
-            <element signature="e#872091#872092#0" expanded="false" />
-            <element signature="e#872162#872163#0" expanded="false" />
-            <element signature="e#872600#872601#0" expanded="false" />
-            <element signature="e#872638#872639#0" expanded="false" />
-            <element signature="e#873370#873371#0" expanded="false" />
-            <element signature="e#873418#873419#0" expanded="false" />
-            <element signature="e#873853#873854#0" expanded="false" />
-            <element signature="e#873891#873892#0" expanded="false" />
-            <element signature="e#884284#884285#0" expanded="false" />
-            <element signature="e#884325#884326#0" expanded="false" />
-            <element signature="e#884819#884820#0" expanded="false" />
-            <element signature="e#884861#884862#0" expanded="false" />
-            <element signature="e#885553#885554#0" expanded="false" />
-            <element signature="e#885594#885595#0" expanded="false" />
-            <element signature="e#886017#886018#0" expanded="false" />
-            <element signature="e#886078#886079#0" expanded="false" />
-            <element signature="e#886334#886335#0" expanded="false" />
-            <element signature="e#886397#886398#0" expanded="false" />
-            <element signature="e#916932#916933#0" expanded="false" />
-            <element signature="e#916967#916968#0" expanded="false" />
-            <element signature="e#918344#918345#0" expanded="false" />
-            <element signature="e#918392#918393#0" expanded="false" />
-            <element signature="e#918562#918563#0" expanded="false" />
-            <element signature="e#918625#918626#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/graphics/RectF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#21030#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3767#3768#0" expanded="false" />
-            <element signature="e#3826#3827#0" expanded="false" />
-            <element signature="e#4663#4664#0" expanded="false" />
-            <element signature="e#4716#4717#0" expanded="false" />
-            <element signature="e#4905#4906#0" expanded="false" />
-            <element signature="e#4940#4941#0" expanded="false" />
-            <element signature="e#5131#5132#0" expanded="false" />
-            <element signature="e#5166#5167#0" expanded="false" />
-            <element signature="e#5343#5344#0" expanded="false" />
-            <element signature="e#5387#5388#0" expanded="false" />
-            <element signature="e#5562#5563#0" expanded="false" />
-            <element signature="e#5606#5607#0" expanded="false" />
-            <element signature="e#5694#5695#0" expanded="false" />
-            <element signature="e#5741#5742#0" expanded="false" />
-            <element signature="e#13392#13393#0" expanded="false" />
-            <element signature="e#13458#13459#0" expanded="false" />
-            <element signature="e#18319#18320#0" expanded="false" />
-            <element signature="e#18374#18375#0" expanded="false" />
-            <element signature="e#19645#19646#0" expanded="false" />
-            <element signature="e#19669#19670#0" expanded="false" />
-            <element signature="e#20552#20553#0" expanded="false" />
-            <element signature="e#20598#20599#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/view/MotionEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="194" column="28" selection-start-line="194" selection-start-column="28" selection-end-line="194" selection-end-column="28" />
-          <folding>
-            <element signature="e#75159#75160#0" expanded="false" />
-            <element signature="e#75209#75210#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/view/KeyEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="140" column="28" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/track_title.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="69" />
+        <state relative-caret-position="275">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/media/audiofx/Equalizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="196" column="19" selection-start-line="196" selection-start-column="19" selection-end-line="196" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6405">
-          <caret line="68" column="13" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/widget/SimpleAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="86" column="11" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/MagicTextView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4797#4798#0" expanded="true" />
-            <element signature="e#4843#4844#0" expanded="true" />
-            <element signature="e#5176#5177#0" expanded="true" />
-            <element signature="e#5203#5204#0" expanded="true" />
-            <element signature="e#5238#5239#0" expanded="true" />
-            <element signature="e#5265#5266#0" expanded="true" />
-            <element signature="e#5314#5315#0" expanded="true" />
-            <element signature="e#5348#5349#0" expanded="true" />
-            <element signature="e#8686#8687#0" expanded="true" />
-            <element signature="e#8707#8708#0" expanded="true" />
-            <element signature="e#8750#8751#0" expanded="true" />
-            <element signature="e#8790#8791#0" expanded="true" />
-            <element signature="e#8833#8834#0" expanded="true" />
-            <element signature="e#8874#8875#0" expanded="true" />
-            <element signature="e#9061#9062#0" expanded="true" />
-            <element signature="e#9098#9099#0" expanded="true" />
-            <element signature="e#9146#9147#0" expanded="true" />
-            <element signature="e#9187#9188#0" expanded="true" />
-            <element signature="e#9252#9253#0" expanded="true" />
-            <element signature="e#9296#9297#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/widget/ArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="112" column="11" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-24/data/res/layout/simple_spinner_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="219" column="101" selection-start-line="219" selection-start-column="101" selection-end-line="219" selection-end-column="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onResume#0;class#DetailActivity#0" expanded="false" />
-            <element signature="class#2733:3137" expanded="false" />
-            <element signature="method#onFabClick#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#repeat#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#shuffle#0;class#DetailActivity#0" expanded="false" />
-            <element signature="e#5345#5346#0" expanded="true" />
-            <element signature="e#5374#5375#0" expanded="true" />
-            <element signature="method#onKeyDown#0;class#DetailActivity#0" expanded="false" />
-            <element signature="e#6346#6367#0" expanded="true" />
-            <element signature="e#11324#11344#0" expanded="false" />
-            <element signature="e#12094#12798#0" expanded="true" />
-            <element signature="e#12797#12798#0" expanded="true" />
-            <element signature="e#14328#15035#0" expanded="true" />
-            <element signature="e#15034#15035#0" expanded="true" />
-            <element signature="e#18703#19398#0" expanded="true" />
-            <element signature="e#19397#19398#0" expanded="true" />
-            <element signature="e#19439#20134#0" expanded="true" />
-            <element signature="e#20133#20134#0" expanded="true" />
-            <marker date="1489395512928" expanded="false" signature="9758:9878" ph="(v, keyCode, event) → {" />
-            <marker date="1489395512928" expanded="false" signature="10515:10530" ph="}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="464" column="52" selection-start-line="464" selection-start-column="52" selection-end-line="464" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1865#1872#0" expanded="true" />
-            <element signature="e#1927#1935#0" expanded="true" />
-            <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
-            <element signature="e#12102#12139#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3453">
-          <caret line="310" column="63" selection-start-line="310" selection-start-column="63" selection-end-line="310" selection-end-column="63" />
-          <folding>
-            <element signature="class#3847:4448" expanded="false" />
-            <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
-            <element signature="method#getBandLeve#0;class#PlayerActivity#0" expanded="false" />
-            <element signature="e#10591#10592#0" expanded="true" />
-            <element signature="e#10644#10645#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="351" column="0" selection-start-line="351" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
+        <state relative-caret-position="-3580">
+          <caret line="364" column="60" selection-start-line="364" selection-start-column="60" selection-end-line="364" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#calculateDrawRectFWithoutProgressText#0;class#NumberProgressBar#0" expanded="false" />
@@ -3506,100 +2795,147 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/common_dialog.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/24.2.1/support-fragment-24.2.1-sources.jar!/android/support/v4/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="149" column="39" selection-start-line="149" selection-start-column="39" selection-end-line="149" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mixer_sp_item.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        <state relative-caret-position="289">
+          <caret line="788" column="25" selection-start-line="788" selection-start-column="25" selection-end-line="788" selection-end-column="25" />
           <folding>
-            <element signature="e#434#474#0" expanded="true" />
+            <element signature="e#28067#28068#0" expanded="true" />
+            <element signature="e#28097#28098#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-24/data/res/values/colors.xml">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.shaohui/bottomdialog/1.1.9/9be370f61ee7288490139da8a97503e6508110ef/bottomdialog-1.1.9-sources.jar!/me/shaohui/bottomdialog/BottomDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+        <state relative-caret-position="200">
+          <caret line="11" column="44" selection-start-line="11" selection-start-column="44" selection-end-line="11" selection-end-column="44" />
+          <folding>
+            <element signature="e#3195#3196#0" expanded="true" />
+            <element signature="e#3222#3223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.shaohui/bottomdialog/1.1.9/9be370f61ee7288490139da8a97503e6508110ef/bottomdialog-1.1.9-sources.jar!/me/shaohui/bottomdialog/BaseBottomDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/24.2.1/support-fragment-24.2.1-sources.jar!/android/support/v4/app/DialogFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-          <folding />
+        <state relative-caret-position="356">
+          <caret line="453" column="17" selection-start-line="453" selection-start-column="17" selection-end-line="453" selection-end-column="30" />
+          <folding>
+            <element signature="e#6672#6673#0" expanded="true" />
+            <element signature="e#6709#6710#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/switch_track_on.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="302">
+          <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="42" />
+          <folding>
+            <element signature="e#2930#4300#0" expanded="false" />
+            <element signature="e#4655#10235#0" expanded="false" />
+            <element signature="e#10446#10471#0" expanded="true" />
+            <element signature="e#11067#11097#0" expanded="true" />
+            <element signature="e#11205#11226#0" expanded="true" />
+            <element signature="e#11418#11439#0" expanded="true" />
+            <element signature="e#11712#11733#0" expanded="true" />
+            <element signature="e#11892#11916#0" expanded="true" />
+            <element signature="e#11963#11988#0" expanded="true" />
+            <element signature="e#12040#12061#0" expanded="true" />
+            <element signature="e#13391#13421#0" expanded="true" />
+            <element signature="e#13772#13793#0" expanded="true" />
+            <element signature="e#14066#14087#0" expanded="true" />
+            <element signature="e#14245#14269#0" expanded="true" />
+            <element signature="e#14316#14341#0" expanded="true" />
+            <element signature="e#15647#15677#0" expanded="true" />
+            <element signature="e#16028#16049#0" expanded="true" />
+            <element signature="e#16322#16343#0" expanded="true" />
+            <element signature="e#16501#16525#0" expanded="true" />
+            <element signature="e#16572#16597#0" expanded="true" />
+            <element signature="e#17904#17934#0" expanded="true" />
+            <element signature="e#18285#18306#0" expanded="true" />
+            <element signature="e#18579#18600#0" expanded="true" />
+            <element signature="e#18758#18782#0" expanded="true" />
+            <element signature="e#18829#18854#0" expanded="true" />
+            <element signature="e#20160#20190#0" expanded="true" />
+            <element signature="e#20296#20317#0" expanded="true" />
+            <element signature="e#20612#20633#0" expanded="true" />
+            <element signature="e#20906#20927#0" expanded="true" />
+            <element signature="e#21085#21109#0" expanded="true" />
+            <element signature="e#21156#21181#0" expanded="true" />
+            <element signature="e#21231#21252#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/mixer_background.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="34">
+          <caret line="309" column="19" selection-start-line="309" selection-start-column="19" selection-end-line="309" selection-end-column="19" />
+          <folding>
+            <element signature="class#3847:4448" expanded="false" />
+            <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
+            <element signature="e#9999#10000#0" expanded="true" />
+            <element signature="e#10065#10066#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
+            <element signature="e#10743#10744#0" expanded="true" />
+            <element signature="e#10799#10800#0" expanded="true" />
+            <element signature="e#10853#10854#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/mixer_background_inside.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="654">
+          <caret line="524" column="0" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
+          <folding>
+            <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
+            <element signature="e#12102#12139#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_pause_vector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/add_red.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/animator/ic_pause_to_play_morph.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/add_values.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_pause_animatable.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/add_values_pressed.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_confirm_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-nodpi/album_cover_daft_punk.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/bee_music.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/bee_music_big.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/btn_add_background.xml">
@@ -3610,103 +2946,200 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_play_vector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_reduce_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="46" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb_test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_track_off.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_play_animatable.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/switch_thumb.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_cancel_background.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/SwitchView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.android/build-cache/906c9552b586805922e90da0bac9c6f302c0166e/output/res/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="223" column="18" selection-start-line="223" selection-start-column="18" selection-end-line="223" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mixer_dialog.xml">
-      <provider selected="true" editor-type-id="android-designer2">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_bg_off.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/btn_bg.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/play_icon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/play_icon2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/reduce.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/reduce_black.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/reduce_new.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/reduce_pressed.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/refresh.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/refresh_focused.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/values_add.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/thumb.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/valuesadd.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/valuesadd_pressed.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/refresh_focused_red.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_bg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/adjust_btn.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="52" column="30" selection-start-line="52" selection-start-column="30" selection-end-line="52" selection-end-column="30" />
           <folding>
-            <element signature="e#1622#1640#0" expanded="true" />
-            <element signature="e#1672#1703#0" expanded="true" />
-            <element signature="e#1960#2408#0" expanded="false" />
-            <element signature="e#2435#20121#0" expanded="false" />
-            <element signature="e#2751#4121#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#DetailActivity#0" expanded="false" />
+            <element signature="class#2676:3080" expanded="false" />
+            <element signature="method#onFabClick#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#repeat#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#shuffle#0;class#DetailActivity#0" expanded="false" />
+            <element signature="e#14213#14233#0" expanded="false" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="95" column="57" selection-start-line="95" selection-start-column="57" selection-end-line="95" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_repeat_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_repeat_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_repeat_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_repeat_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_repeat_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_shuffle_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_shuffle_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_shuffle_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_shuffle_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_skip_previous_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_skip_previous_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_skip_previous_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_skip_previous_white_24dp.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>

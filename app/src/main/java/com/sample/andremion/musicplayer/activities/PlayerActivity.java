@@ -50,8 +50,29 @@ import java.util.Objects;
 
 public abstract class PlayerActivity extends AppCompatActivity {
 
-    private PlayerService mService;
     public boolean mBound = false;
+    private PlayerService mService;
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+//            Log.e("12312",""+mService);
+            mBound = true;
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
+        }
+    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -64,7 +85,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private boolean isRepeat;
     private boolean isRandom;
     private int msgWhat = 0;
-
     private final Handler mUpdateProgressHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -90,27 +110,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
                     break;
             }
 
-        }
-    };
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
         }
     };
 
@@ -279,13 +278,12 @@ public abstract class PlayerActivity extends AppCompatActivity {
         return mService.getPath();
     }
 
-    public int getBandLeve(short index) {
-
+    public int getBandLevel(short index) {
         return (mService.getBandLeve(index) / 10) - (-150);
     }
 
     public int getEqualizerMax() {
-        return mService.getEqualizerMax() / 10;
+        return (mService.getEqualizerMax() / 10) * 2;
     }
 
     public short getgetEqualizerMin() {
@@ -308,6 +306,13 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.setPresetReverbPreset(index);
     }
 
+    public boolean getEqualizerEnabled() {
+        return mService.getEqualizerEnabled();
+    }
+
+    public void setEqualizerEnabled(Boolean isOpened) {
+        mService.setEqualizerEnabled(isOpened);
+    }
     public void update(List<MediaEntity> mListMedia, int dex) {
         mService.update(mListMedia, dex);
         mUpdateProgressHandler.sendEmptyMessage(1);
