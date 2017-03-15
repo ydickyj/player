@@ -33,6 +33,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.listener.DialogListener;
+import com.sample.andremion.musicplayer.view.BottomDialog;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.NumberProgressBar;
@@ -42,8 +44,6 @@ import com.sample.andremion.musicplayer.view.TransitionAdapter;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-
-import me.shaohui.bottomdialog.BottomDialog;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
@@ -108,6 +108,17 @@ public class DetailActivity extends PlayerActivity {
             }
         });
         newBtn = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
+        newBtn.setKeyListener(new DialogListener() {
+            @Override
+            public void onKey(KeyEvent event, int keyCode) {
+                Log.e(TAG, "" + event.getAction() + "" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    for (int i = 0; i < 5; i++) {
+                        saveBandPositionData(i);
+                    }
+                }
+            }
+        });
         newBtn.setViewListener(new BottomDialog.ViewListener() {
             @Override
             public void bindView(View v) {
@@ -188,19 +199,15 @@ public class DetailActivity extends PlayerActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
                 newBtn.show();
                 break;
             case KeyEvent.KEYCODE_BACK:
-                Log.e(TAG, "" + KeyEvent.KEYCODE_BACK);
                 newBtn.onDestroyView();
                 break;
         }
-
         return super.onKeyDown(keyCode, event);
-
     }
 
     public void saveBandPositionData(int index) {
@@ -210,18 +217,7 @@ public class DetailActivity extends PlayerActivity {
     }
 
     private void initView(View v) {
-        v.setClickable(true);
-        v.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.e(TAG, "" + keyCode);
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    newBtn.dismiss();
-                    return true;
-                }
-                return false;
-            }
-        });
+
         int position = share.getInt("spinner", 0);
         for (int i = 0; i < 5; i++) {
             int bandPosition = share.getInt("band" + i, -1);
@@ -235,6 +231,7 @@ public class DetailActivity extends PlayerActivity {
             }
         }
         Spinner mSpinner = (Spinner) v.findViewById(R.id.mixer_sp);
+
         Switch mSwitch = (Switch) v.findViewById(R.id.switch_eq);
         Button mResetBtn = (Button) v.findViewById(R.id.reset_btn);
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -341,7 +338,7 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_UP) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 0, newPosition);//手指抬起时停止发送
-                    saveBandPositionData((short) 0);
+
                 } else if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_DOWN) {
                     if (isOneClicked[0]) {
                         newPosition = bassProgress.getProgress() - 1;
@@ -475,7 +472,6 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_UP) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 2, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 2);
                 } else if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_DOWN) {
                     if (isOneClicked[0]) {
                         newPosition = mediantProgress.getProgress() - 1;
@@ -488,7 +484,6 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_DOWN) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 2, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 2);
                 }
                 return false;
             }
@@ -521,7 +516,6 @@ public class DetailActivity extends PlayerActivity {
                     //手指按下时触发不停的发送消息
                 } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
                     setBandLevel((short) 3, newPosition);    //手指抬起时停止发送
-
                 }
                 return false;
             }
@@ -543,7 +537,6 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_UP) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 3, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 3);
                 } else if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_DOWN) {
                     if (isOneClicked[0]) {
                         newPosition = msProgress.getProgress() - 1;
@@ -556,7 +549,6 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_DOWN) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 3, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 3);
                 }
                 return false;
             }
@@ -589,7 +581,6 @@ public class DetailActivity extends PlayerActivity {
                     //手指按下时触发不停的发送消息
                 } else if (event.getAction() == MotionEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
                     setBandLevel((short) 4, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 4);
                 }
                 return false;
             }
@@ -612,7 +603,6 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_UP) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 4, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 4);
                 } else if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_DOWN) {
                     if (isOneClicked[0]) {
                         newPosition = altProgress.getProgress() - 1;
@@ -625,12 +615,10 @@ public class DetailActivity extends PlayerActivity {
                 } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_DOWN) {
                     isOneClicked[0] = true;
                     setBandLevel((short) 4, newPosition);    //手指抬起时停止发送
-                    saveBandPositionData((short) 4);
                 }
                 return false;
             }
         });
     }
-
 
 }
