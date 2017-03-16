@@ -27,6 +27,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class PlayerService extends Service {
     public static MediaPlayer mp = new MediaPlayer();
     // Binder given to clients
     private final IBinder mBinder = new LocalBinder();
+    public VisualizerListener vListener;
     List<MediaEntity> mListMedia = new ArrayList<>();
     private int musicIndex = 0;
     private int lyricIndex = 0;
@@ -58,8 +60,8 @@ public class PlayerService extends Service {
     private List<String> reverbVals = new ArrayList<String>();
 
     public PlayerService() {
-        // 初始化示波器
-        setupVisualizer();
+//        // 初始化示波器
+//        setupVisualizer();
         // 初始化均衡控制器
         setupEqualizer();
 //        // 初始化重低音控制器
@@ -79,11 +81,10 @@ public class PlayerService extends Service {
             mMediaPlayerIsReady = false;
             mp.release();
             // 释放所有对象
-            mVisualizer.release();
+//            mVisualizer.release();
             mEqualizer.release();
             mPresetReverb.release();
-            mBass.release();
-
+//            mBass.release();
             Log.e(TAG, "释放所有对象");
         }
         return super.onUnbind(intent);
@@ -172,8 +173,12 @@ public class PlayerService extends Service {
             mp.stop();
             try {
                 mp.reset();
-                mp.setDataSource(mListMedia.get(musicIndex + 1).getPath());
-                musicIndex++;
+                if (mListMedia.size() == 1 || (musicIndex + 1) == mListMedia.size()) {
+                    mp.setDataSource(mListMedia.get(0).getPath());
+                } else {
+                    musicIndex++;
+                    mp.setDataSource(mListMedia.get(musicIndex).getPath());
+                }
                 mp.prepare();
                 mp.seekTo(0);
                 mp.start();
@@ -275,7 +280,10 @@ public class PlayerService extends Service {
             }
             mMediaPlayerIsReady = true;
             setupEqualizer();
+            setupVisualizer();
             setupPresetReverb();
+            // 初始化示波器
+
         }
     }
 
@@ -298,9 +306,11 @@ public class PlayerService extends Service {
      */
     private void setupVisualizer() {
         if (mMediaPlayerIsReady) {
+            int AudioSessionId = mp.getAudioSessionId();
             mVisualizer = new Visualizer(mp.getAudioSessionId());
+
             //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
-            mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+            mVisualizer.setCaptureSize(512);
             // 为mVisualizer设置监听器
         /*
          * Visualizer.setDataCaptureListener(OnDataCaptureListener listener, int rate, boolean waveform, boolean fft
@@ -309,7 +319,6 @@ public class PlayerService extends Service {
                 rate， 表示采样的周期，即隔多久采样一次，联系前文就是隔多久采样128个数据
                 iswave，是波形信号
                 isfft，是FFT信号，表示是获取波形信号还是频域信号
-
          */
             mVisualizer.setDataCaptureListener(
                     new Visualizer.OnDataCaptureListener() {
@@ -317,17 +326,23 @@ public class PlayerService extends Service {
                         @Override
                         public void onFftDataCapture(Visualizer visualizer,
                                                      byte[] fft, int samplingRate) {
+                            if (vListener != null) {
+                                vListener.updateView(fft);
+                            }
                         }
-
                         //这个回调应该采集的是波形数据
                         @Override
                         public void onWaveFormDataCapture(Visualizer visualizer,
                                                           byte[] waveform, int samplingRate) {
                             // 用waveform波形数据更新mVisualizerView组件
 //                        mVisualizerView.updateVisualizer(waveform);
+                            if (vListener != null) {
+                                vListener.updateView(waveform);
+                            }
                         }
-                    }, Visualizer.getMaxCaptureRate() / 2, true, false);
+                    }, Visualizer.getMaxCaptureRate() / 2, true, true);
         }
+        mVisualizer.setEnabled(true);
     }
 
     /**
@@ -337,6 +352,7 @@ public class PlayerService extends Service {
         if (mMediaPlayerIsReady) {
             // 以MediaPlayer的AudioSessionId创建Equalizer
             // 相当于设置Equalizer负责控制该MediaPlayer
+            int AudioSessionId2 = mp.getAudioSessionId();
             mEqualizer = new Equalizer(0, mp.getAudioSessionId());
             // 启用均衡控制效果
             mEqualizer.setEnabled(true);
@@ -406,6 +422,13 @@ public class PlayerService extends Service {
     }
 
     /**
+     * 设置频谱动画监听器
+     */
+    public void setVisualizerViewListener(VisualizerListener listener) {
+        this.vListener = listener;
+    }
+
+    /**
      * 初始化重低音控制器
      */
 //    private void setupBassBoost() {
@@ -457,7 +480,6 @@ public class PlayerService extends Service {
 //        });
 //        layout.addView(sp);
 //    }
-
     public List<Short> getReverbNames() {
         reverbNames.clear();
         if (mEqualizer != null) {

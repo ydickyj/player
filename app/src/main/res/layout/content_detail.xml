@@ -25,6 +25,13 @@
                 android:layout_marginTop="54dp"
                 app:layout_marginTopPercent="10%" />
 
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical"></LinearLayout>
             <com.sample.andremion.musicplayer.view.MusicCoverView
                 android:id="@+id/music_cover"
                 android:layout_centerInParent="true"
@@ -78,6 +85,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:transitionName="@string/transition_name_duration"
                 tools:text="04:30" />
+
 
             <LinearLayout
                 android:id="@+id/ordering"

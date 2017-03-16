@@ -37,6 +37,7 @@ import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.listener.ProgressListener;
+import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
 import com.sample.andremion.musicplayer.musicUtils.utils;
@@ -52,27 +53,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
-        }
-    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -110,6 +90,27 @@ public abstract class PlayerActivity extends AppCompatActivity {
                     break;
             }
 
+        }
+    };
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+//            Log.e("12312",""+mService);
+            mBound = true;
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
         }
     };
 
@@ -313,6 +314,11 @@ public abstract class PlayerActivity extends AppCompatActivity {
     public void setEqualizerEnabled(Boolean isOpened) {
         mService.setEqualizerEnabled(isOpened);
     }
+
+    public void setVisualizerViewListener(VisualizerListener mListener) {
+        mService.setVisualizerViewListener(mListener);
+    }
+
     public void update(List<MediaEntity> mListMedia, int dex) {
         mService.update(mListMedia, dex);
         mUpdateProgressHandler.sendEmptyMessage(1);

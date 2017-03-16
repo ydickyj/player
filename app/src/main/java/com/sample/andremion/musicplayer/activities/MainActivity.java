@@ -35,7 +35,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
@@ -62,11 +61,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.sample.andremion.musicplayer.musicUtils.utils.folderScan;
-
 
 @EActivity(R.layout.content_list)
 public class MainActivity extends PlayerActivity implements MyItemClickListener {
+    private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
+    public RecyclerViewAdapter mAdapter;
+    public boolean onCreate = false;
     String TAG = "MainActivity";
     @ViewById(R.id.music_cover)
     View mCoverView;
@@ -90,14 +90,10 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     ImageView btnRefresh;
     @ViewById
     TextView tvCounter;
-
-    private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
     private int intentIndex = -1;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
-    public RecyclerViewAdapter mAdapter;
-    public boolean onCreate = false;
     private MyFirstReceiver mReceiver = new MyFirstReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -122,8 +118,6 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @AfterViews
     void afterView() {
-
-
         ((MusicCoverView) mCoverView).setScaleType(ImageView.ScaleType.CENTER_CROP);
         IntentFilter filter = new IntentFilter();
         filter.addAction("scanFlag");
@@ -155,13 +149,14 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         if (Build.VERSION.SDK_INT >= 23) {//判断当前系统的版本
             int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
             int checkReadStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
+            int checkRecordAudioPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO);//获取系统是否被授予RECORD_AUDIO权限
             int checkMountPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
             //判断是否需要 向用户解释，为什么要申请该权限
             ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
             Log.e(TAG, "" + checkMountPermission);
-            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE);
+            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED || checkRecordAudioPermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE);
             } else {
                 btnRefresh();//定义好的获取权限后的处理的事件
             }
@@ -204,7 +199,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                             break;
                         }
                     }
-                    Log.e("your 被我解决了吧",""+intentIndex);
+                    Log.e("your 被我解决了吧", "" + intentIndex);
                 }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -345,7 +340,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Override
     public void onItemClick(View view, int postion) {
         if (mBound) {
-            if (!Objects.equals(mListMedia.get(postion).getPath(), getCurrentPath())){
+            if (!Objects.equals(mListMedia.get(postion).getPath(), getCurrentPath())) {
                 update(mListMedia, postion);
             }
         } else {

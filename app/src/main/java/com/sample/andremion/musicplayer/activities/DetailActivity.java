@@ -23,23 +23,27 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.listener.DialogListener;
+import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.view.BottomDialog;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.NumberProgressBar;
 import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
+import com.sample.andremion.musicplayer.view.VisualizerView;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -53,6 +57,7 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
+    private static final float VISUALIZER_HEIGHT_DIP = 480f;
     String TAG = DetailActivity.class.getName();
     @ViewById(R.id.music_cover)
     MusicCoverView mCoverView;
@@ -68,23 +73,33 @@ public class DetailActivity extends PlayerActivity {
     ImageView repeat;
     @ViewById
     ImageView shuffle;
+    @ViewById
+    LinearLayout ll;
     //指定操作的文件名称
     SharedPreferences share;
     BottomDialog newBtn;
     private int repSumClick = 0;
     private int ranSumClick = 0;
-    private int delfault[] = {180, 150, 150, 150, 180};
+    private int defaults[] = {180, 150, 150, 150, 180};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         share = getSharedPreferences("userData", MODE_PRIVATE);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        final VisualizerView mVisualizerView = new VisualizerView(this);
+        mVisualizerView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) (VISUALIZER_HEIGHT_DIP * getResources()
+                        .getDisplayMetrics().density)));
+        mVisualizerView.setProgress(13);// 设置波形的高度
+        mVisualizerView.setmHeight(8);// 让水位处于最高振幅
+        ll.addView(mVisualizerView);
         mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
             @Override
             public void onMorphEnd(MusicCoverView coverView) {
@@ -104,7 +119,12 @@ public class DetailActivity extends PlayerActivity {
                 play();
                 mCoverView.start();
                 lyricView.setVisibility(View.VISIBLE);
-                Log.e(TAG, "" + getPosition());
+                setVisualizerViewListener(new VisualizerListener() {
+                    @Override
+                    public void updateView(byte[] fftOrBytes) {
+                        mVisualizerView.updateVisualizer(fftOrBytes);
+                    }
+                });
             }
         });
         newBtn = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
@@ -125,6 +145,7 @@ public class DetailActivity extends PlayerActivity {
                 initView(v);
             }
         });
+
     }
 
     @Override
@@ -296,7 +317,7 @@ public class DetailActivity extends PlayerActivity {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < 5; i++) {
-                    setBandLevel((short) i, delfault[i]);
+                    setBandLevel((short) i, defaults[i]);
                 }
                 bassProgress.setProgress(getBandLevel((short) 0));
                 mediumProgress.setProgress(getBandLevel((short) 1));
