@@ -230,8 +230,12 @@ public class PlayerService extends Service {
             mp.stop();
             try {
                 mp.reset();
-                mp.setDataSource(mListMedia.get(musicIndex - 1).getPath());
                 musicIndex--;
+                if (musicIndex < 0) {
+                    musicIndex = 0;
+                }
+                mp.setDataSource(mListMedia.get(musicIndex).getPath());
+
                 mp.prepare();
                 mp.seekTo(0);
                 mp.start();
@@ -310,7 +314,7 @@ public class PlayerService extends Service {
             mVisualizer = new Visualizer(mp.getAudioSessionId());
 
             //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
-            mVisualizer.setCaptureSize(512);
+            mVisualizer.setCaptureSize(256);
             // 为mVisualizer设置监听器
         /*
          * Visualizer.setDataCaptureListener(OnDataCaptureListener listener, int rate, boolean waveform, boolean fft
@@ -330,6 +334,7 @@ public class PlayerService extends Service {
                                 vListener.updateView(fft);
                             }
                         }
+
                         //这个回调应该采集的是波形数据
                         @Override
                         public void onWaveFormDataCapture(Visualizer visualizer,
@@ -340,7 +345,7 @@ public class PlayerService extends Service {
                                 vListener.updateView(waveform);
                             }
                         }
-                    }, Visualizer.getMaxCaptureRate() / 2, true, true);
+                    }, Visualizer.getMaxCaptureRate() / 2, false, true);
         }
         mVisualizer.setEnabled(true);
     }

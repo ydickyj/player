@@ -61,12 +61,54 @@ public class VisualizerView extends View {
     private float mLeftSide;// 被隐藏的最左边的波形
     private float mMoveLen;// 水波平移的距离
     private List<Point> mPointsList;// 波浪顶部的点阵
+    Thread bgRun = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            mViewWidth = getWidth();
+            mViewHeight = getHeight();
+
+            // 根据View宽度计算波形峰值
+            mWaveHeight = mViewWidth / 10f;
+
+            // 水位线从最底下开始上升
+            mLevelLine = mViewHeight;
+
+            // 波长等于四倍View宽度也就是View中只能看到四分之一个波形，这样可以使起伏更明显
+            mWaveWidth = mViewWidth / 4;
+            // 左边隐藏的距离预留一个波形
+            mLeftSide = -mWaveWidth;
+            // 这里计算在可见的View宽度中能容纳几个波形，注意n上取整
+            int n = (int) Math.round(mViewWidth / mWaveWidth + 0.5);
+            // n个波形需要4n+1个点，但是我们要预留一个波形在左边隐藏区域，所以需要4n+5个点
+            for (int i = 0; i < (4 * n + 5); i++) {
+                // 从P0开始初始化到P4n+4，总共4n+5个点
+                float x = i * mWaveWidth / 4 - mWaveWidth;
+                float y = 0;
+                switch (i % 4) {
+                    case 0:
+                    case 2:
+                        // 零点位于水位线上
+                        y = mLevelLine + mWaveHeight;
+                        break;
+                    case 1:
+                        // 往下波动的控制点
+                        y = mLevelLine + 2 * mWaveHeight;
+                        break;
+                    case 3:
+                        // 往上波动的控制点
+                        y = mLevelLine;
+                        break;
+                }
+                mPointsList.add(new Point(x, y));
+            }
+
+        }
+    });
     private Path mWavePath;// 波浪的路径
     private boolean isMeasured = false;
-
+    private boolean is = false;
     private Timer timer;
     private MyTimerTask mTask;
-
     private float progress = 100;// 进度
     private double mHeight;// 波浪幅度
     @SuppressLint("HandlerLeak")
@@ -150,7 +192,7 @@ public class VisualizerView extends View {
         }
 
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.parseColor("#E54B4C"));
+        mPaint.setColor(Color.BLACK);
 
         mPointsList = new ArrayList<Point>();
         timer = new Timer();
@@ -173,8 +215,8 @@ public class VisualizerView extends View {
             j++;
         }
         mBytes = model;
-        invalidate();// 重绘
 
+        invalidate();// 重绘
     }
 
     @Override
@@ -196,58 +238,21 @@ public class VisualizerView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if (!isMeasured) {
-            isMeasured = true;
 
-            mViewWidth = 1000;
-            mViewHeight = 720;
-
-            // 根据View宽度计算波形峰值
-            mWaveHeight = mViewWidth / 10f;
-
-            // 水位线从最底下开始上升
-            mLevelLine = mViewHeight;
-
-            // 波长等于四倍View宽度也就是View中只能看到四分之一个波形，这样可以使起伏更明显
-            mWaveWidth = mViewWidth / 4;
-            // 左边隐藏的距离预留一个波形
-            mLeftSide = -mWaveWidth;
-            // 这里计算在可见的View宽度中能容纳几个波形，注意n上取整
-            int n = (int) Math.round(mViewWidth / mWaveWidth + 0.5);
-            // n个波形需要4n+1个点，但是我们要预留一个波形在左边隐藏区域，所以需要4n+5个点
-            for (int i = 0; i < (4 * n + 5); i++) {
-                // 从P0开始初始化到P4n+4，总共4n+5个点
-                float x = i * mWaveWidth / 4 - mWaveWidth;
-                float y = 0;
-                switch (i % 4) {
-                    case 0:
-                    case 2:
-                        // 零点位于水位线上
-                        y = mLevelLine + mWaveHeight;
-                        break;
-                    case 1:
-                        // 往下波动的控制点
-                        y = mLevelLine + 2 * mWaveHeight;
-                        break;
-                    case 3:
-                        // 往上波动的控制点
-                        y = mLevelLine;
-                        break;
-                }
-                mPointsList.add(new Point(x, y));
-            }
-        }
     }
 
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.BLACK);
+        if (!isMeasured) {
+            canvas.drawColor(Color.BLACK);
+            isMeasured = true;
+            bgRun.start();
+        }
         if (mBytes == null) {
             return;
         }
-
         final int baseX = (getWidth() - 2 * Padding) / mSpectrumNum;
         final int height = getHeight();
         r = baseX / 4;
@@ -258,67 +263,64 @@ public class VisualizerView extends View {
                 mBytes[i] = 127;
             }
 
-            int centerx = baseX * i + baseX / 2 + Padding;
+            int centerX = baseX * i + r + Padding;
 
             int left = baseX * i + Padding;
-            int right = left + 4 * r;
-            int top = height - mBytes[i] - 4 * r;
-            int bottom = height;
-
-            cricle1 = new RectF(left, height - 2 * r, right, bottom);// 底部圆
+            int right = left + 2 * r;
+            int top = height - mBytes[i] - 2 * r;
+//            int bottomR = (right - left) / 2;
+//            cricle1 = new RectF(left, height - 2 * bottomR, right, height);// 底部圆
 
             r1 = (int) (r - (mBytes[i] / 8) * 1.2);
-            cricle2 = new RectF(centerx - r1, top, centerx + r1, top + 2// 顶部圆
-                    * r1);
+            cricle2 = new RectF(centerX - r1, top, centerX + r1, top + 2 * r1);// 顶部圆
 
-            canvas.drawOval(cricle1, mPaint);// 画圆
-            canvas.drawOval(cricle2, mPaint);// 画圆
+//            canvas.drawOval(cricle1, mPaint);// 画底部圆
+
 
             path1 = new Path(); // 梯
             path1.moveTo(left, height - r);
-            path1.lineTo(centerx - r1, top + r1);
-            path1.lineTo(centerx + r1, top + r1);
+            path1.lineTo(centerX - r1, top + r1);
+            path1.lineTo(centerX + r1, top + r1);
             path1.lineTo(right, height - r);
             path1.lineTo(left, height - r);
 
+            canvas.drawOval(cricle2, mPaint);// 画圆
             canvas.drawPath(path1, mPaint);// 画梯形
 
             if (mBytes[i] >= mOnBallHeight
                     && mStatues.get(i).getBollsNum() == 0) {// 本来没有而且现在到了触发位置，则添加小球
                 int mid = (mSpectrumNum % 2 == 0) ? mSpectrumNum / 2
                         : mSpectrumNum / 2 + 1;
-                if (i == mid && mDrageBolls.size() > 0) {// 中间有，就不加了吧，否则太混乱了
-                    continue;
-                } else {// 否则添加小球，根据mBytes[i]，设置初始位置和初始速度
+                if (!(i == mid && mDrageBolls.size() > 0)) {
+                    // 中间有，就不加了吧，否则太混乱了
+                    // 添加小球，根据mBytes[i]，设置初始位置和初始速度
                     int v0 = (mBytes[i] - mOnBallHeight) / 8 + 40;
                     int centery = height - mBytes[i] - r1;
-                    Boll mBoll = new Boll(centerx, centery, i, v0);
+                    Boll mBoll = new Boll(centerX, centery, i, v0);
                     mBolls.add(mBoll);
                     mStatues.get(i).addNum();
                 }
-
             }
         }
 
-        int num = 0;
-        mDrageBolls = new ArrayList<Boll>();// 所有处于拉伸状态的的小球
-        for (int j = 0; j < mBolls.size(); j++) {// 保证最多只有1个小球处于拉伸下滴状态，后来的小球会和之前的小球凝聚起来变大
-            if (mBolls.get(j).isDrage && mBolls.get(j).centerX == RcenterX) {
-                num++;
-                mDrageBolls.add(mBolls.get(j));
-                if (mDrageBolls.size() > 1) {
-                    mStatues.get(mBolls.get(j).getId()).removeNum();
-                    mBolls.remove(j);
-                    int r = 8 + 2 * num;// 凝聚在一起的小球半径会线性变大
-                    mDrageBolls.get(0).setR(r);
-                }
-            }
-        }
+//        int num = 0;
+//        mDrageBolls = new ArrayList<Boll>();// 所有处于拉伸状态的的小球
+//        for (int j = 0; j < mBolls.size(); j++) {// 保证最多只有1个小球处于拉伸下滴状态，后来的小球会和之前的小球凝聚起来变大
+//            if (mBolls.get(j).isDrage && mBolls.get(j).centerX == RcenterX) {
+//                num++;
+//                mDrageBolls.add(mBolls.get(j));
+//                if (mDrageBolls.size() > 1) {
+//                    mStatues.get(mBolls.get(j).getId()).removeNum();
+//                    mBolls.remove(j);
+//                    int r = 8 + 2 * num;// 凝聚在一起的小球半径会线性变大
+//                    mDrageBolls.get(0).setR(r);
+//                }
+//            }
+//        }
 
         for (int j = 0; j < mBolls.size(); j++) {// 更新所有小球的数据并画图
             mBolls.get(j).update();
             mBolls.get(j).draw(canvas);
-
             if (mBolls.get(j).newy > height) {// 清除移动到画面以外的小球
                 mStatues.get(mBolls.get(j).getId()).removeNum();
                 mBolls.remove(j);
@@ -341,14 +343,13 @@ public class VisualizerView extends View {
         // canvas.drawOval(cricleM, mPaint);
 
         // 画底部的波浪
+        if (mPointsList.size() == 0) {
+            bgRun.run();
+        }
         mWavePath.reset();
         int i = 0;
         mWavePath.moveTo(mPointsList.get(0).getX(), mPointsList.get(0).getY());
         for (; i < mPointsList.size() - 2; i = i + 2) {
-            float quadToX1 = mPointsList.get(i + 1).getX();
-            float quadToY1 = mPointsList.get(i + 1).getY();
-            float quadToX2 = mPointsList.get(i + 2).getX();
-            float quadToY2 = mPointsList.get(i + 2).getY();
             mWavePath.quadTo(mPointsList.get(i + 1).getX(),
                     mPointsList.get(i + 1).getY(), mPointsList.get(i + 2)
                             .getX(), mPointsList.get(i + 2).getY());
@@ -358,6 +359,8 @@ public class VisualizerView extends View {
         mWavePath.close();
         // mPaint的Style是FILL，会填充整个Path区域
         canvas.drawPath(mWavePath, mPaint);
+
+
     }
 
     /**

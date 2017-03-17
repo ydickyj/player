@@ -33,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.listener.DialogListener;
@@ -45,6 +46,7 @@ import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
 import com.sample.andremion.musicplayer.view.VisualizerView;
 
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -57,7 +59,7 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
-    private static final float VISUALIZER_HEIGHT_DIP = 480f;
+    private static final float VISUALIZER_HEIGHT_DIP = 720f;
     String TAG = DetailActivity.class.getName();
     @ViewById(R.id.music_cover)
     MusicCoverView mCoverView;
@@ -78,9 +80,11 @@ public class DetailActivity extends PlayerActivity {
     //指定操作的文件名称
     SharedPreferences share;
     BottomDialog newBtn;
+    VisualizerView mVisualizerView;
     private int repSumClick = 0;
     private int ranSumClick = 0;
     private int defaults[] = {180, 150, 150, 150, 180};
+    private boolean finishInitDialog = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +96,13 @@ public class DetailActivity extends PlayerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final VisualizerView mVisualizerView = new VisualizerView(this);
+        mVisualizerView = new VisualizerView(this);
         mVisualizerView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) (VISUALIZER_HEIGHT_DIP * getResources()
-                        .getDisplayMetrics().density)));
+                ViewGroup.LayoutParams.MATCH_PARENT));
         mVisualizerView.setProgress(13);// 设置波形的高度
         mVisualizerView.setmHeight(8);// 让水位处于最高振幅
+        mVisualizerView.setFocusable(false);
         ll.addView(mVisualizerView);
         mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
             @Override
@@ -122,11 +126,19 @@ public class DetailActivity extends PlayerActivity {
                 setVisualizerViewListener(new VisualizerListener() {
                     @Override
                     public void updateView(byte[] fftOrBytes) {
-                        mVisualizerView.updateVisualizer(fftOrBytes);
+                        if (!newBtn.isVisible()) {
+                            mVisualizerView.updateVisualizer(fftOrBytes);
+                        }
                     }
                 });
             }
         });
+        initBottomDialog();
+    }
+
+    @Background
+    void initBottomDialog() {
+        finishInitDialog = false;
         newBtn = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
         newBtn.setKeyListener(new DialogListener() {
             @Override
@@ -145,7 +157,7 @@ public class DetailActivity extends PlayerActivity {
                 initView(v);
             }
         });
-
+        finishInitDialog = true;
     }
 
     @Override
@@ -155,6 +167,9 @@ public class DetailActivity extends PlayerActivity {
 
     public void onFabClick(View view) {
         lyricView.setVisibility(View.GONE);
+        if (mVisualizerView != null) {
+            mVisualizerView.setVisibility(View.GONE);
+        }
         pause();
         mCoverView.stop();
     }
@@ -222,7 +237,11 @@ public class DetailActivity extends PlayerActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
-                newBtn.show();
+                if (finishInitDialog) {
+                    newBtn.show();
+                } else {
+                    Toast.makeText(this, "mixer is loading,please try again...", Toast.LENGTH_LONG).show();
+                }
                 break;
             case KeyEvent.KEYCODE_BACK:
                 newBtn.onDestroyView();

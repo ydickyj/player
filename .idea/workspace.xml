@@ -15,27 +15,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f3a91c4c-6d7d-4410-87ec-9bd558730c2a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/VisualizerListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/percent_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/percent_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_24_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_24_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_24_2_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
     </list>
     <ignored path="player.iws" />
@@ -68,33 +52,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DetailActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DetailActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
-              <caret line="121" column="68" selection-start-line="121" selection-start-column="68" selection-end-line="121" selection-end-column="68" />
+            <state relative-caret-position="500">
+              <caret line="141" column="64" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
               <folding>
-                <element signature="class#3672:4076" expanded="false" />
-                <element signature="e#4644#4645#0" expanded="true" />
-                <element signature="method#onFabClick#0;class#DetailActivity#0" expanded="false" />
+                <element signature="class#3797:4201" expanded="false" />
                 <element signature="method#repeat#0;class#DetailActivity#0" expanded="false" />
                 <element signature="method#shuffle#0;class#DetailActivity#0" expanded="false" />
                 <element signature="method#onKeyDown#0;class#DetailActivity#0" expanded="false" />
                 <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
                 <element signature="method#initView#0;class#DetailActivity#0" expanded="false" />
-                <element signature="e#15334#15354#0" expanded="false" />
+                <element signature="e#15984#16004#0" expanded="false" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="content_detail.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4200">
+              <caret line="168" column="52" selection-start-line="168" selection-start-column="52" selection-end-line="168" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="PlayerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="312" column="44" selection-start-line="312" selection-start-column="44" selection-end-line="312" selection-end-column="44" />
+            <state relative-caret-position="7300">
+              <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
               <folding>
-                <element signature="e#1934#1941#0" expanded="true" />
                 <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
               </folding>
             </state>
@@ -104,95 +98,70 @@
       <file leaf-file-name="Visualizer.java" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/media/audiofx/Visualizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="581" column="15" selection-start-line="581" selection-start-column="15" selection-end-line="581" selection-end-column="15" />
-              <folding />
+            <state relative-caret-position="5600">
+              <caret line="243" column="0" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+              <folding>
+                <element signature="e#9721#9722#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VisualizerView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VisualizerView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="273" column="49" selection-start-line="273" selection-start-column="49" selection-end-line="273" selection-end-column="49" />
-              <folding>
-                <element signature="e#1798#1799#0" expanded="true" />
-                <element signature="e#1837#1838#0" expanded="true" />
-                <element signature="e#1992#1993#0" expanded="true" />
-                <element signature="e#2015#2016#0" expanded="true" />
-                <element signature="e#12207#12208#0" expanded="true" />
-                <element signature="e#12238#12239#0" expanded="true" />
-                <element signature="e#12466#12467#0" expanded="true" />
-                <element signature="e#12483#12484#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/view/View.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="11733" column="21" selection-start-line="11733" selection-start-column="21" selection-end-line="11733" selection-end-column="21" />
+            <state relative-caret-position="4925">
+              <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Path.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/graphics/Path.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="384" column="16" selection-start-line="384" selection-start-column="16" selection-end-line="384" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NumberProgressBar.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/NumberProgressBar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="318" column="30" selection-start-line="318" selection-start-column="30" selection-end-line="318" selection-end-column="30" />
-              <folding>
-                <element signature="class#2159:2760" expanded="false" />
-                <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
-                <element signature="e#6998#7643#0" expanded="true" />
-                <element signature="e#7642#7643#0" expanded="true" />
-                <element signature="e#9441#9442#0" expanded="true" />
-                <element signature="e#9477#9478#0" expanded="true" />
-                <element signature="method#update#0;class#PlayerActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="129" column="49" selection-start-line="129" selection-start-column="49" selection-end-line="129" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VisualizerListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/VisualizerListener.java">
+      <file leaf-file-name="MusicContent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/MusicContent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Timer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/util/Timer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5250">
+              <caret line="242" column="58" selection-start-line="242" selection-start-column="58" selection-end-line="242" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LyricView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/LyricView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Thread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/lang/Thread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16400">
+              <caret line="711" column="29" selection-start-line="711" selection-start-column="29" selection-end-line="711" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Canvas.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/graphics/Canvas.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26750">
+              <caret line="1139" column="16" selection-start-line="1139" selection-start-column="16" selection-end-line="1139" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -1927,11 +1896,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/DialogListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/BottomDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/utils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/listener/VisualizerListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java" />
@@ -1970,6 +1939,8 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1987,161 +1958,23 @@
               <option name="myItemId" value="player" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="musicplayer" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="musicplayer" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="musicplayer" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="musicplayer" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listener" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="musicplayer" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="player" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MultiType-FilePicker-master/MultiType-FilePicker-master" />
-    <property name="device.picker.selection" value="192.168.1.34:5555" />
+    <property name="device.picker.selection" value="192.168.1.134:5555" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="ScreenshotViewer.SavePath" value="$USER_HOME$/Desktop" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi" />
+    <property name="android.project.structure.last.selected" value="app" />
+    <property name="android.project.structure.proportion" value="0.15" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -2626,11 +2459,18 @@
       <option name="project" value="LOCAL" />
       <updated>1489563991886</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="增加动画待测试">
+      <created>1489660844324</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1489660844324</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2640,7 +2480,6 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35340023" sideWeight="0.5127932" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6477146" sideWeight="0.48720682" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5250836" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2664,6 +2503,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2706,97 +2546,24 @@
     <MESSAGE value="增加均衡器界面." />
     <MESSAGE value="实现均衡器界面功能." />
     <MESSAGE value="完全实现均衡器功能，带测试。" />
-    <option name="LAST_COMMIT_MESSAGE" value="完全实现均衡器功能，带测试。" />
+    <MESSAGE value="增加动画待测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加动画待测试" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>245</line>
-          <properties />
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>226</line>
-          <properties />
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>224</line>
-          <properties />
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>211</line>
-          <properties />
-          <option name="timeStamp" value="107" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>210</line>
-          <properties />
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>274</line>
-          <properties />
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>273</line>
-          <properties />
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java</url>
-          <line>276</line>
-          <properties />
-          <option name="timeStamp" value="115" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="116" />
+      <option name="time" value="122" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
         <watch expression="mSubtitleController" />
+        <watch expression="this" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/valuesadd.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/valuesadd_pressed.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/refresh_focused_red.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2890,7 +2657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1675">
           <caret line="86" column="5" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2898,7 +2664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2906,104 +2671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1925">
           <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#122077#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#56948#56949#0" expanded="false" />
-            <element signature="e#56983#56984#0" expanded="false" />
-            <element signature="e#71096#71097#0" expanded="false" />
-            <element signature="e#71131#71132#0" expanded="false" />
-            <element signature="e#74868#74869#0" expanded="false" />
-            <element signature="e#74919#74920#0" expanded="false" />
-            <element signature="e#75350#75351#0" expanded="false" />
-            <element signature="e#75395#75396#0" expanded="false" />
-            <element signature="e#75521#75522#0" expanded="false" />
-            <element signature="e#75565#75566#0" expanded="false" />
-            <element signature="e#75622#75623#0" expanded="false" />
-            <element signature="e#75664#75665#0" expanded="false" />
-            <element signature="e#81079#81080#0" expanded="false" />
-            <element signature="e#81111#81112#0" expanded="false" />
-            <element signature="e#81186#81187#0" expanded="false" />
-            <element signature="e#81216#81217#0" expanded="false" />
-            <element signature="e#81302#81303#0" expanded="false" />
-            <element signature="e#81334#81335#0" expanded="false" />
-            <element signature="e#82344#82345#0" expanded="false" />
-            <element signature="e#82377#82378#0" expanded="false" />
-            <element signature="e#83211#83212#0" expanded="false" />
-            <element signature="e#83285#83286#0" expanded="false" />
-            <element signature="e#83416#83417#0" expanded="false" />
-            <element signature="e#83445#83446#0" expanded="false" />
-            <element signature="e#85697#85698#0" expanded="false" />
-            <element signature="e#85738#85739#0" expanded="false" />
-            <element signature="e#94584#94585#0" expanded="false" />
-            <element signature="e#94642#94643#0" expanded="false" />
-            <element signature="e#96633#96634#0" expanded="false" />
-            <element signature="e#96687#96688#0" expanded="false" />
-            <element signature="e#96982#96983#0" expanded="false" />
-            <element signature="e#97038#97039#0" expanded="false" />
-            <element signature="e#97285#97286#0" expanded="false" />
-            <element signature="e#97339#97340#0" expanded="false" />
-            <element signature="e#97628#97629#0" expanded="false" />
-            <element signature="e#97683#97684#0" expanded="false" />
-            <element signature="e#97972#97973#0" expanded="false" />
-            <element signature="e#98027#98028#0" expanded="false" />
-            <element signature="e#98299#98300#0" expanded="false" />
-            <element signature="e#98358#98359#0" expanded="false" />
-            <element signature="e#98623#98624#0" expanded="false" />
-            <element signature="e#98683#98684#0" expanded="false" />
-            <element signature="e#98943#98944#0" expanded="false" />
-            <element signature="e#99002#99003#0" expanded="false" />
-            <element signature="e#99277#99278#0" expanded="false" />
-            <element signature="e#99339#99340#0" expanded="false" />
-            <element signature="e#99614#99615#0" expanded="false" />
-            <element signature="e#99644#99645#0" expanded="false" />
-            <element signature="e#99820#99821#0" expanded="false" />
-            <element signature="e#99870#99871#0" expanded="false" />
-            <element signature="e#100012#100013#0" expanded="false" />
-            <element signature="e#100051#100052#0" expanded="false" />
-            <element signature="e#100448#100449#0" expanded="false" />
-            <element signature="e#100493#100494#0" expanded="false" />
-            <element signature="e#100709#100710#0" expanded="false" />
-            <element signature="e#100759#100760#0" expanded="false" />
-            <element signature="e#100940#100941#0" expanded="false" />
-            <element signature="e#100992#100993#0" expanded="false" />
-            <element signature="e#101228#101229#0" expanded="false" />
-            <element signature="e#101259#101260#0" expanded="false" />
-            <element signature="e#101630#101631#0" expanded="false" />
-            <element signature="e#101664#101665#0" expanded="false" />
-            <element signature="e#101916#101917#0" expanded="false" />
-            <element signature="e#101948#101949#0" expanded="false" />
-            <element signature="e#102368#102369#0" expanded="false" />
-            <element signature="e#102403#102404#0" expanded="false" />
-            <element signature="e#102975#102976#0" expanded="false" />
-            <element signature="e#103007#103008#0" expanded="false" />
-            <element signature="e#103321#103322#0" expanded="false" />
-            <element signature="e#103354#103355#0" expanded="false" />
-            <element signature="e#103924#103925#0" expanded="false" />
-            <element signature="e#103968#103969#0" expanded="false" />
-            <element signature="e#104159#104160#0" expanded="false" />
-            <element signature="e#104191#104192#0" expanded="false" />
-            <element signature="e#104642#104643#0" expanded="false" />
-            <element signature="e#104696#104697#0" expanded="false" />
-            <element signature="e#104957#104958#0" expanded="false" />
-            <element signature="e#105026#105027#0" expanded="false" />
-            <element signature="e#105873#105874#0" expanded="false" />
-            <element signature="e#105922#105923#0" expanded="false" />
-            <element signature="e#107916#107917#0" expanded="false" />
-            <element signature="e#107957#107958#0" expanded="false" />
-            <element signature="e#109603#109604#0" expanded="false" />
-            <element signature="e#109666#109667#0" expanded="false" />
-            <element signature="e#109827#109828#0" expanded="false" />
-            <element signature="e#109894#109895#0" expanded="false" />
-            <element signature="e#110067#110068#0" expanded="false" />
-            <element signature="e#110120#110121#0" expanded="false" />
-            <element signature="e#114988#114989#0" expanded="false" />
-            <element signature="e#115053#115054#0" expanded="false" />
-            <element signature="e#121081#121082#0" expanded="false" />
-            <element signature="e#121130#121131#0" expanded="false" />
-            <element signature="e#121216#121217#0" expanded="false" />
-            <element signature="e#121255#121256#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3011,9 +2678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2175">
           <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3021,7 +2685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3029,37 +2692,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="180" column="17" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/media/MediaPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="1861" column="22" selection-start-line="1861" selection-start-column="22" selection-end-line="1861" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3067,7 +2717,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="7028" column="15" selection-start-line="7028" selection-start-column="15" selection-end-line="7028" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3075,7 +2724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3083,7 +2731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3091,7 +2738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3099,7 +2745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3107,7 +2752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3115,7 +2759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="639">
           <caret line="114" column="12" selection-start-line="114" selection-start-column="12" selection-end-line="114" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3123,7 +2766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
           <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3131,7 +2773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3139,7 +2780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-11">
           <caret line="100" column="39" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3147,23 +2787,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
+        <state relative-caret-position="4150">
           <caret line="318" column="30" selection-start-line="318" selection-start-column="30" selection-end-line="318" selection-end-column="30" />
-          <folding>
-            <element signature="class#2159:2760" expanded="false" />
-            <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
-            <element signature="e#6998#7643#0" expanded="true" />
-            <element signature="e#7642#7643#0" expanded="true" />
-            <element signature="e#9441#9442#0" expanded="true" />
-            <element signature="e#9477#9478#0" expanded="true" />
-            <element signature="method#update#0;class#PlayerActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3171,84 +2801,121 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/graphics/Path.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
+        <state relative-caret-position="8675">
           <caret line="384" column="16" selection-start-line="384" selection-start-column="16" selection-end-line="384" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="286200">
           <caret line="11733" column="21" selection-start-line="11733" selection-start-column="21" selection-end-line="11733" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="129" column="49" selection-start-line="129" selection-start-column="49" selection-end-line="129" selection-end-column="49" />
+        <state relative-caret-position="1700">
+          <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/graphics/Canvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26750">
+          <caret line="1139" column="16" selection-start-line="1139" selection-start-column="16" selection-end-line="1139" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16400">
+          <caret line="711" column="29" selection-start-line="711" selection-start-column="29" selection-end-line="711" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/LyricView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4200">
+          <caret line="168" column="52" selection-start-line="168" selection-start-column="52" selection-end-line="168" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/java/util/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5250">
+          <caret line="242" column="58" selection-start-line="242" selection-start-column="58" selection-end-line="242" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/MusicContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/media/audiofx/Visualizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="581" column="15" selection-start-line="581" selection-start-column="15" selection-end-line="581" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="5600">
+          <caret line="243" column="0" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+          <folding>
+            <element signature="e#9721#9722#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="312" column="44" selection-start-line="312" selection-start-column="44" selection-end-line="312" selection-end-column="44" />
+        <state relative-caret-position="7300">
+          <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
           <folding>
-            <element signature="e#1934#1941#0" expanded="true" />
             <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="121" column="68" selection-start-line="121" selection-start-column="68" selection-end-line="121" selection-end-column="68" />
-          <folding>
-            <element signature="class#3672:4076" expanded="false" />
-            <element signature="e#4644#4645#0" expanded="true" />
-            <element signature="method#onFabClick#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#repeat#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#shuffle#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#onKeyDown#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
-            <element signature="method#initView#0;class#DetailActivity#0" expanded="false" />
-            <element signature="e#15334#15354#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="273" column="49" selection-start-line="273" selection-start-column="49" selection-end-line="273" selection-end-column="49" />
+        <state relative-caret-position="4925">
+          <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="141" column="64" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
           <folding>
-            <element signature="e#1798#1799#0" expanded="true" />
-            <element signature="e#1837#1838#0" expanded="true" />
-            <element signature="e#1992#1993#0" expanded="true" />
-            <element signature="e#2015#2016#0" expanded="true" />
-            <element signature="e#12207#12208#0" expanded="true" />
-            <element signature="e#12238#12239#0" expanded="true" />
-            <element signature="e#12466#12467#0" expanded="true" />
-            <element signature="e#12483#12484#0" expanded="true" />
+            <element signature="class#3797:4201" expanded="false" />
+            <element signature="method#repeat#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#shuffle#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#onKeyDown#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
+            <element signature="method#initView#0;class#DetailActivity#0" expanded="false" />
+            <element signature="e#15984#16004#0" expanded="false" />
           </folding>
         </state>
       </provider>
