@@ -62,7 +62,6 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
-    private static final float VISUALIZER_HEIGHT_DIP = 720f;
     String TAG = DetailActivity.class.getName();
     @ViewById(R.id.music_cover)
     MusicCoverView mCoverView;
@@ -96,10 +95,6 @@ public class DetailActivity extends PlayerActivity {
         share = getSharedPreferences("userData", MODE_PRIVATE);
 //音量控制,初始化定义
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-//最大音量
-        int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-//当前音量
-        int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
     }
 
     @AfterViews
@@ -193,14 +188,14 @@ public class DetailActivity extends PlayerActivity {
         repSumClick++;
         Log.e(TAG, "repSumClick" + repSumClick);
         if (repSumClick > 1) {
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp, null));
             setRepeatPlayMode(false);
             setRandomPlayMode(false);
             repSumClick = 0;
 
         } else {
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp));
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp, null));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp, null));
             setRepeatPlayMode(true);
             setRandomPlayMode(false);
             ranSumClick = 0;
@@ -213,13 +208,13 @@ public class DetailActivity extends PlayerActivity {
         ranSumClick++;
         Log.e(TAG, "ranSumClick" + ranSumClick);
         if (ranSumClick > 1) {
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp, null));
             setRandomPlayMode(false);
             setRepeatPlayMode(false);
             ranSumClick = 0;
         } else {
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp));
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp, null));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp, null));
             setRandomPlayMode(true);
             setRepeatPlayMode(false);
             repSumClick = 0;
@@ -295,7 +290,7 @@ public class DetailActivity extends PlayerActivity {
             }
         });
         mSwitch.setChecked(getEqualizerEnabled());
-        mSpinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getReverbVals()));
+        mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverbVals()));
 //        mSpinner.setAdapter(new SimpleAdapter(this,listems,R.layout.mixer_sp_item,new String[]{"name"},new int[]{R.id.tv_spinner}));
         final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
         int eqMax = getEqualizerMax();

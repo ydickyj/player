@@ -1,7 +1,6 @@
 package com.sample.andremion.musicplayer.musicUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -12,7 +11,6 @@ import android.util.Log;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,9 +20,10 @@ import java.util.Random;
 
 /**
  * Created by Administrator on 2017/2/28.
+ *
  */
 
-public class utils {
+public class Utils {
 
     private static String TAG = "音乐工具类";
 
@@ -145,11 +144,6 @@ public class utils {
         return mStrList;
     }
 
-    public int getRandom(int inMax,int inMin){
-        Random random = new Random();
-        return random.nextInt(inMax) % (inMax - inMin + 1) + inMin;
-    }
-
     /**
      *
      * 功能 通过album_id查找 album_art 如果找不到返回null
@@ -186,4 +180,9 @@ public class utils {
                     }
              return sBuilder.toString();
             }
+
+    public int getRandom(int inMax, int inMin) {
+        Random random = new Random();
+        return random.nextInt(inMax) % (inMax - inMin + 1) + inMin;
+    }
 }

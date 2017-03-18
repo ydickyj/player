@@ -40,7 +40,7 @@ import com.sample.andremion.musicplayer.listener.ProgressListener;
 import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
-import com.sample.andremion.musicplayer.musicUtils.utils;
+import com.sample.andremion.musicplayer.musicUtils.Utils;
 import com.sample.andremion.musicplayer.view.LyricView;
 import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.ProgressView;
@@ -53,45 +53,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
-    private TextView mTimeView;
-    private TextView mDurationView;
-    private TextView mName;
-    private TextView mAuthor;
-    private ProgressView mProgressView;
-    private LyricView mLyricView;
-    private MusicCoverView mMusicCoverView;
-    private String mOldName;
-    private String mOldAlbums;
-    private boolean isRepeat;
-    private boolean isRandom;
-    private int msgWhat = 0;
-    private final Handler mUpdateProgressHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    final int position = mService.getPosition();
-                    final int mDuration = mService.getDuration();
-                    Log.e("position:", "" + position + " Duration   " + mDuration);
-                    final String name = mService.getDisplayName();
-                    final String author = mService.getDisplayAuthor();
-                    onUpdateProgress(position, mDuration, name, author, mService.getMusicAlbums());
-
-                    sendEmptyMessageDelayed(msgWhat, DateUtils.SECOND_IN_MILLIS);
-                    break;
-                case 1:
-                    final int endPosition = mService.getPosition();
-                    final int endDuration = mService.getDuration();
-                    final String endName = mService.getDisplayName();
-                    final String endAuthor = mService.getDisplayAuthor();
-                    Log.e("position:", "end");
-                    Log.e("position:", "" + endPosition + " Duration   " + endDuration);
-                    onUpdateProgress(endPosition, endDuration, endName, endAuthor, mService.getMusicAlbums());
-                    break;
-            }
-
-        }
-    };
     /**
      * Defines callbacks for service binding, passed to bindService()
      */
@@ -113,14 +74,52 @@ public abstract class PlayerActivity extends AppCompatActivity {
             onUnbind();
         }
     };
+    private TextView mTimeView;
+    private TextView mDurationView;
+    private TextView mName;
+    private TextView mAuthor;
+    private ProgressView mProgressView;
+    private LyricView mLyricView;
+    private MusicCoverView mMusicCoverView;
+    private String mOldName;
+    private String mOldAlbums;
+    private boolean isRepeat;
+    private boolean isRandom;
+    private int msgWhat = 0;
+    private final Handler mUpdateProgressHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    final int position = mService.getPosition();
+                    final int mDuration = mService.getDuration();
+                    Log.e("position:", "" + position + " Duration   " + mDuration);
+                    final String name = mService.getDisplayName();
+                    final String author = mService.getDisplayAuthor();
+                    onUpdateProgress(position, mDuration, name, author, mService.getMusicAlbums());
+                    mUpdateProgressHandler.sendEmptyMessageDelayed(msgWhat, DateUtils.SECOND_IN_MILLIS);
+                    break;
+                case 1:
+                    final int endPosition = mService.getPosition();
+                    final int endDuration = mService.getDuration();
+                    final String endName = mService.getDisplayName();
+                    final String endAuthor = mService.getDisplayAuthor();
+                    Log.e("position:", "end");
+                    Log.e("position:", "" + endPosition + " Duration   " + endDuration);
+                    onUpdateProgress(endPosition, endDuration, endName, endAuthor, mService.getMusicAlbums());
+                    break;
+            }
+            return false;
+        }
+    });
 
     private void onUpdateProgress(int position, int duration, String name, String author, String Ablums) {
         if (mTimeView != null) {
-            mTimeView.setText(utils.IntToStrTime(position));
+            mTimeView.setText(Utils.IntToStrTime(position));
         }
         if (mDurationView != null) {
-//            Log.e("12312",""+utils.IntToStrTime((duration/ 1000))+ "   "+duration);
-            mDurationView.setText(utils.IntToStrTime(duration));
+//            Log.e("12312",""+Utils.IntToStrTime((duration/ 1000))+ "   "+duration);
+            mDurationView.setText(Utils.IntToStrTime(duration));
         }
         if (mProgressView != null) {
             Log.e("123", "mProgressView");
@@ -287,10 +286,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
         return (mService.getEqualizerMax() / 10) * 2;
     }
 
-    public short getgetEqualizerMin() {
-        return mService.getEqualizerMin();
-    }
-
     public void setBandLevel(short brand, int progress) {
         mService.setBandLevel(brand, progress);
     }
@@ -330,14 +325,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mUpdateProgressHandler.sendEmptyMessage(1);
         }
 
-    }
-
-    public void saveLrcIndex(int index) {
-        mService.upLyricIndex(index);
-    }
-
-    public long getPosition() {
-        return (long) mService.getPosition();
     }
 
 
