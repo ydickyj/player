@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.sample.andremion.musicplayer.R;
-import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.listener.ProgressListener;
 
 public class ProgressView extends View {
@@ -50,7 +49,7 @@ public class ProgressView extends View {
 
     private int mProgress;
     private int mMax;
-    private float mMorph;
+    private float mMorph = 1;
     private ProgressListener mListener;
 
     public ProgressView(Context context) {

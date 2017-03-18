@@ -32,7 +32,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sample.andremion.musicplayer.R;
@@ -42,7 +41,7 @@ import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.music.PlayerService;
 import com.sample.andremion.musicplayer.musicUtils.Utils;
 import com.sample.andremion.musicplayer.view.LyricView;
-import com.sample.andremion.musicplayer.view.MusicCoverView;
+import com.sample.andremion.musicplayer.view.MyCycleView;
 import com.sample.andremion.musicplayer.view.ProgressView;
 
 import java.io.File;
@@ -80,7 +79,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
     private TextView mAuthor;
     private ProgressView mProgressView;
     private LyricView mLyricView;
-    private MusicCoverView mMusicCoverView;
+    private MyCycleView mMusicCoverView;
     private String mOldName;
     private String mOldAlbums;
     private boolean isRepeat;
@@ -93,7 +92,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 case 0:
                     final int position = mService.getPosition();
                     final int mDuration = mService.getDuration();
-                    Log.e("position:", "" + position + " Duration   " + mDuration);
+//                    Log.e("position:", "" + position + " Duration   " + mDuration);
                     final String name = mService.getDisplayName();
                     final String author = mService.getDisplayAuthor();
                     onUpdateProgress(position, mDuration, name, author, mService.getMusicAlbums());
@@ -105,7 +104,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                     final String endName = mService.getDisplayName();
                     final String endAuthor = mService.getDisplayAuthor();
                     Log.e("position:", "end");
-                    Log.e("position:", "" + endPosition + " Duration   " + endDuration);
+//                    Log.e("position:", "" + endPosition + " Duration   " + endDuration);
                     onUpdateProgress(endPosition, endDuration, endName, endAuthor, mService.getMusicAlbums());
                     break;
             }
@@ -113,7 +112,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
         }
     });
 
-    private void onUpdateProgress(int position, int duration, String name, String author, String Ablums) {
+    private void onUpdateProgress(int position, int duration, String name, String author, String albums) {
         if (mTimeView != null) {
             mTimeView.setText(Utils.IntToStrTime(position));
         }
@@ -122,16 +121,18 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mDurationView.setText(Utils.IntToStrTime(duration));
         }
         if (mProgressView != null) {
-            Log.e("123", "mProgressView");
+//            Log.e("123", "mProgressView");
             mProgressView.setMax(duration);
             mProgressView.setProgress(position);
         }
         if (mLyricView != null) {
             File lrcFile;
-            if (getCurrentName().length() < 4) {
-                lrcFile = null;
-            } else {
-//                Log.e("getCurrentName", "" + (getCurrentName().length()));
+            if (!(getCurrentName().length() < 4)) {
+
+                //                Log.e("getCurrentName", "" + (getCurrentName().length()));
+
+                isFolderExists(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/");
+
                 lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, (name.length() - 4)) + ".lrc");
                 if (lrcFile.exists()) {
                     if (!Objects.equals(mOldName, lrcFile.getName())) {
@@ -154,17 +155,19 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mName.setText(name);
         }
         if (mMusicCoverView != null) {
-            if (!Objects.equals(mOldAlbums, Ablums)) {
-                mOldAlbums = Ablums;
+            if (!Objects.equals(mOldAlbums, albums)) {
+                mOldAlbums = albums;
                 Matrix matrix = new Matrix();
                 matrix.postScale(6, 6);
-                Drawable img = Drawable.createFromPath(Ablums);
+                Drawable img = Drawable.createFromPath(albums);
                 if (img == null) {
                     mMusicCoverView.setImageDrawable(getResources().getDrawable(R.drawable.album_cover_the_1975));
                 } else {
                     mMusicCoverView.setImageDrawable(img);
                 }
 //                mMusicCoverView.setImageMatrix(matrix);
+            } else if (albums == null) {
+                mMusicCoverView.setImageDrawable(getResources().getDrawable(R.drawable.album_cover_the_1975));
             }
         }
     }
@@ -177,7 +180,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 @Override
                 public void onProgressListener(boolean isFinish) {
                     if (isFinish) {
-//                        Log.e("playMode","isRepeat:"+isRepeat+" israndom：" +isRandom);
+//                        Log.e("playMode","isRepeat:"+isRepeat+" isRandom：" +isRandom);
                         if (isRepeat) {
                             mService.reMusic();
                         } else if (isRandom) {
@@ -209,8 +212,9 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mName = (TextView) findViewById(R.id.display_name);
         mAuthor = (TextView) findViewById(R.id.display_author);
         mLyricView = (LyricView) findViewById(R.id.lyricView);
-        mMusicCoverView = (MusicCoverView) findViewById(R.id.music_cover);
-        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        mMusicCoverView = (MyCycleView) findViewById(R.id.my_music_cover);
+
+//        mMusicCoverView.setScaleType(ImageView.ScaleType.FIT_CENTER);
     }
 
     @Override
@@ -290,15 +294,15 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.setBandLevel(brand, progress);
     }
 
-    public List<Short> getReverbNames() {
+    public List<Short> getReverberationNames() {
         return mService.getReverbNames();
     }
 
-    public List<String> getReverbVals() {
+    public List<String> getReverberationVals() {
         return mService.getReverbVals();
     }
 
-    public void setPresetReverbPreset(int index) {
+    public void setPresetReverberationPreset(int index) {
         mService.setPresetReverbPreset(index);
     }
 
@@ -327,5 +331,15 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     }
 
-
+    boolean isFolderExists(String strFolder) {
+        File file = new File(strFolder);
+        if (!file.exists()) {
+            if (file.mkdirs()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 }

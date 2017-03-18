@@ -29,7 +29,6 @@ import com.sample.andremion.musicplayer.listener.MyItemClickListener;
 import com.sample.andremion.musicplayer.listener.MyItemOnFocusChangeListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.musicUtils.Utils;
-import com.sample.andremion.musicplayer.view.MusicCoverView;
 import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
 import com.sample.andremion.musicplayer.view.sweetAlertDialog.SweetAlertDialog;
 
@@ -54,8 +53,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     public RecyclerViewAdapter mAdapter;
     public boolean onCreate = false;
     String TAG = "MainActivity";
-    @ViewById(R.id.music_cover)
-    View mCoverView;
+    //    @ViewById(R.id.music_cover)
+//    View mCoverView;
     @ViewById(R.id.title)
     View mTitleView;
     @ViewById(R.id.time)
@@ -104,10 +103,11 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @AfterViews
     void afterView() {
-        ((MusicCoverView) mCoverView).setScaleType(ImageView.ScaleType.CENTER_CROP);
+//        ((MusicCoverView) mCoverView).setScaleType(ImageView.ScaleType.CENTER_CROP);
         IntentFilter filter = new IntentFilter();
         filter.addAction("scanFlag");
         registerReceiver(mReceiver, filter);
+        mFabView.setFocusable(true);
         btnRefresh.setFocusable(true);
         btnRefresh.setFocusableInTouchMode(true);
         assert recyclerView != null;
@@ -236,12 +236,12 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     public void fab(View view) {
         //noinspection unchecked
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
+//                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
                 new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
                 new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
                 new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
-                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)),
-                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)));
+//                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)),
+                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)));
         ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
     }
 
@@ -332,13 +332,6 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         } else {
             bindService();
         }
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
-                new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
-                new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
-                new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
-                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)),
-                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)));
-        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
+        startActivity(new Intent(this, DetailActivity_.class));
     }
 }

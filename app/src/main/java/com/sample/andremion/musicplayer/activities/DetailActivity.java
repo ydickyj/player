@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -42,10 +41,9 @@ import com.sample.andremion.musicplayer.listener.DialogListener;
 import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.view.BottomDialog;
 import com.sample.andremion.musicplayer.view.LyricView;
-import com.sample.andremion.musicplayer.view.MusicCoverView;
+import com.sample.andremion.musicplayer.view.MyCycleView;
 import com.sample.andremion.musicplayer.view.NumberProgressBar;
 import com.sample.andremion.musicplayer.view.ProgressView;
-import com.sample.andremion.musicplayer.view.TransitionAdapter;
 import com.sample.andremion.musicplayer.view.VisualizerView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -63,8 +61,8 @@ import static android.view.KeyEvent.KEYCODE_DPAD_UP;
 @EActivity(R.layout.content_detail)
 public class DetailActivity extends PlayerActivity {
     String TAG = DetailActivity.class.getName();
-    @ViewById(R.id.music_cover)
-    MusicCoverView mCoverView;
+    @ViewById(R.id.my_music_cover)
+    MyCycleView mCoverView;
     @ViewById
     TextView displayName;
     @ViewById
@@ -107,35 +105,28 @@ public class DetailActivity extends PlayerActivity {
         mVisualizerView.setmHeight(8);// 让水位处于最高振幅
         mVisualizerView.setFocusable(false);
         ll.addView(mVisualizerView);
-        mCoverView.setCallbacks(new MusicCoverView.Callbacks() {
-            @Override
-            public void onMorphEnd(MusicCoverView coverView) {
-                // Nothing to do
-                Log.e(TAG, "onMorphEnd");
-            }
-
-            @Override
-            public void onRotateEnd(MusicCoverView coverView) {
-                Log.e(TAG, "onRotateEnd");
-                supportFinishAfterTransition();
-            }
-        });
-        getWindow().getSharedElementEnterTransition().addListener(new TransitionAdapter() {
-            @Override
-            public void onTransitionEnd(Transition transition) {
-                play();
-                mCoverView.start();
-                lyricView.setVisibility(View.VISIBLE);
-                setVisualizerViewListener(new VisualizerListener() {
-                    @Override
-                    public void updateView(byte[] fftOrBytes) {
-                        if (!newBtn.isVisible()) {
-                            mVisualizerView.updateVisualizer(fftOrBytes);
-                        }
+//        getWindow().getSharedElementEnterTransition().addListener(new TransitionAdapter() {
+//            @Override
+//            public void onTransitionEnd(Transition transition) {
+//
+//            }
+//        });
+        lyricView.setVisibility(View.VISIBLE);
+        lyricView.setFocusable(false);
+        lyricView.setEnabled(false);
+        if (mBound) {
+            play();
+            setVisualizerViewListener(new VisualizerListener() {
+                @Override
+                public void updateView(byte[] fftOrBytes) {
+                    if (!newBtn.isVisible()) {
+                        mVisualizerView.updateVisualizer(fftOrBytes);
                     }
-                });
-            }
-        });
+                }
+            });
+        } else {
+            bindService();
+        }
         initBottomDialog();
     }
 
@@ -169,6 +160,23 @@ public class DetailActivity extends PlayerActivity {
         finishInitDialog = true;
     }
 
+    @Background
+    void bindService() {
+        while (!mBound) {
+            Log.e("wait", "等待服务初始化完毕");
+        }
+        play();
+        setVisualizerViewListener(new VisualizerListener() {
+            @Override
+            public void updateView(byte[] fftOrBytes) {
+                if (!newBtn.isVisible()) {
+                    mVisualizerView.updateVisualizer(fftOrBytes);
+                }
+            }
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
         onFabClick(null);
@@ -180,7 +188,8 @@ public class DetailActivity extends PlayerActivity {
             mVisualizerView.setVisibility(View.GONE);
         }
         pause();
-        mCoverView.stop();
+        supportFinishAfterTransition();
+//        mCoverView.stop();
     }
 
     @Click(R.id.repeat)
@@ -188,14 +197,14 @@ public class DetailActivity extends PlayerActivity {
         repSumClick++;
         Log.e(TAG, "repSumClick" + repSumClick);
         if (repSumClick > 1) {
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp, null));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
             setRepeatPlayMode(false);
             setRandomPlayMode(false);
             repSumClick = 0;
 
         } else {
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp, null));
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp, null));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_pressed24dp));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
             setRepeatPlayMode(true);
             setRandomPlayMode(false);
             ranSumClick = 0;
@@ -208,13 +217,13 @@ public class DetailActivity extends PlayerActivity {
         ranSumClick++;
         Log.e(TAG, "ranSumClick" + ranSumClick);
         if (ranSumClick > 1) {
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp, null));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_24dp));
             setRandomPlayMode(false);
             setRepeatPlayMode(false);
             ranSumClick = 0;
         } else {
-            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp, null));
-            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp, null));
+            shuffle.setImageDrawable(getResources().getDrawable(R.drawable.ic_shuffle_white_pressed24dp));
+            repeat.setImageDrawable(getResources().getDrawable(R.drawable.ic_repeat_white_24dp));
             setRandomPlayMode(true);
             setRepeatPlayMode(false);
             repSumClick = 0;
@@ -290,7 +299,7 @@ public class DetailActivity extends PlayerActivity {
             }
         });
         mSwitch.setChecked(getEqualizerEnabled());
-        mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverbVals()));
+        mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverberationVals()));
 //        mSpinner.setAdapter(new SimpleAdapter(this,listems,R.layout.mixer_sp_item,new String[]{"name"},new int[]{R.id.tv_spinner}));
         final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
         int eqMax = getEqualizerMax();
@@ -326,11 +335,11 @@ public class DetailActivity extends PlayerActivity {
         altProgress.setProgress(getBandLevel((short) 4));
 
         mSpinner.setSelection(position);
-        setPresetReverbPreset(getReverbNames().get(position));
+        setPresetReverberationPreset(getReverberationNames().get(position));
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setPresetReverbPreset(getReverbNames().get(position));
+                setPresetReverberationPreset(getReverberationNames().get(position));
                 SharedPreferences.Editor edit = share.edit(); //编辑文件
                 edit.putInt("spinner", position);         //根据键值对添加数据
                 edit.apply();  //保存数据信息

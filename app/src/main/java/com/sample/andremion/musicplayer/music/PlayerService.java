@@ -46,7 +46,6 @@ public class PlayerService extends Service {
     public VisualizerListener vListener;
     List<MediaEntity> mListMedia = new ArrayList<>();
     private int musicIndex = 0;
-    private int lyricIndex = 0;
     private boolean mMediaPlayerIsReady = false;
     // 定义系统的频谱
     private Visualizer mVisualizer;
@@ -56,8 +55,8 @@ public class PlayerService extends Service {
     private BassBoost mBass;
     // 定义系统的预设音场控制器
     private PresetReverb mPresetReverb;
-    private List<Short> reverbNames = new ArrayList<Short>();
-    private List<String> reverbVals = new ArrayList<String>();
+    private List<Short> reverbNames = new ArrayList<>();
+    private List<String> reverbVals = new ArrayList<>();
 
     public PlayerService() {
 //        // 初始化示波器
@@ -267,7 +266,6 @@ public class PlayerService extends Service {
     }
 
     public void update(List<MediaEntity> listMedia, int mMusicIndex) {
-        lyricIndex = 0;
         mListMedia = new ArrayList<>();
         mListMedia.addAll(listMedia);
         musicIndex = mMusicIndex;
@@ -291,18 +289,12 @@ public class PlayerService extends Service {
         }
     }
 
-    public void upLyricIndex(int index) {
-        lyricIndex = index;
-    }
-
     public String getMusicAlbums() {
         if (musicIndex < mListMedia.size() && mListMedia.size() != 0) {
             return mListMedia.get(musicIndex).albums;
         } else {
             return null;
         }
-
-
     }
 
     /**
@@ -310,7 +302,6 @@ public class PlayerService extends Service {
      */
     private void setupVisualizer() {
         if (mMediaPlayerIsReady) {
-            int AudioSessionId = mp.getAudioSessionId();
             mVisualizer = new Visualizer(mp.getAudioSessionId());
 
             //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
@@ -354,10 +345,12 @@ public class PlayerService extends Service {
      * 初始化均衡控制器
      */
     private void setupEqualizer() {
-        if (mMediaPlayerIsReady) {
+        if (mMediaPlayerIsReady && mp != null) {
             // 以MediaPlayer的AudioSessionId创建Equalizer
             // 相当于设置Equalizer负责控制该MediaPlayer
-            int AudioSessionId2 = mp.getAudioSessionId();
+            if (mEqualizer != null) {
+                mEqualizer.release();
+            }
             mEqualizer = new Equalizer(0, mp.getAudioSessionId());
             // 启用均衡控制效果
             mEqualizer.setEnabled(true);
@@ -404,7 +397,7 @@ public class PlayerService extends Service {
     public void setBandLevel(short brand, int progress) {
         if (mEqualizer != null) {
             // 设置该频率的均衡值
-            Log.e(TAG, (progress * 10) + "  " + mEqualizer.getBandLevelRange()[0] + "");
+//            Log.e(TAG, (progress * 10) + "  " + mEqualizer.getBandLevelRange()[0] + "");
             mEqualizer.setBandLevel(brand,
                     (short) ((progress * 10) + mEqualizer.getBandLevelRange()[0]));
         } else {
@@ -418,6 +411,9 @@ public class PlayerService extends Service {
     private void setupPresetReverb() {
         // 以MediaPlayer的AudioSessionId创建PresetReverb
         // 相当于设置PresetReverb负责控制该MediaPlayer
+        if (mPresetReverb != null) {
+            mPresetReverb.release();
+        }
         mPresetReverb = new PresetReverb(0,
                 mp.getAudioSessionId());
         // 设置启用预设音场控制

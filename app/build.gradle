@@ -3,16 +3,21 @@ apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.sample.andremion.musicplayer"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -30,8 +35,8 @@ dependencies {
     compile "com.android.support:design:$APPCOMPAT_VERSION"
     compile "com.android.support:recyclerview-v7:$APPCOMPAT_VERSION"
     compile "com.android.support:percent:$APPCOMPAT_VERSION"
-    compile "com.github.andremion:musiccoverview:$MUSICCOVERVIEW_VERSION"
     apt "org.androidannotations:androidannotations:$AASnapshotVersion"
     compile "org.androidannotations:androidannotations-api:$AASnapshotVersion"
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.0.0'
     testCompile 'junit:junit:4.12'
 }

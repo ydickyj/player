@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    >
+    android:fillViewport="true">
 
-    <com.sample.andremion.musicplayer.view.MusicCoverView
-        android:id="@+id/music_cover"
+    <ImageView
+        android:id="@+id/main_music_cover"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/album_cover_daft_punk"
-        android:transitionName="@string/transition_name_cover"
-        app:layout_heightPercent="40%"/>
+        app:layout_heightPercent="40%" />
+
 
     <View
         android:id="@+id/pane"
@@ -23,19 +23,19 @@
         android:layout_alignEnd="@+id/pane_anchor"
         android:layout_alignStart="@+id/pane_anchor"
         android:layout_alignTop="@+id/pane_anchor"
-        android:background="@color/colorPane"/>
+        android:background="@color/colorPane" />
 
     <LinearLayout
         android:id="@+id/pane_anchor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/music_cover"
+        android:layout_alignBottom="@+id/main_music_cover"
         android:orientation="vertical"
         android:padding="@dimen/activity_vertical_margin">
 
         <include
             android:id="@+id/title"
-            layout="@layout/track_title"/>
+            layout="@layout/track_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:transitionName="@string/transition_name_time"
-                tools:text="02:30"/>
+                tools:text="02:30" />
 
             <com.sample.andremion.musicplayer.view.ProgressView
                 android:id="@+id/progress"
@@ -57,7 +57,7 @@
                 android:layout_marginEnd="@dimen/inner_padding"
                 android:layout_marginStart="@dimen/inner_padding"
                 android:layout_weight="1"
-                android:transitionName="@string/transition_name_progress"/>
+                android:transitionName="@string/transition_name_progress" />
 
             <TextView
                 android:id="@+id/duration"
@@ -65,14 +65,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:transitionName="@string/transition_name_duration"
-                tools:text="04:30"/>
+                tools:text="04:30" />
 
             <Space
-                android:visibility="gone"
                 android:id="@+id/fab_placeholder"
                 android:layout_width="@dimen/design_fab_size_mini"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/inner_padding"/>
+                android:layout_marginStart="@dimen/inner_padding"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -82,7 +82,7 @@
         android:id="@+id/playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/music_cover"
+        android:layout_below="@+id/main_music_cover"
         android:gravity="center_vertical"
         android:padding="@dimen/activity_vertical_margin"
         android:transitionGroup="true">
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My favorites"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
             android:id="@+id/tv_counter"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:text="102 songs"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <ImageView
             android:id="@+id/btn_refresh"
@@ -109,35 +109,30 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/btn_refresh_background"
-            android:clickable="true"
-            />
+            android:clickable="true" />
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_alignParentBottom="true"
         android:id="@+id/tracks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/playlist"
-        app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/content_list_item"
-        android:focusableInTouchMode="true"
         android:fillViewport="true"
-        />
+        android:focusableInTouchMode="true"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/content_list_item" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/music_cover"
+        android:layout_width="@dimen/design_fab_size_mini"
+        android:layout_height="@dimen/design_fab_size_mini"
+        android:layout_alignBottom="@+id/main_music_cover"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/fab_vertical_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:onClick="onFabClick"
-        android:scaleType="center"
         android:nextFocusDown="@id/btn_refresh"
-        android:src="@drawable/ic_play_animatable"
-        android:transitionName="@string/transition_name_fab"
-        app:fabSize="mini"/>
+        android:src="@drawable/selector_play_icon" />
+
 
 </com.sample.andremion.musicplayer.view.InsetsPercentRelativeLayout>

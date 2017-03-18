@@ -155,6 +155,7 @@ public class BottomDialog extends BaseBottomDialog {
                 return false;
             }
         });
+
         return super.onCreateView(inflater, container, savedInstanceState);
 
 

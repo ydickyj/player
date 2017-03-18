@@ -50,12 +50,10 @@ import java.util.List;
  */
 public class LyricView extends View {
 
-    private static final String TAG = "LyricView";
-
     public static final int LEFT = 0;
     public static final int CENTER = 1;
     public static final int RIGHT = 2;
-
+    private static final String TAG = "LyricView";
     private static final float SLIDE_COEFFICIENT = 0.2f;
 
     private static final int UNITS_SECOND = 1000;
@@ -108,25 +106,26 @@ public class LyricView extends View {
     private float mDownY;
     private float mLastScrollY;
     private boolean mUserTouch = false;
+    Runnable hideIndicator = new Runnable() {
+        @Override
+        public void run() {
+            setUserTouch(false);
+            invalidateView();
+        }
+    };
     private int maxVelocity;
     private int mLineNumberUnderIndicator = 0;
     private Rect mBtnPlayRect = new Rect();
     private Rect mTimerRect;
     private String mDefaultTime = "00:00";
-
     private int mLineColor = Color.parseColor("#EFEFEF");
     private int mBtnColor = Color.parseColor("#EFEFEF");
-
     private List<Integer> mLineFeedRecord = new ArrayList<>();
     private boolean mEnableLineFeed = false;
     private int mExtraHeight = 0;
-
     private int mTextHeight;
-
     private String mCurrentLyricFilePath = null;
-
     private OnPlayerClickListener mClickListener;
-
 
     public LyricView(Context context) {
         super(context);
@@ -154,27 +153,27 @@ public class LyricView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain();
-        }
-        mVelocityTracker.addMovement(event);
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_CANCEL:
-                actionCancel(event);
-                break;
-            case MotionEvent.ACTION_DOWN:
-                actionDown(event);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                actionMove(event);
-                break;
-            case MotionEvent.ACTION_UP:
-                actionUp(event);
-                break;
-            default:
-                break;
-        }
-        invalidateView();
+//        if (mVelocityTracker == null) {
+//            mVelocityTracker = VelocityTracker.obtain();
+//        }
+//        mVelocityTracker.addMovement(event);
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_CANCEL:
+//                actionCancel(event);
+//                break;
+//            case MotionEvent.ACTION_DOWN:
+//                actionDown(event);
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                actionMove(event);
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                actionUp(event);
+//                break;
+//            default:
+//                break;
+//        }
+//        invalidateView();
         return true;
     }
 
@@ -384,7 +383,6 @@ public class LyricView extends View {
 
         return scrollable() && (mScrollY > mLineHeight * (mLineCount - 1) + mLineFeedRecord.get(mLineCount - 1) + (mEnableLineFeed ? mTextHeight : 0) || mScrollY < 0);
     }
-
 
     private void actionMove(MotionEvent event) {
         if (scrollable()) {
@@ -816,6 +814,15 @@ public class LyricView extends View {
         }
     }
 
+    @IntDef({LEFT, CENTER, RIGHT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Alignment {
+    }
+
+    public interface OnPlayerClickListener {
+        void onPlayerClicked(long progress, String content);
+    }
+
     private class LyricInfo {
         List<LineInfo> songLines;
 
@@ -829,22 +836,5 @@ public class LyricView extends View {
     private class LineInfo {
         String content;
         long start;
-    }
-
-    Runnable hideIndicator = new Runnable() {
-        @Override
-        public void run() {
-            setUserTouch(false);
-            invalidateView();
-        }
-    };
-
-    @IntDef({LEFT, CENTER, RIGHT})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Alignment {
-    }
-
-    public interface OnPlayerClickListener {
-        void onPlayerClicked(long progress, String content);
     }
 }

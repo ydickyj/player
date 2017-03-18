@@ -5,8 +5,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/mixer_background"
+    android:fitsSystemWindows="true"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:paddingBottom="40dp"
+    android:paddingEnd="@dimen/mixer_margin_big"
+    android:paddingStart="@dimen/mixer_margin_big"
+    android:paddingTop="@dimen/mixer_margin_big"
     android:weightSum="2">
 
     <LinearLayout

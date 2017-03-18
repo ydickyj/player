@@ -31,17 +31,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
                 android:layout_centerHorizontal="true"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
 
-            <com.sample.andremion.musicplayer.view.MusicCoverView
-                android:id="@+id/music_cover"
+
+            </LinearLayout>
+
+
+            <com.sample.andremion.musicplayer.view.MyCycleView
+                android:id="@+id/my_music_cover"
                 android:layout_centerInParent="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/album_cover_daft_punk"
-                android:transitionName="@string/transition_name_cover"
-                app:layout_heightPercent="45%"
-                app:layout_widthPercent="100%"
-                app:shape="circle" />
+                app:layout_aspectRatio="100%"
+                app:layout_heightPercent="45%" />
+
 
             <com.sample.andremion.musicplayer.view.ProgressView
                 android:id="@+id/progress"
@@ -50,20 +51,17 @@
                 app:layout_aspectRatio="100%"
                 app:layout_heightPercent="48%" />
 
-            <android.support.design.widget.FloatingActionButton
+            <ImageView
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:onClick="onFabClick"
-                android:scaleType="center"
-                android:src="@drawable/ic_pause_animatable"
-                android:transitionName="@string/transition_name_fab" />
+                android:scaleType="center" />
 
             <Space
                 android:id="@+id/timers_anchor"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/music_cover"
+                android:layout_below="@+id/my_music_cover"
                 android:layout_centerHorizontal="true"
                 app:layout_widthPercent="25%" />
 
@@ -93,8 +91,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/time"
-                android:layout_centerHorizontal="true"
-                android:transitionGroup="true">
+                android:layout_centerHorizontal="true">
+
 
                 <ImageView
                     android:id="@+id/repeat"
@@ -126,7 +124,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_horizontal"
-                android:transitionGroup="true"
                 app:layout_marginBottomPercent="5%">
 
                 <ImageView
