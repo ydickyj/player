@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 
@@ -215,10 +216,18 @@ public class VisualizerView extends View {
             j++;
         }
         mBytes = model;
-
-        invalidate();// 重绘
+        invalidateView();// 重绘
     }
 
+    private void invalidateView() {
+        if (Looper.getMainLooper() == Looper.myLooper()) {
+            //  当前线程是主UI线程，直接刷新。
+            invalidate();
+        } else {
+            //  当前线程是非UI线程，post刷新。
+            postInvalidate();
+        }
+    }
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
@@ -241,7 +250,7 @@ public class VisualizerView extends View {
 
     }
 
-    @SuppressLint("DrawAllocation")
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

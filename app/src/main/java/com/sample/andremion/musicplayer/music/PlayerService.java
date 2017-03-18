@@ -345,7 +345,7 @@ public class PlayerService extends Service {
                                 vListener.updateView(waveform);
                             }
                         }
-                    }, Visualizer.getMaxCaptureRate() / 2, false, true);
+                    }, Visualizer.getMaxCaptureRate() / 2, true, true);
         }
         mVisualizer.setEnabled(true);
     }

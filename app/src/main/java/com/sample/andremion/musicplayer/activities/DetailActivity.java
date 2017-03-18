@@ -16,7 +16,9 @@
 
 package com.sample.andremion.musicplayer.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.util.Log;
@@ -46,6 +48,7 @@ import com.sample.andremion.musicplayer.view.ProgressView;
 import com.sample.andremion.musicplayer.view.TransitionAdapter;
 import com.sample.andremion.musicplayer.view.VisualizerView;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -81,6 +84,7 @@ public class DetailActivity extends PlayerActivity {
     SharedPreferences share;
     BottomDialog newBtn;
     VisualizerView mVisualizerView;
+    AudioManager mAudioManager;
     private int repSumClick = 0;
     private int ranSumClick = 0;
     private int defaults[] = {180, 150, 150, 150, 180};
@@ -90,12 +94,16 @@ public class DetailActivity extends PlayerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         share = getSharedPreferences("userData", MODE_PRIVATE);
-
+//音量控制,初始化定义
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//最大音量
+        int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+//当前音量
+        int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    @AfterViews
+    void afterView() {
         mVisualizerView = new VisualizerView(this);
         mVisualizerView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -134,6 +142,12 @@ public class DetailActivity extends PlayerActivity {
             }
         });
         initBottomDialog();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     @Background
