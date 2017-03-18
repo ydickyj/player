@@ -53,27 +53,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
-        }
-    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -112,8 +91,29 @@ public abstract class PlayerActivity extends AppCompatActivity {
             return false;
         }
     });
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
 
-    private void onUpdateProgress(int position, int duration, String name, String author, String Ablums) {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+//            Log.e("12312",""+mService);
+            mBound = true;
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
+        }
+    };
+
+    private void onUpdateProgress(int position, int duration, String name, String author, String albums) {
         if (mTimeView != null) {
             mTimeView.setText(Utils.IntToStrTime(position));
         }
@@ -128,10 +128,9 @@ public abstract class PlayerActivity extends AppCompatActivity {
         }
         if (mLyricView != null) {
             File lrcFile;
-            if (getCurrentName().length() < 4) {
-                lrcFile = null;
-            } else {
-//                Log.e("getCurrentName", "" + (getCurrentName().length()));
+            if (!(getCurrentName().length() < 4)) {
+
+                //                Log.e("getCurrentName", "" + (getCurrentName().length()));
                 lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, (name.length() - 4)) + ".lrc");
                 if (lrcFile.exists()) {
                     if (!Objects.equals(mOldName, lrcFile.getName())) {
@@ -154,13 +153,13 @@ public abstract class PlayerActivity extends AppCompatActivity {
             mName.setText(name);
         }
         if (mMusicCoverView != null) {
-            if (!Objects.equals(mOldAlbums, Ablums)) {
-                mOldAlbums = Ablums;
+            if (!Objects.equals(mOldAlbums, albums)) {
+                mOldAlbums = albums;
                 Matrix matrix = new Matrix();
                 matrix.postScale(6, 6);
-                Drawable img = Drawable.createFromPath(Ablums);
+                Drawable img = Drawable.createFromPath(albums);
                 if (img == null) {
-                    mMusicCoverView.setImageDrawable(getResources().getDrawable(R.drawable.album_cover_the_1975));
+                    mMusicCoverView.setImageDrawable(getResources().getDrawable(R.drawable.album_cover_the_1975, null));
                 } else {
                     mMusicCoverView.setImageDrawable(img);
                 }
@@ -177,7 +176,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 @Override
                 public void onProgressListener(boolean isFinish) {
                     if (isFinish) {
-//                        Log.e("playMode","isRepeat:"+isRepeat+" israndom：" +isRandom);
+//                        Log.e("playMode","isRepeat:"+isRepeat+" isRandom：" +isRandom);
                         if (isRepeat) {
                             mService.reMusic();
                         } else if (isRandom) {
@@ -290,15 +289,15 @@ public abstract class PlayerActivity extends AppCompatActivity {
         mService.setBandLevel(brand, progress);
     }
 
-    public List<Short> getReverbNames() {
+    public List<Short> getReverberationNames() {
         return mService.getReverbNames();
     }
 
-    public List<String> getReverbVals() {
+    public List<String> getReverberationVals() {
         return mService.getReverbVals();
     }
 
-    public void setPresetReverbPreset(int index) {
+    public void setPresetReverberationPreset(int index) {
         mService.setPresetReverbPreset(index);
     }
 

@@ -17,9 +17,8 @@
     <list default="true" id="f3a91c4c-6d7d-4410-87ec-9bd558730c2a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
     </list>
     <ignored path="player.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,15 +53,15 @@
       <file leaf-file-name="DetailActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+            <state relative-caret-position="278">
+              <caret line="328" column="37" selection-start-line="328" selection-start-column="37" selection-end-line="328" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#3948:4352" expanded="false" />
                 <element signature="e#4691#5002#0" expanded="true" />
                 <element signature="e#5001#5002#0" expanded="true" />
                 <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
-                <element signature="e#16240#16260#0" expanded="false" />
+                <element signature="e#16281#16301#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -71,8 +70,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="335" column="22" selection-start-line="335" selection-start-column="22" selection-end-line="335" selection-end-column="22" />
+            <state relative-caret-position="495">
+              <caret line="337" column="20" selection-start-line="337" selection-start-column="20" selection-end-line="337" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,13 +82,14 @@
       <file leaf-file-name="PlayerActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-421">
-              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+            <state relative-caret-position="446">
+              <caret line="292" column="32" selection-start-line="292" selection-start-column="32" selection-end-line="292" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2477#3846#0" expanded="true" />
-                <element signature="e#3845#3846#0" expanded="true" />
-                <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
+                <element signature="e#3218#4587#0" expanded="true" />
+                <element signature="e#4586#4587#0" expanded="true" />
+                <element signature="e#10436#10437#0" expanded="true" />
+                <element signature="e#10484#10485#0" expanded="true" />
                 <element signature="method#update#0;class#PlayerActivity#0" expanded="false" />
               </folding>
             </state>
@@ -119,6 +119,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MusicContent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/MusicContent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-191">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Pair.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-compat/24.2.1/support-compat-24.2.1-sources.jar!/android/support/v4/util/Pair.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -139,38 +149,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="328">
-              <caret line="61" column="55" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
+              <caret line="59" column="55" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlayerService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="343" column="52" selection-start-line="343" selection-start-column="52" selection-end-line="343" selection-end-column="52" />
+            <state relative-caret-position="474">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VisualizerView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2928">
-              <caret line="221" column="35" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
-              <folding>
-                <element signature="e#4808#4809#0" expanded="true" />
-                <element signature="e#4856#4857#0" expanded="true" />
-                <element signature="e#4965#4966#0" expanded="true" />
-                <element signature="e#4997#4998#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1907,12 +1903,12 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/view/VisualizerView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/MyHandler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/Utils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java" />
       </list>
     </option>
   </component>
@@ -2021,6 +2017,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="musicUtils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="musicplayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2583,7 +2601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489807163377</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="优化一些warn提示">
+      <created>1489808608553</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1489808608553</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2665,7 +2690,8 @@
     <MESSAGE value="完全实现均衡器功能，带测试。" />
     <MESSAGE value="增加动画待测试" />
     <MESSAGE value="不刷新问题已解决。" />
-    <option name="LAST_COMMIT_MESSAGE" value="不刷新问题已解决。" />
+    <MESSAGE value="优化一些warn提示" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化一些warn提示" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -2894,25 +2920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/MusicContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#2103#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1831#1832#0" expanded="false" />
-            <element signature="e#1868#1869#0" expanded="false" />
-            <element signature="e#1904#1905#0" expanded="false" />
-            <element signature="e#1941#1942#0" expanded="false" />
-            <element signature="e#1978#1979#0" expanded="false" />
-            <element signature="e#2016#2017#0" expanded="false" />
-            <element signature="e#2053#2054#0" expanded="false" />
-            <element signature="e#2093#2094#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/media/audiofx/Visualizer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -2940,10 +2947,10 @@
         <state relative-caret-position="158">
           <caret line="13968" column="16" selection-start-line="13968" selection-start-column="16" selection-end-line="13968" selection-end-column="16" />
           <folding>
-            <element signature="e#534592#534593#0" expanded="true" />
-            <element signature="e#534624#534625#0" expanded="true" />
-            <element signature="e#551268#551269#0" expanded="true" />
-            <element signature="e#551308#551309#0" expanded="true" />
+            <element signature="e#534592#534593#0" expanded="false" />
+            <element signature="e#534624#534625#0" expanded="false" />
+            <element signature="e#551268#551269#0" expanded="false" />
+            <element signature="e#551308#551309#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3015,16 +3022,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="343" column="52" selection-start-line="343" selection-start-column="52" selection-end-line="343" selection-end-column="52" />
-          <folding>
-            <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-24/android/content/res/Resources.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
@@ -3033,36 +3030,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#3948:4352" expanded="false" />
-            <element signature="e#4691#5002#0" expanded="true" />
-            <element signature="e#5001#5002#0" expanded="true" />
-            <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
-            <element signature="e#16240#16260#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-compat/24.2.1/support-compat-24.2.1-sources.jar!/android/support/v4/util/Pair.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="335" column="22" selection-start-line="335" selection-start-column="22" selection-end-line="335" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3101,25 +3073,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-421">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+        <state relative-caret-position="328">
+          <caret line="59" column="55" selection-start-line="59" selection-start-column="55" selection-end-line="59" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/MusicContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-191">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="337" column="20" selection-start-line="337" selection-start-column="20" selection-end-line="337" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2477#3846#0" expanded="true" />
-            <element signature="e#3845#3846#0" expanded="true" />
-            <element signature="method#onUpdateProgress#0;class#PlayerActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/DetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="328" column="37" selection-start-line="328" selection-start-column="37" selection-end-line="328" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#3948:4352" expanded="false" />
+            <element signature="e#4691#5002#0" expanded="true" />
+            <element signature="e#5001#5002#0" expanded="true" />
+            <element signature="method#saveBandPositionData#0;class#DetailActivity#0" expanded="false" />
+            <element signature="e#16281#16301#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/activities/PlayerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="292" column="32" selection-start-line="292" selection-start-column="32" selection-end-line="292" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3218#4587#0" expanded="true" />
+            <element signature="e#4586#4587#0" expanded="true" />
+            <element signature="e#10436#10437#0" expanded="true" />
+            <element signature="e#10484#10485#0" expanded="true" />
             <element signature="method#update#0;class#PlayerActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/musicUtils/Utils.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sample/andremion/musicplayer/music/PlayerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="61" column="55" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
-          <folding />
+        <state relative-caret-position="474">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getMusicAlbums#0;class#PlayerService#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

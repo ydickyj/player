@@ -290,7 +290,7 @@ public class DetailActivity extends PlayerActivity {
             }
         });
         mSwitch.setChecked(getEqualizerEnabled());
-        mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverbVals()));
+        mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverberationVals()));
 //        mSpinner.setAdapter(new SimpleAdapter(this,listems,R.layout.mixer_sp_item,new String[]{"name"},new int[]{R.id.tv_spinner}));
         final NumberProgressBar bassProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_bar_bass);
         int eqMax = getEqualizerMax();
@@ -326,11 +326,11 @@ public class DetailActivity extends PlayerActivity {
         altProgress.setProgress(getBandLevel((short) 4));
 
         mSpinner.setSelection(position);
-        setPresetReverbPreset(getReverbNames().get(position));
+        setPresetReverberationPreset(getReverberationNames().get(position));
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setPresetReverbPreset(getReverbNames().get(position));
+                setPresetReverberationPreset(getReverberationNames().get(position));
                 SharedPreferences.Editor edit = share.edit(); //编辑文件
                 edit.putInt("spinner", position);         //根据键值对添加数据
                 edit.apply();  //保存数据信息
