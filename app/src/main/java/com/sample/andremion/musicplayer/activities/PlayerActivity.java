@@ -331,15 +331,5 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     }
 
-    boolean isFolderExists(String strFolder) {
-        File file = new File(strFolder);
-        if (!file.exists()) {
-            if (file.mkdirs()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
+
 }
