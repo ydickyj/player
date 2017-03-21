@@ -27,8 +27,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -52,27 +50,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
-        }
-    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -111,6 +88,27 @@ public abstract class PlayerActivity extends AppCompatActivity {
             return false;
         }
     });
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+//            Log.e("12312",""+mService);
+            mBound = true;
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
+        }
+    };
 
     private void onUpdateProgress(int position, int duration, String name, String author, String albums) {
         if (mTimeView != null) {
@@ -196,7 +194,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Bind to PlayerService
         Intent intent = new Intent(PlayerActivity.this, PlayerService.class);
@@ -204,7 +202,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void setContentView(@LayoutRes int layoutResID) {
+    public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         mTimeView = (TextView) findViewById(R.id.time);
         mDurationView = (TextView) findViewById(R.id.duration);
@@ -332,4 +330,17 @@ public abstract class PlayerActivity extends AppCompatActivity {
     }
 
 
+    boolean isFolderExists(String strFolder) {
+        File file = new File(strFolder);
+        if (!file.exists()) {
+            if (file.mkdirs()) {
+                return true;
+            } else {
+                return false;
+
+            }
+        }
+        return true;
+
+    }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:duration="@integer/anim_duration_default"
     android:interpolator="@android:interpolator/accelerate_quad">
 
@@ -10,9 +9,7 @@
         <changeTransform />
         <changeClipBounds />
         <changeImageTransform />
-        <transition
-            class="com.sample.andremion.musicplayer.transition.ProgressViewTransition"
-            app:morph="1" />
+
         <targets>
             <target android:targetId="@id/progress" />
         </targets>
@@ -23,9 +20,7 @@
         <changeTransform />
         <changeClipBounds />
         <changeImageTransform />
-        <transition
-            class="com.andremion.music.MusicCoverViewTransition"
-            app:shape="circle" />
+
         <targets>
             <target android:targetId="@id/cover" />
         </targets>

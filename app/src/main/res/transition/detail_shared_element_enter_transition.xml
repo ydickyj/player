@@ -3,10 +3,7 @@
     android:duration="@integer/anim_duration_default"
     android:interpolator="@android:interpolator/accelerate_quad">
 
-    <!--Progress-->
-    <transition class="com.sample.andremion.musicplayer.transition.ProgressViewTransition" />
-    <!--Cover-->
-    <transition class="com.andremion.music.MusicCoverViewTransition" />
+
     <!--Others-->
     <transitionSet>
         <changeBounds />

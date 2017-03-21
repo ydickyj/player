@@ -11,10 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.util.Pair;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -235,14 +232,15 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Click
     public void fab(View view) {
         //noinspection unchecked
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-//                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
-                new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
-                new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
-                new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
-//                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)),
-                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)));
-        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
+//        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+////                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
+//                new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
+//                new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
+//                new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
+////                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)),
+//                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)));
+//        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
+        startActivity(new Intent(this, DetailActivity_.class));
     }
 
     @Click(R.id.btn_refresh)
