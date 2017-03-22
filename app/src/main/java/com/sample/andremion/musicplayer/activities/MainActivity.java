@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -19,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.broadcastReceiver.MyFirstReceiver;
@@ -73,6 +75,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @ViewById
     TextView tvCounter;
     private int intentIndex = -1;
+    private boolean notNeedWaitServer = false;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
@@ -95,6 +98,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Override
     protected void onResume() {
         super.onResume();
+        notNeedWaitServer = false;
         onResumeUpdate();
     }
 
@@ -256,7 +260,13 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 ////                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)),
 //                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)));
 //        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
-        startActivity(new Intent(this, DetailActivity_.class));
+        if (mListMedia.size() != 0) {
+            notNeedWaitServer = true;
+            startActivity(new Intent(this, DetailActivity_.class));
+        } else {
+            Toast.makeText(this, "media list is null", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Click(R.id.btn_refresh)
@@ -281,24 +291,35 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             return;
         }
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        ArrayList<String> strListMusic = Utils.folderScan(filePath);
+        String storagePath = "/storage";
+        final ArrayList<String> strListMusic = Utils.folderScan(filePath);
+        final ArrayList<String> strStorageListMusic = Utils.folderScan(storagePath);
+        strListMusic.addAll(strStorageListMusic);
         Log.e("音乐列表长度", "" + strListMusic.size());
         if (strListMusic.size() != 0) {
-
+            final String[] mStr = new String[strListMusic.size()];
             for (int i = 0; i < strListMusic.size(); i++) {
                 if (!pDialog.isShowing()) {
                     return;
                 }
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + strListMusic.get(i))));
+                mStr[i] = strListMusic.get(i);
             }
-            try {
-                Thread.sleep(100 * (strListMusic.size()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            final int[] completedSum = {0};
+            MediaScannerConnection.scanFile(this, mStr, null, new MediaScannerConnection.OnScanCompletedListener() {
+                @Override
+                public void onScanCompleted(String path, Uri uri) {
+                    if (!pDialog.isShowing()) {
+                        return;
+                    }
+                    completedSum[0]++;
+                    if (completedSum[0] == mStr.length) {
+                        Log.e(TAG, "scanFlag: " + completedSum[0]);
+                        sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
+                    }
+                    Log.e(TAG, path);
+                }
+            });
 
-            Log.e(TAG, "scanFlag");
-            sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
         } else {
             mListMedia.clear();
             update();
@@ -308,6 +329,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Background
     void bindService() {
         while (!mBound) {
+            if (notNeedWaitServer) {
+                return;
+            }
             Log.e("wait", "等待服务初始化完毕");
         }
         update(mListMedia, 0);

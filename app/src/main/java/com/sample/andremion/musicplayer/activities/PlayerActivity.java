@@ -50,6 +50,27 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+//            Log.e("12312",""+mService);
+            mBound = true;
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
+        }
+    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -88,27 +109,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
             return false;
         }
     });
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
-        }
-    };
 
     private void onUpdateProgress(int position, int duration, String name, String author, String albums) {
         if (mTimeView != null) {
@@ -129,9 +129,9 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
                 //                Log.e("getCurrentName", "" + (getCurrentName().length()));
 
-                isFolderExists(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/");
+                isFolderExists(Environment.getExternalStorageDirectory().toString() + "/Music/");
 
-                lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/Lrc/" + name.substring(0, (name.length() - 4)) + ".lrc");
+                lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/" + name.substring(0, (name.length() - 4)) + ".lrc");
                 if (lrcFile.exists()) {
                     if (!Objects.equals(mOldName, lrcFile.getName())) {
                         Log.e("TAG", "setLyricFile");

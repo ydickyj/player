@@ -143,7 +143,8 @@ public class BottomDialog extends BaseBottomDialog {
 
     public BaseBottomDialog show() {
         Log.e(mTag, "dialog isAdded: " + this.isAdded());
-        if ((!this.isAdded() || !this.isVisible()) && !dialogIsAdded) {
+        if (!this.isAdded() && !dialogIsAdded) {
+            Log.e(mTag, "dialog isAdded: " + this.isAdded());
             dialogIsAdded = true;
             show(mFragmentManager, getFragmentTag());
         }

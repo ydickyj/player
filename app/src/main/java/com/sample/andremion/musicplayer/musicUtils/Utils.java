@@ -2,9 +2,7 @@ package com.sample.andremion.musicplayer.musicUtils;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -20,7 +18,6 @@ import java.util.Random;
 
 /**
  * Created by Administrator on 2017/2/28.
- *
  */
 
 public class Utils {
@@ -31,7 +28,7 @@ public class Utils {
         Log.e(TAG, "扫描类");
         Cursor cursor = null;
         List<MediaEntity> mediaList = new ArrayList<MediaEntity>();
-        MediaScannerConnection.scanFile(context, new String[]{Environment.getExternalStorageDirectory().getPath()}, null, null);
+
         try {
             cursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     new String[]{
@@ -45,7 +42,7 @@ public class Utils {
                             MediaStore.Audio.Media.ALBUM_ID
                     },
                     selection, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
-            if(cursor == null) {
+            if (cursor == null) {
                 Log.e(TAG, "The getMediaList cursor is null.");
                 return mediaList;
             }
@@ -72,7 +69,8 @@ public class Utils {
                 }
                 mediaEntity.artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                 mediaEntity.path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                mediaEntity.albums = getAlbumArt(context,cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+                Log.e(TAG, "PATH:" + mediaEntity.path);
+                mediaEntity.albums = getAlbumArt(context, cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
                 mediaList.add(mediaEntity);
             }
         } catch (Exception e) {
@@ -119,17 +117,18 @@ public class Utils {
         return format.format(date);
     }
 
-    public static ArrayList<String>folderScan(String path) {
+    public static ArrayList<String> folderScan(String path) {
         ArrayList<String> mStrList;
         mStrList = new ArrayList<>();
         File file = new File(path);
         if (file.exists() && file.isDirectory()) {
             File[] array = new File[]{};
             try {
-                 array = file.listFiles();
+                array = file.listFiles();
             } catch (Exception e) {
                 Log.e(TAG, "" + e);
             }
+            if (array != null) {
                 for (File f : array) {
                     if (f.isFile()) {//FILE TYPE
                         String name = f.getName();
@@ -141,12 +140,12 @@ public class Utils {
                         mStrList.addAll(folderScan(f.getAbsolutePath()));
                     }
                 }
+            }
         }
         return mStrList;
     }
 
     /**
-     *
      * 功能 通过album_id查找 album_art 如果找不到返回null
      *
      * @param album_id
@@ -154,7 +153,7 @@ public class Utils {
      */
     private static String getAlbumArt(Context mContext, int album_id) {
         String mUriAlbums = "content://media/external/audio/albums";
-        String[] projection = new String[] { "album_art" };
+        String[] projection = new String[]{"album_art"};
         Cursor cur = mContext.getContentResolver().query(
                 Uri.parse(mUriAlbums + "/" + Integer.toString(album_id)),
                 projection, null, null, null);
@@ -168,19 +167,19 @@ public class Utils {
         return album_art;
     }
 
-         public static String replaceSpace(StringBuffer str) {
-                 String str1=str.toString();
-                char[] charArray = str1.toCharArray();
-                StringBuilder sBuilder = new StringBuilder();
-                for (char c : charArray) {
-                         if(c==' ') {
-                             sBuilder.append("%20");
-                            }else {
-                                sBuilder.append(c);
-                            }
-                    }
-             return sBuilder.toString();
+    public static String replaceSpace(StringBuffer str) {
+        String str1 = str.toString();
+        char[] charArray = str1.toCharArray();
+        StringBuilder sBuilder = new StringBuilder();
+        for (char c : charArray) {
+            if (c == ' ') {
+                sBuilder.append("%20");
+            } else {
+                sBuilder.append(c);
             }
+        }
+        return sBuilder.toString();
+    }
 
     public int getRandom(int inMax, int inMin) {
         Random random = new Random();

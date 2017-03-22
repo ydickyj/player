@@ -487,7 +487,7 @@ public class PlayerService extends Service {
             // 获取系统支持的所有预设音场
             for (short i = 0; i < mEqualizer.getNumberOfPresets(); i++) {
                 if (Objects.equals(mEqualizer.getPresetName(i), "Jazz") || Objects.equals(mEqualizer.getPresetName(i), "Pop") || Objects.equals(mEqualizer.getPresetName(i), "Rock")) {
-                    Log.e(TAG, "bad parameter value");
+//                    Log.e(TAG, "bad parameter value");
                 } else {
                     reverbNames.add(i);
                 }
