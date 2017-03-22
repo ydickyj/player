@@ -12,6 +12,7 @@
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/album_cover_daft_punk"
+        android:tag="music_image"
         app:layout_heightPercent="40%" />
 
 
@@ -51,13 +52,14 @@
                 tools:text="02:30" />
 
             <com.sample.andremion.musicplayer.view.ProgressView
+
                 android:id="@+id/progress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/inner_padding"
                 android:layout_marginStart="@dimen/inner_padding"
                 android:layout_weight="1"
-                android:transitionName="@string/transition_name_progress" />
+                android:tag="@string/transition_name_progress" />
 
             <TextView
                 android:id="@+id/duration"
@@ -113,6 +115,7 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+
         android:id="@+id/tracks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -50,8 +50,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     public RecyclerViewAdapter mAdapter;
     public boolean onCreate = false;
     String TAG = "MainActivity";
-    //    @ViewById(R.id.music_cover)
-//    View mCoverView;
+    @ViewById(R.id.main_music_cover)
+    View mCoverView;
     @ViewById(R.id.title)
     View mTitleView;
     @ViewById(R.id.time)
@@ -123,6 +123,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             }
         });
         recyclerView.setAdapter(mAdapter);
+
         onCreate = true;
         checkPermission();
     }
@@ -150,6 +151,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @Background
     void scanMusicFile() {
+        if (!pDialog.isShowing()) {
+            return;
+        }
         Log.e(TAG, "扫描中");
         mListMedia.clear();
         mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
@@ -162,6 +166,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                 path = path.substring(7, path.length());
                 File mFile = new File(path);
                 for (int i = 0; i < mListMedia.size(); i++) {
+                    if (!pDialog.isShowing()) {
+                        return;
+                    }
                     if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
                         intentIndex = i;
                         break;
@@ -177,6 +184,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                     mListMedia.clear();
                     mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
                     for (int i = 0; i < mListMedia.size(); i++) {
+                        if (!pDialog.isShowing()) {
+                            return;
+                        }
                         if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
                             intentIndex = i;
                             break;
@@ -191,7 +201,13 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         if (!onCreate) {
             ArrayList<MediaEntity> temporaryList = new ArrayList<>();
             for (int i = 0; i < mListMedia.size(); i++) {
+                if (!pDialog.isShowing()) {
+                    return;
+                }
                 for (int a = 0; a < mListScreen.size(); a++) {
+                    if (!pDialog.isShowing()) {
+                        return;
+                    }
                     if (Objects.equals(mListMedia.get(i).getPath(), mListScreen.get(a))) {
                         temporaryList.add(mListMedia.get(i));
                         break;
@@ -261,11 +277,18 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @Background
     public void scanSdCard() {
+        if (!pDialog.isShowing()) {
+            return;
+        }
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
         ArrayList<String> strListMusic = Utils.folderScan(filePath);
         Log.e("音乐列表长度", "" + strListMusic.size());
         if (strListMusic.size() != 0) {
+
             for (int i = 0; i < strListMusic.size(); i++) {
+                if (!pDialog.isShowing()) {
+                    return;
+                }
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + strListMusic.get(i))));
             }
             try {
@@ -273,9 +296,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (!pDialog.isShowing()) {
-                return;
-            }
+
             Log.e(TAG, "scanFlag");
             sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
         } else {
@@ -294,6 +315,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.e(TAG, "keyCode: " + keyCode + " KeyEvent: " + event.getAction());
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Are you sure?")
@@ -316,6 +338,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                         }
                     })
                     .show();
+        } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+            btnRefresh.requestFocus();
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -331,5 +355,6 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             bindService();
         }
         startActivity(new Intent(this, DetailActivity_.class));
+//        KShareViewActivityManager.getInstance(MainActivity.this).startActivity(this, DetailActivity_.class,R.layout.content_list,R.layout.content_detail, mProgressView);
     }
 }

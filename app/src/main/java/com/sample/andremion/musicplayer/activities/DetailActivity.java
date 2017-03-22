@@ -86,6 +86,7 @@ public class DetailActivity extends PlayerActivity {
     private int ranSumClick = 0;
     private int defaults[] = {180, 150, 150, 150, 180};
     private boolean finishInitDialog = false;
+    private boolean isBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,9 @@ public class DetailActivity extends PlayerActivity {
 
     @Background
     void initBottomDialog() {
+        if (isBackPressed) {
+            return;
+        }
         finishInitDialog = false;
         newBtn = BottomDialog.create(getSupportFragmentManager()).setLayoutRes(R.layout.mixer_dialog);
         newBtn.setKeyListener(new DialogListener() {
@@ -163,6 +167,9 @@ public class DetailActivity extends PlayerActivity {
     @Background
     void bindService() {
         while (!mBound) {
+            if (isBackPressed) {
+                return;
+            }
             Log.e("wait", "等待服务初始化完毕");
         }
         play();
@@ -179,6 +186,7 @@ public class DetailActivity extends PlayerActivity {
 
     @Override
     public void onBackPressed() {
+        isBackPressed = true;
         onFabClick(null);
     }
 
@@ -256,13 +264,14 @@ public class DetailActivity extends PlayerActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
                 if (finishInitDialog) {
-                    newBtn.show();
+                    if (!newBtn.isVisible()) {
+                        newBtn.show();
+                    }
                 } else {
                     Toast.makeText(this, "mixer is loading,please try again...", Toast.LENGTH_LONG).show();
                 }
                 break;
             case KeyEvent.KEYCODE_BACK:
-                newBtn.onDestroyView();
                 break;
         }
         return super.onKeyDown(keyCode, event);
@@ -275,9 +284,14 @@ public class DetailActivity extends PlayerActivity {
     }
 
     private void initView(View v) {
-
+        if (isBackPressed) {
+            return;
+        }
         int position = share.getInt("spinner", 0);
         for (int i = 0; i < 5; i++) {
+            if (isBackPressed) {
+                return;
+            }
             int bandPosition = share.getInt("band" + i, -1);
             if (bandPosition != -1) {
                 setBandLevel((short) i, bandPosition);
@@ -288,8 +302,10 @@ public class DetailActivity extends PlayerActivity {
                 edit.apply();  //保存数据信息
             }
         }
+        if (isBackPressed) {
+            return;
+        }
         Spinner mSpinner = (Spinner) v.findViewById(R.id.mixer_sp);
-
         Switch mSwitch = (Switch) v.findViewById(R.id.switch_eq);
         Button mResetBtn = (Button) v.findViewById(R.id.reset_btn);
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -298,6 +314,9 @@ public class DetailActivity extends PlayerActivity {
                 setEqualizerEnabled(isChecked);
             }
         });
+        if (isBackPressed) {
+            return;
+        }
         mSwitch.setChecked(getEqualizerEnabled());
         mSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getReverberationVals()));
 //        mSpinner.setAdapter(new SimpleAdapter(this,listems,R.layout.mixer_sp_item,new String[]{"name"},new int[]{R.id.tv_spinner}));
@@ -315,6 +334,7 @@ public class DetailActivity extends PlayerActivity {
         Button mediumReduceBtn = (Button) v.findViewById(R.id.reduce_button_medium_bass);
         mediumProgress.setMax(getEqualizerMax());
         mediumProgress.setProgress(getBandLevel((short) 1));
+
 
         final NumberProgressBar mediantProgress = (NumberProgressBar) v.findViewById(R.id.number_progress_mediant);
         Button mediantAddBtn = (Button) v.findViewById(R.id.add_button_mediant);
@@ -334,6 +354,9 @@ public class DetailActivity extends PlayerActivity {
         altProgress.setMax(getEqualizerMax());
         altProgress.setProgress(getBandLevel((short) 4));
 
+        if (isBackPressed) {
+            return;
+        }
         mSpinner.setSelection(position);
         setPresetReverberationPreset(getReverberationNames().get(position));
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -482,6 +505,9 @@ public class DetailActivity extends PlayerActivity {
             }
         });
 
+        if (isBackPressed) {
+            return;
+        }
 //        mediant音段按钮
 //        mediantAddBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -564,6 +590,7 @@ public class DetailActivity extends PlayerActivity {
 //                setBandLevel((short) 3, newPosition);
 //            }
 //        });
+
         msAddBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -629,6 +656,9 @@ public class DetailActivity extends PlayerActivity {
 //                setBandLevel((short) 4, newPosition);
 //            }
 //        });
+        if (isBackPressed) {
+            return;
+        }
         altAddBtn.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {

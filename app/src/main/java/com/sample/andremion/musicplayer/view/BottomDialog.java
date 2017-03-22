@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.sample.andremion.musicplayer.listener.DialogListener;
 import me.shaohui.bottomdialog.BaseBottomDialog;
 
 /**
- * Created by shaohui on 16/10/11.
+ * Created by  on 16/10/11.
  */
 
 public class BottomDialog extends BaseBottomDialog {
@@ -23,6 +24,7 @@ public class BottomDialog extends BaseBottomDialog {
     private static final String KEY_HEIGHT = "bottom_height";
     private static final String KEY_DIM = "bottom_dim";
     private static final String KEY_CANCEL_OUTSIDE = "bottom_cancel_outside";
+    private boolean dialogIsAdded = false;
 
     private FragmentManager mFragmentManager;
 
@@ -140,7 +142,11 @@ public class BottomDialog extends BaseBottomDialog {
     }
 
     public BaseBottomDialog show() {
-        show(mFragmentManager, getFragmentTag());
+        Log.e(mTag, "dialog isAdded: " + this.isAdded());
+        if ((!this.isAdded() || !this.isVisible()) && !dialogIsAdded) {
+            dialogIsAdded = true;
+            show(mFragmentManager, getFragmentTag());
+        }
         return this;
     }
 
@@ -152,13 +158,13 @@ public class BottomDialog extends BaseBottomDialog {
                 if (mDialogListener != null) {
                     mDialogListener.onKey(event, keyCode);
                 }
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    dialogIsAdded = false;
+                }
                 return false;
             }
         });
-
         return super.onCreateView(inflater, container, savedInstanceState);
-
-
     }
 
     public interface ViewListener {

@@ -59,6 +59,7 @@ public class Utils {
             MediaEntity mediaEntity = null;
 //          String[] columns = cursor.getColumnNames();
             while (cursor.moveToNext()) {
+
                 mediaEntity = new MediaEntity();
                 mediaEntity.id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
                 mediaEntity.title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
