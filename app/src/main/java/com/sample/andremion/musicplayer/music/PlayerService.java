@@ -225,7 +225,7 @@ public class PlayerService extends Service {
     }
 
     public void preMusic() {
-        if (mMediaPlayerIsReady && musicIndex > 0) {
+        if (mMediaPlayerIsReady && musicIndex >= 0) {
             mp.stop();
             try {
                 mp.reset();
@@ -234,7 +234,6 @@ public class PlayerService extends Service {
                     musicIndex = 0;
                 }
                 mp.setDataSource(mListMedia.get(musicIndex).getPath());
-
                 mp.prepare();
                 mp.seekTo(0);
                 mp.start();

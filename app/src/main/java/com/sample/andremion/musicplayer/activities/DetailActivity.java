@@ -75,6 +75,10 @@ public class DetailActivity extends PlayerActivity {
     ImageView repeat;
     @ViewById
     ImageView shuffle;
+    @ViewById(R.id.rewind)
+    ImageView rewind;
+    @ViewById(R.id.forward)
+    ImageView forward;
     @ViewById
     LinearLayout ll;
     //指定操作的文件名称
@@ -129,6 +133,45 @@ public class DetailActivity extends PlayerActivity {
             bindService();
         }
         initBottomDialog();
+        final boolean[] isOneClicked = {false, false};
+        rewind.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.e(TAG, "keyCode" + keyCode + " event" + event.toString());
+                if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    if (!isOneClicked[0]) {
+                        rewindMusic();
+                        isOneClicked[0] = false;
+                    } else {
+                        rewindMusic();
+                        isOneClicked[0] = false;
+                    }
+                    return true;
+                } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    isOneClicked[0] = true;
+                }
+                return false;
+            }
+        });
+        forward.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.e(TAG, "keyCode" + keyCode + " event" + event.toString());
+                if (event.getAction() == ACTION_DOWN && keyCode == KEYCODE_DPAD_CENTER) {
+                    if (!isOneClicked[1]) {
+                        forwardMusic();
+                        isOneClicked[1] = false;
+                    } else {
+                        forwardMusic();
+                        isOneClicked[1] = false;
+                    }
+                    return true;
+                } else if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KEYCODE_DPAD_CENTER) {
+                    isOneClicked[1] = true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -152,6 +195,8 @@ public class DetailActivity extends PlayerActivity {
                     for (int i = 0; i < 5; i++) {
                         saveBandPositionData(i);
                     }
+                    newBtn.dismiss();
+                    initBottomDialog();
                 }
             }
         });
@@ -261,8 +306,10 @@ public class DetailActivity extends PlayerActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.e(TAG, "keyCode" + keyCode + " event" + event.toString());
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
+
                 if (finishInitDialog) {
                     if (!newBtn.isVisible()) {
                         newBtn.show();
