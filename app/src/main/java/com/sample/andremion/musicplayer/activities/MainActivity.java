@@ -76,6 +76,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     TextView tvCounter;
     private int intentIndex = -1;
     private boolean notNeedWaitServer = false;
+    private boolean isScanOver = false;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
     private List<MediaEntity> mListMedia = new ArrayList<>();
@@ -98,6 +99,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Override
     protected void onResume() {
         super.onResume();
+        isScanOver = false;
         notNeedWaitServer = false;
         onResumeUpdate();
     }
@@ -168,7 +170,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                 String path = URLDecoder.decode(intent.getDataString(), "utf-8");//关键啊 ！
                 Log.e("ACTION_VIEW", path);
                 path = path.substring(7, path.length());
-                File mFile = new File(path);
+                final File mFile = new File(path);
                 for (int i = 0; i < mListMedia.size(); i++) {
                     if (!pDialog.isShowing()) {
                         return;
@@ -179,23 +181,25 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                     }
                 }
                 if (intentIndex == -1) {
-                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(URLDecoder.decode(intent.getDataString(), "utf-8"))));
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    mListMedia.clear();
-                    mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
-                    for (int i = 0; i < mListMedia.size(); i++) {
-                        if (!pDialog.isShowing()) {
-                            return;
+                    MediaScannerConnection.scanFile(this, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                        @Override
+                        public void onScanCompleted(String path, Uri uri) {
+                            if (!pDialog.isShowing()) {
+                                return;
+                            }
+                            mListMedia.clear();
+                            mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
+                            for (int i = 0; i < mListMedia.size(); i++) {
+                                if (!pDialog.isShowing()) {
+                                    return;
+                                }
+                                if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                                    intentIndex = i;
+                                    break;
+                                }
+                            }
                         }
-                        if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
-                            intentIndex = i;
-                            break;
-                        }
-                    }
+                    });
                     Log.e("your 被我解决了吧", "" + intentIndex);
                 }
             } catch (UnsupportedEncodingException e) {
@@ -242,9 +246,10 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         if (pDialog.isShowing()) {
             pDialog.dismissWithAnimation();
         }
-        if (intentIndex != -1) {
+        if (intentIndex != -1 && !isScanOver) {
             update(mListMedia, intentIndex);
             intentIndex = -1;
+            isScanOver = false;
             fab(null);
         }
     }
@@ -272,6 +277,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @Click(R.id.btn_refresh)
     void btnRefresh() {
         Log.e(TAG, "点击");
+        isScanOver = true;
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Loading");
         pDialog.setCancelable(true);
@@ -317,6 +323,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                         sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
                     }
                     Log.e(TAG, path);
+
                 }
             });
 
