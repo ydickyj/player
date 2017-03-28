@@ -20,4 +20,6 @@
     <color name="mixer_equalizer_adjust_btn_pressed_stroke">#5fff4405</color>
     <color name="mixer_equalizer_adjust_btn_clicked">#01a8fa</color>
     <color name="mixer_equalizer_adjust_btn_clicked_stroke">#5f01a8fa</color>
+
+
 </resources>

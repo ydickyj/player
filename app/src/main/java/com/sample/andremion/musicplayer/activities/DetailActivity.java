@@ -81,6 +81,9 @@ public class DetailActivity extends PlayerActivity {
     ImageView forward;
     @ViewById
     LinearLayout ll;
+    @ViewById(R.id.stop)
+    ImageView stop;
+
     //指定操作的文件名称
     SharedPreferences share;
     BottomDialog newBtn;
@@ -91,6 +94,7 @@ public class DetailActivity extends PlayerActivity {
     private int defaults[] = {180, 150, 150, 150, 180};
     private boolean finishInitDialog = false;
     private boolean isBackPressed = false;
+    private boolean isPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,6 +247,19 @@ public class DetailActivity extends PlayerActivity {
         pause();
         supportFinishAfterTransition();
 //        mCoverView.stop();
+    }
+
+    @Click(R.id.stop)
+    void stop() {
+        if (!isPause) {
+            pause();
+            isPause = true;
+            stop.setImageDrawable(getResources().getDrawable(R.drawable.start));
+        } else {
+            play();
+            isPause = false;
+            stop.setImageDrawable(getResources().getDrawable(R.drawable.stop));
+        }
     }
 
     @Click(R.id.repeat)

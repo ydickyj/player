@@ -161,7 +161,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         Log.e(TAG, "扫描中");
         mListMedia.clear();
         mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
-        if (getIntent().getDataString() != null && onCreate) {
+        if (getIntent().getDataString() != null) {
             Intent intent = getIntent();
             intent.getDataString();
             try {

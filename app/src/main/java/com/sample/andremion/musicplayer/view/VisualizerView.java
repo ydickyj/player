@@ -41,7 +41,7 @@ public class VisualizerView extends View {
     List<Boll> mDrageBolls;// 所有处于拉伸状态的的小球
     private byte[] mBytes;// 波形数组
     private Paint mPaint = new Paint();// 主画笔
-    private int mSpectrumNum = 7;// 取样数
+    private int mSpectrumNum = 10;// 取样数
     private int Padding = 100;// 左右边距
     private int R = 120;
     private int RcenterX;
@@ -49,7 +49,7 @@ public class VisualizerView extends View {
     private int Rm = 5;// 顶部小圆半径
     private int r;// 动态圆半径
     private int r1;// 底部圆半径
-    private int mOnBallHeight = 70;// 触发弹射小球的高度
+    private int mOnBallHeight = 10;// 触发弹射小球的高度
     /**
      * 所有 波浪的参数
      */
@@ -268,9 +268,11 @@ public class VisualizerView extends View {
 
         // 绘制频谱
         for (int i = 0; i < mSpectrumNum; i++) {
-            if (mBytes[i] < 0) {
-                mBytes[i] = 127;
-            }
+//            int a = i*2;
+//            mBytes[i] = mBytes[a];
+//            if (mBytes[i] < 0) {
+//                mBytes[i] = 127;
+//            }
 
             int centerX = baseX * i + r + Padding;
 

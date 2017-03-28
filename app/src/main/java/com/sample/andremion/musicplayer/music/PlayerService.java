@@ -173,7 +173,8 @@ public class PlayerService extends Service {
             try {
                 mp.reset();
                 if (mListMedia.size() == 1 || (musicIndex + 1) == mListMedia.size()) {
-                    mp.setDataSource(mListMedia.get(0).getPath());
+                    musicIndex = 0;
+                    mp.setDataSource(mListMedia.get(musicIndex).getPath());
                 } else {
                     musicIndex++;
                     mp.setDataSource(mListMedia.get(musicIndex).getPath());
@@ -303,8 +304,8 @@ public class PlayerService extends Service {
         if (mMediaPlayerIsReady) {
             mVisualizer = new Visualizer(mp.getAudioSessionId());
 
-            //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
-            mVisualizer.setCaptureSize(256);
+            //Visualizer.getCaptureSizeRange()[1] 设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。
+            mVisualizer.setCaptureSize(64);
             // 为mVisualizer设置监听器
         /*
          * Visualizer.setDataCaptureListener(OnDataCaptureListener listener, int rate, boolean waveform, boolean fft
@@ -335,7 +336,7 @@ public class PlayerService extends Service {
                                 vListener.updateView(waveform);
                             }
                         }
-                    }, Visualizer.getMaxCaptureRate() / 2, true, true);
+                    }, Visualizer.getMaxCaptureRate(), false, true);
         }
         mVisualizer.setEnabled(true);
     }
