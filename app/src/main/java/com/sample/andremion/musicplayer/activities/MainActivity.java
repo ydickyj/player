@@ -13,22 +13,20 @@ import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sample.andremion.musicplayer.R;
 import com.sample.andremion.musicplayer.broadcastReceiver.MyFirstReceiver;
 import com.sample.andremion.musicplayer.listener.MyItemClickListener;
-import com.sample.andremion.musicplayer.listener.MyItemOnFocusChangeListener;
 import com.sample.andremion.musicplayer.model.MediaEntity;
 import com.sample.andremion.musicplayer.musicUtils.Utils;
-import com.sample.andremion.musicplayer.view.RecyclerViewAdapter;
+import com.sample.andremion.musicplayer.view.ListViewAdapter;
 import com.sample.andremion.musicplayer.view.sweetAlertDialog.SweetAlertDialog;
 
 import org.androidannotations.annotations.AfterViews;
@@ -49,7 +47,7 @@ import java.util.Objects;
 @EActivity(R.layout.content_list)
 public class MainActivity extends PlayerActivity implements MyItemClickListener {
     private final static int REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE = 0x123;
-    public RecyclerViewAdapter mAdapter;
+    public ListViewAdapter mAdapter;
     public boolean onCreate = false;
     String TAG = "MainActivity";
     @ViewById(R.id.main_music_cover)
@@ -65,7 +63,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @ViewById(R.id.fab)
     View mFabView;
     @ViewById(R.id.tracks)
-    RecyclerView recyclerView;
+    ListView recyclerView;
     @ViewById
     TextView displayName;
     @ViewById
@@ -113,22 +111,20 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         mFabView.setFocusable(true);
         btnRefresh.setFocusable(true);
         btnRefresh.setFocusableInTouchMode(true);
+
+
         assert recyclerView != null;
         // improve performance if you know that changes in content do not change the size of the RecyclerView
         //如果确定每个item的内容不会改变RecyclerView的大小，设置这个选项可以提高性能
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new RecyclerViewAdapter(mListMedia);
+//        recyclerView.setHasFixedSize(true);
+//        LinearLayoutManager linearLayoutManager=new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+        mAdapter = new ListViewAdapter(mListMedia, this);
         mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnFocusChangeListener(new MyItemOnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    Log.e("1231", v.toString() + "121ss:" + v.getVerticalScrollbarPosition());
-                }
-            }
-        });
         recyclerView.setAdapter(mAdapter);
+//        mAdapter.setOnItemClickListener(this);
+
+        recyclerView.setItemsCanFocus(true);
 
         onCreate = true;
         checkPermission();
@@ -163,7 +159,17 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         Log.e(TAG, "扫描中");
         mListMedia.clear();
         mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
-        if (getIntent().getDataString() != null) {
+
+        Log.e("tag", "" + getIntent().getData() + "  " + getIntent().toString());
+        boolean is = false;
+        if (getIntent().getData() == null) {
+            is = false;
+        } else {
+            is = true;
+        }
+        if (is) {
+            String prefix = getIntent().getData().toString().substring(getIntent().getData().toString().lastIndexOf("/"), getIntent().getData().toString().length());
+            prefix = prefix.substring(1, prefix.length());
             Intent intent = getIntent();
             intent.getDataString();
             try {
@@ -175,12 +181,14 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                     if (!pDialog.isShowing()) {
                         return;
                     }
-                    if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                    if (Objects.equals(Integer.parseInt(prefix), mListMedia.get(i).id)) {
                         intentIndex = i;
                         break;
                     }
                 }
+
                 if (intentIndex == -1) {
+                    final String finalPrefix = prefix;
                     MediaScannerConnection.scanFile(this, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
                         @Override
                         public void onScanCompleted(String path, Uri uri) {
@@ -193,15 +201,17 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                                 if (!pDialog.isShowing()) {
                                     return;
                                 }
-                                if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                                if (Objects.equals(Integer.parseInt(finalPrefix), mListMedia.get(i).id)) {
                                     intentIndex = i;
                                     break;
                                 }
                             }
+                            update();
                         }
                     });
                     Log.e("your 被我解决了吧", "" + intentIndex);
                 }
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -254,6 +264,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         }
     }
 
+
     @Click
     public void fab(View view) {
         //noinspection unchecked
@@ -297,10 +308,15 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             return;
         }
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String storagePath = "/storage";
+        String storagePath = "/mnt/";
+//        String usbStoragePath = "/usb_storage";
+//        File mFile = new File(storagePath);
+//        Log.e("mFile.getParent()",mFile.getParent());
         final ArrayList<String> strListMusic = Utils.folderScan(filePath);
         final ArrayList<String> strStorageListMusic = Utils.folderScan(storagePath);
+//        final ArrayList<String> strUsbStorageListMusic = Utils.folderScan(usbStoragePath);
         strListMusic.addAll(strStorageListMusic);
+//        strListMusic.addAll(strUsbStorageListMusic);
         Log.e("音乐列表长度", "" + strListMusic.size());
         if (strListMusic.size() != 0) {
             final String[] mStr = new String[strListMusic.size()];
