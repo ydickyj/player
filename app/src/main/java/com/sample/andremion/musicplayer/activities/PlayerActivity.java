@@ -23,7 +23,6 @@ import android.content.ServiceConnection;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -50,27 +49,6 @@ public abstract class PlayerActivity extends AppCompatActivity {
 
     public boolean mBound = false;
     private PlayerService mService;
-    /**
-     * Defines callbacks for service binding, passed to bindService()
-     */
-    private final ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
-            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
-            mService = binder.getService();
-//            Log.e("12312",""+mService);
-            mBound = true;
-            onBind();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName classname) {
-            mBound = false;
-            onUnbind();
-        }
-    };
     private TextView mTimeView;
     private TextView mDurationView;
     private TextView mName;
@@ -109,6 +87,27 @@ public abstract class PlayerActivity extends AppCompatActivity {
             return false;
         }
     });
+    /**
+     * Defines callbacks for service binding, passed to bindService()
+     */
+    private final ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to PlayerService, cast the IBinder and get PlayerService instance
+            PlayerService.LocalBinder binder = (PlayerService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+            sendBroadcast(new Intent("onBindFinish"));
+            onBind();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName classname) {
+            mBound = false;
+            onUnbind();
+        }
+    };
 
     private void onUpdateProgress(int position, int duration, String name, String author, String albums) {
         if (mTimeView != null) {
@@ -125,13 +124,14 @@ public abstract class PlayerActivity extends AppCompatActivity {
         }
         if (mLyricView != null) {
             File lrcFile;
+
             if (!(getCurrentName().length() < 4)) {
 
-                //                Log.e("getCurrentName", "" + (getCurrentName().length()));
+                Log.e("getCurrentPath()", new File(getCurrentPath()).getParent());
 
-                isFolderExists(Environment.getExternalStorageDirectory().toString() + "/Music/");
+                isFolderExists(new File(getCurrentPath()).getParent());
 
-                lrcFile = new File(Environment.getExternalStorageDirectory().toString() + "/Music/" + name.substring(0, (name.length() - 4)) + ".lrc");
+                lrcFile = new File(new File(getCurrentPath()).getParent() + "/" + name.substring(0, (name.length() - 4)) + ".lrc");
                 if (lrcFile.exists()) {
                     if (!Objects.equals(mOldName, lrcFile.getName())) {
                         Log.e("TAG", "setLyricFile");
@@ -191,6 +191,7 @@ public abstract class PlayerActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 
     @Override
@@ -326,21 +327,20 @@ public abstract class PlayerActivity extends AppCompatActivity {
         if (mBound) {
             mUpdateProgressHandler.sendEmptyMessage(1);
         }
-
     }
 
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
+
+    public void onRelease() {
+        mService.releaseAll();
+    }
 
     boolean isFolderExists(String strFolder) {
         File file = new File(strFolder);
-        if (!file.exists()) {
-            if (file.mkdirs()) {
-                return true;
-            } else {
-                return false;
-
-            }
-        }
-        return true;
-
+        return file.exists() || file.mkdirs();
     }
 }

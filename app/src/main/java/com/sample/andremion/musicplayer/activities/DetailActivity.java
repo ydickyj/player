@@ -17,6 +17,8 @@
 package com.sample.andremion.musicplayer.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sample.andremion.musicplayer.R;
+import com.sample.andremion.musicplayer.broadcastReceiver.MyFirstReceiver;
 import com.sample.andremion.musicplayer.listener.DialogListener;
 import com.sample.andremion.musicplayer.listener.VisualizerListener;
 import com.sample.andremion.musicplayer.view.BottomDialog;
@@ -95,17 +98,38 @@ public class DetailActivity extends PlayerActivity {
     private boolean finishInitDialog = false;
     private boolean isBackPressed = false;
     private boolean isPause = false;
-
+    private MyFirstReceiver mReceiver = new MyFirstReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case "onBindFinish":
+                    play();
+                    setVisualizerViewListener(new VisualizerListener() {
+                        @Override
+                        public void updateView(byte[] fftOrBytes) {
+                            if (!newBtn.isVisible()) {
+                                mVisualizerView.updateVisualizer(fftOrBytes);
+                            }
+                        }
+                    });
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         share = getSharedPreferences("userData", MODE_PRIVATE);
-//音量控制,初始化定义
+        //音量控制,初始化定义
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
     }
 
     @AfterViews
     void afterView() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("scanFlag");
+        filter.addAction("onBindFinish");
+        registerReceiver(mReceiver, filter);
         mVisualizerView = new VisualizerView(this);
         mVisualizerView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -114,28 +138,9 @@ public class DetailActivity extends PlayerActivity {
         mVisualizerView.setmHeight(8);// 让水位处于最高振幅
         mVisualizerView.setFocusable(false);
         ll.addView(mVisualizerView);
-//        getWindow().getSharedElementEnterTransition().addListener(new TransitionAdapter() {
-//            @Override
-//            public void onTransitionEnd(Transition transition) {
-//
-//            }
-//        });
         lyricView.setVisibility(View.VISIBLE);
         lyricView.setFocusable(false);
         lyricView.setEnabled(false);
-        if (mBound) {
-            play();
-            setVisualizerViewListener(new VisualizerListener() {
-                @Override
-                public void updateView(byte[] fftOrBytes) {
-                    if (!newBtn.isVisible()) {
-                        mVisualizerView.updateVisualizer(fftOrBytes);
-                    }
-                }
-            });
-        } else {
-            bindService();
-        }
         initBottomDialog();
         final boolean[] isOneClicked = {false, false};
         rewind.setOnKeyListener(new View.OnKeyListener() {
@@ -181,7 +186,6 @@ public class DetailActivity extends PlayerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Background
@@ -213,24 +217,7 @@ public class DetailActivity extends PlayerActivity {
         finishInitDialog = true;
     }
 
-    @Background
-    void bindService() {
-        while (!mBound) {
-            if (isBackPressed) {
-                return;
-            }
-            Log.e("wait", "等待服务初始化完毕");
-        }
-        play();
-        setVisualizerViewListener(new VisualizerListener() {
-            @Override
-            public void updateView(byte[] fftOrBytes) {
-                if (!newBtn.isVisible()) {
-                    mVisualizerView.updateVisualizer(fftOrBytes);
-                }
-            }
-        });
-    }
+
 
 
     @Override
@@ -345,6 +332,12 @@ public class DetailActivity extends PlayerActivity {
         SharedPreferences.Editor edit = share.edit(); //编辑文件
         edit.putInt("band" + index, getBandLevel((short) index));         //根据键值对添加数据
         edit.apply();  //保存数据信息
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     private void initView(View v) {

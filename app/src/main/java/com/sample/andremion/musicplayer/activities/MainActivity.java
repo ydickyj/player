@@ -3,6 +3,7 @@
 package com.sample.andremion.musicplayer.activities;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -73,7 +73,6 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
     @ViewById
     TextView tvCounter;
     private int intentIndex = -1;
-    private boolean notNeedWaitServer = false;
     private boolean isScanOver = false;
     private SweetAlertDialog pDialog;
     private ArrayList<String> mListScreen = new ArrayList<>();
@@ -90,47 +89,64 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                     intent.getDataString();
                     Log.e("ACTION_VIEW", intent.getDataString());
                     break;
+                case "onBindFinish":
+                    if (intentIndex != -1 && !isScanOver) {
+                        update(mListMedia, intentIndex);
+                        intentIndex = -1;
+                        isScanOver = false;
+                        fab(null);
+                    } else {
+                        if (mListMedia.size() != 0 && onCreate) {
+                            update(mListMedia, 0);
+                        }
+                    }
+                    break;
             }
         }
     };
+
+    private BroadcastReceiver mScanListener = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            btnRefresh();
+        }
+    };
+
+
+    @AfterViews
+    void afterView() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("scanFlag");
+        filter.addAction("onBindFinish");
+        registerReceiver(mReceiver, filter);
+        IntentFilter f = new IntentFilter();
+        f.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
+        f.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
+        f.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
+        f.addDataScheme("file");
+        registerReceiver(mScanListener, f);
+        mFabView.setFocusable(true);
+        btnRefresh.setFocusable(true);
+        btnRefresh.setFocusableInTouchMode(true);
+        assert recyclerView != null;
+        mAdapter = new ListViewAdapter(mListMedia, this);
+        mAdapter.setOnItemClickListener(this);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setItemsCanFocus(true);
+        onCreate = true;
+        checkPermission();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
         isScanOver = false;
-        notNeedWaitServer = false;
         onResumeUpdate();
     }
 
-    @AfterViews
-    void afterView() {
-//        ((MusicCoverView) mCoverView).setScaleType(ImageView.ScaleType.CENTER_CROP);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("scanFlag");
-        registerReceiver(mReceiver, filter);
-        mFabView.setFocusable(true);
-        btnRefresh.setFocusable(true);
-        btnRefresh.setFocusableInTouchMode(true);
-
-
-        assert recyclerView != null;
-        // improve performance if you know that changes in content do not change the size of the RecyclerView
-        //如果确定每个item的内容不会改变RecyclerView的大小，设置这个选项可以提高性能
-//        recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager=new WrapContentLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(linearLayoutManager);
-        mAdapter = new ListViewAdapter(mListMedia, this);
-        mAdapter.setOnItemClickListener(this);
-        recyclerView.setAdapter(mAdapter);
-//        mAdapter.setOnItemClickListener(this);
-
-        recyclerView.setItemsCanFocus(true);
-
-        onCreate = true;
-        checkPermission();
-    }
-
-    //    判断权限
+    /**
+     * 判断权限,小于api 20的android版本不需要检测版本
+     */
     void checkPermission() {
         if (Build.VERSION.SDK_INT >= 23) {//判断当前系统的版本
             int checkWriteStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);//获取系统是否被授予该种权限
@@ -141,7 +157,8 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
             ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS);
             Log.e(TAG, "" + checkMountPermission);
-            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED || checkRecordAudioPermission != PackageManager.PERMISSION_GRANTED) {//如果没有被授予
+            //如果没有被授予
+            if (checkWriteStoragePermission != PackageManager.PERMISSION_GRANTED || checkReadStoragePermission != PackageManager.PERMISSION_GRANTED || checkRecordAudioPermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, REQUEST_CODE_ASK_WRITE_EXTERNAL_STORAGE);
             } else {
                 btnRefresh();//定义好的获取权限后的处理的事件
@@ -151,6 +168,9 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         }
     }
 
+    /**
+     * 扫描媒体文件，从媒体库中获取文件，在后台运行
+     */
     @Background
     void scanMusicFile() {
         if (!pDialog.isShowing()) {
@@ -161,22 +181,70 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
 
         Log.e("tag", "" + getIntent().getData() + "  " + getIntent().toString());
-        boolean is = false;
-        if (getIntent().getData() == null) {
-            is = false;
-        } else {
-            is = true;
-        }
+        boolean is;
+        is = getIntent().getData() != null;
         if (is) {
-            String prefix = getIntent().getData().toString().substring(getIntent().getData().toString().lastIndexOf("/"), getIntent().getData().toString().length());
-            prefix = prefix.substring(1, prefix.length());
-            Intent intent = getIntent();
-            intent.getDataString();
-            try {
-                String path = URLDecoder.decode(intent.getDataString(), "utf-8");//关键啊 ！
-                Log.e("ACTION_VIEW", path);
-                path = path.substring(7, path.length());
-                final File mFile = new File(path);
+            if (Build.VERSION.SDK_INT >= 23) {
+                Intent intent = getIntent();
+                intent.getDataString();
+                try {
+                    String path = URLDecoder.decode(intent.getDataString(), "utf-8");//关键啊 ！
+                    Log.e("ACTION_VIEW", path);
+                    path = path.substring(7, path.length());
+                    final File mFile = new File(path);
+                    for (int i = 0; i < mListMedia.size(); i++) {
+                        if (!pDialog.isShowing()) {
+                            return;
+                        }
+                        if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                            intentIndex = i;
+                            break;
+                        }
+                    }
+                    if (intentIndex == -1) {
+                        MediaScannerConnection.scanFile(this, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                            @Override
+                            public void onScanCompleted(String path, Uri uri) {
+                                if (!pDialog.isShowing()) {
+                                    return;
+                                }
+                                mListMedia.clear();
+                                mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
+                                for (int i = 0; i < mListMedia.size(); i++) {
+                                    if (!pDialog.isShowing()) {
+                                        return;
+                                    }
+                                    if (Objects.equals(mFile.getName(), mListMedia.get(i).getDisplay_name()) && Objects.equals(mFile.getAbsolutePath(), mListMedia.get(i).getPath())) {
+                                        intentIndex = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                        Log.e("your 被我解决了吧", "" + intentIndex);
+                    }
+                    if (intentIndex == -1) {
+                        MediaEntity intentData = new MediaEntity();
+                        Uri mUri = intent.getData();
+                        intentData.setUri(mUri);
+                        intentData.setDisplay_name((mUri).getLastPathSegment());
+                        intentData.setPath(mUri.getPath());
+                        Log.e("your 被我解决了吧", "" + mUri.getPath());
+                        mListMedia.add(intentData);
+                        if (mListMedia.size() >= 1) {
+                            intentIndex = (mListMedia.size() - 1);
+                        } else {
+                            intentIndex = 0;
+                        }
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                String prefix = getIntent().getData().toString().substring(getIntent().getData().toString().lastIndexOf("/"), getIntent().getData().toString().length());
+                prefix = prefix.substring(1, prefix.length());
+                Intent intent = getIntent();
+                intent.getDataString();
                 for (int i = 0; i < mListMedia.size(); i++) {
                     if (!pDialog.isShowing()) {
                         return;
@@ -186,62 +254,27 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                         break;
                     }
                 }
-
                 if (intentIndex == -1) {
-                    final String finalPrefix = prefix;
-                    MediaScannerConnection.scanFile(this, new String[]{path}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                        @Override
-                        public void onScanCompleted(String path, Uri uri) {
-                            if (!pDialog.isShowing()) {
-                                return;
-                            }
-                            mListMedia.clear();
-                            mListMedia.addAll(Utils.getAllMediaList(getApplicationContext(), null));
-                            for (int i = 0; i < mListMedia.size(); i++) {
-                                if (!pDialog.isShowing()) {
-                                    return;
-                                }
-                                if (Objects.equals(Integer.parseInt(finalPrefix), mListMedia.get(i).id)) {
-                                    intentIndex = i;
-                                    break;
-                                }
-                            }
-                            update();
-                        }
-                    });
-                    Log.e("your 被我解决了吧", "" + intentIndex);
-                }
+                    MediaEntity intentData = new MediaEntity();
+                    intentData.setUri(intent.getData());
+                    intentData.setDisplay_name((intent.getData()).getLastPathSegment());
+                    mListMedia.add(intentData);
+                    if (mListMedia.size() >= 1) {
+                        intentIndex = (mListMedia.size() - 1);
+                    } else {
+                        intentIndex = 0;
+                    }
 
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-        if (!onCreate) {
-            ArrayList<MediaEntity> temporaryList = new ArrayList<>();
-            for (int i = 0; i < mListMedia.size(); i++) {
-                if (!pDialog.isShowing()) {
-                    return;
                 }
-                for (int a = 0; a < mListScreen.size(); a++) {
-                    if (!pDialog.isShowing()) {
-                        return;
-                    }
-                    if (Objects.equals(mListMedia.get(i).getPath(), mListScreen.get(a))) {
-                        temporaryList.add(mListMedia.get(i));
-                        break;
-                    }
-                }
-                Log.e("路径", mListMedia.get(i).getPath());
             }
-            mListMedia.clear();
-            mListMedia.addAll(temporaryList);
-        } else {
-            onCreate = false;
         }
         Log.e(TAG, "扫描结束");
         update();
     }
 
+    /**
+     * 更新界面
+     */
     @UiThread
     void update() {
         if (tvCounter != null) {
@@ -250,39 +283,19 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         mAdapter.notifyDataSetChanged();
         if (mBound) {
             update(mListMedia, 0);
-        } else {
-            bindService();
         }
         if (pDialog.isShowing()) {
             pDialog.dismissWithAnimation();
         }
-        if (intentIndex != -1 && !isScanOver) {
-            update(mListMedia, intentIndex);
-            intentIndex = -1;
-            isScanOver = false;
-            fab(null);
-        }
     }
-
 
     @Click
     public void fab(View view) {
-        //noinspection unchecked
-//        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-////                new Pair<>(mCoverView, ViewCompat.getTransitionName(mCoverView)),
-//                new Pair<>(mTitleView, ViewCompat.getTransitionName(mTitleView)),
-//                new Pair<>(mTimeView, ViewCompat.getTransitionName(mTimeView)),
-//                new Pair<>(mDurationView, ViewCompat.getTransitionName(mDurationView)),
-////                new Pair<>(mFabView, ViewCompat.getTransitionName(mFabView)),
-//                new Pair<>(mProgressView, ViewCompat.getTransitionName(mProgressView)));
-//        ActivityCompat.startActivity(this, new Intent(this, DetailActivity_.class), options.toBundle());
         if (mListMedia.size() != 0) {
-            notNeedWaitServer = true;
             startActivity(new Intent(this, DetailActivity_.class));
         } else {
             Toast.makeText(this, "media list is null", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Click(R.id.btn_refresh)
@@ -293,71 +306,7 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                 .setTitleText("Loading");
         pDialog.setCancelable(true);
         pDialog.show();
-        if (onCreate) {
-            scanMusicFile();
-        } else {
-            scanSdCard();
-        }
-
-    }
-
-
-    @Background
-    public void scanSdCard() {
-        if (!pDialog.isShowing()) {
-            return;
-        }
-        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String storagePath = "/mnt/";
-//        String usbStoragePath = "/usb_storage";
-//        File mFile = new File(storagePath);
-//        Log.e("mFile.getParent()",mFile.getParent());
-        final ArrayList<String> strListMusic = Utils.folderScan(filePath);
-        final ArrayList<String> strStorageListMusic = Utils.folderScan(storagePath);
-//        final ArrayList<String> strUsbStorageListMusic = Utils.folderScan(usbStoragePath);
-        strListMusic.addAll(strStorageListMusic);
-//        strListMusic.addAll(strUsbStorageListMusic);
-        Log.e("音乐列表长度", "" + strListMusic.size());
-        if (strListMusic.size() != 0) {
-            final String[] mStr = new String[strListMusic.size()];
-            for (int i = 0; i < strListMusic.size(); i++) {
-                if (!pDialog.isShowing()) {
-                    return;
-                }
-                mStr[i] = strListMusic.get(i);
-            }
-            final int[] completedSum = {0};
-            MediaScannerConnection.scanFile(this, mStr, null, new MediaScannerConnection.OnScanCompletedListener() {
-                @Override
-                public void onScanCompleted(String path, Uri uri) {
-                    if (!pDialog.isShowing()) {
-                        return;
-                    }
-                    completedSum[0]++;
-                    if (completedSum[0] == mStr.length) {
-                        Log.e(TAG, "scanFlag: " + completedSum[0]);
-                        sendBroadcast(new Intent("scanFlag").putStringArrayListExtra("musicList", strListMusic));
-                    }
-                    Log.e(TAG, path);
-
-                }
-            });
-
-        } else {
-            mListMedia.clear();
-            update();
-        }
-    }
-
-    @Background
-    void bindService() {
-        while (!mBound) {
-            if (notNeedWaitServer) {
-                return;
-            }
-            Log.e("wait", "等待服务初始化完毕");
-        }
-        update(mListMedia, 0);
+        scanMusicFile();
     }
 
     @Override
@@ -380,7 +329,6 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
                             sDialog.dismiss();
-                            unregisterReceiver(mReceiver);
                             finish();
                         }
                     })
@@ -391,17 +339,23 @@ public class MainActivity extends PlayerActivity implements MyItemClickListener 
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        if (mBound) {
+            if (!Objects.equals(mListMedia.get(position).getPath(), getCurrentPath())) {
+                update(mListMedia, position);
+            }
+            onCreate = false;
+            startActivity(new Intent(this, DetailActivity_.class));
+        } else {
+            Toast.makeText(this, "播放服务未绑定", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
-    public void onItemClick(View view, int postion) {
-        if (mBound) {
-            if (!Objects.equals(mListMedia.get(postion).getPath(), getCurrentPath())) {
-                update(mListMedia, postion);
-            }
-        } else {
-            bindService();
-        }
-        startActivity(new Intent(this, DetailActivity_.class));
-//        KShareViewActivityManager.getInstance(MainActivity.this).startActivity(this, DetailActivity_.class,R.layout.content_list,R.layout.content_detail, mProgressView);
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        unregisterReceiver(mScanListener);
+        super.onDestroy();
     }
 }

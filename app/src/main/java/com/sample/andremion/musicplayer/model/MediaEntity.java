@@ -1,5 +1,7 @@
 package com.sample.andremion.musicplayer.model;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class MediaEntity implements Serializable {
@@ -16,6 +18,7 @@ public class MediaEntity implements Serializable {
     public String artist; // 艺术家   
     public String singer; //歌手   
     public long size;
+    public Uri uri = Uri.parse("-1");
 
     public String getTitle() {
         return title;
@@ -87,5 +90,13 @@ public class MediaEntity implements Serializable {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
     }
 }

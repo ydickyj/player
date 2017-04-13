@@ -89,6 +89,18 @@ public class PlayerService extends Service {
         return super.onUnbind(intent);
     }
 
+    public void releaseAll() {
+        if (mMediaPlayerIsReady) {
+            mMediaPlayerIsReady = false;
+            mp.release();
+            // 释放所有对象
+//            mVisualizer.release();
+            mEqualizer.release();
+            mPresetReverb.release();
+//            mBass.release();
+            Log.e(TAG, "释放所有对象");
+        }
+    }
 
     public int getPosition() {
         if (mMediaPlayerIsReady && mListMedia.size() != 0) {
@@ -103,7 +115,7 @@ public class PlayerService extends Service {
 
     public int getDuration() {
         if (mListMedia.size() != 0) {
-            return mListMedia.get(musicIndex).getDuration();
+            return mp.getDuration();
         } else {
             return 0;
         }
@@ -272,21 +284,35 @@ public class PlayerService extends Service {
         if (mListMedia.size() == 0) {
             mMediaPlayerIsReady = false;
         } else {
-            try {
-                mp = new MediaPlayer();
-                mp.setDataSource(mListMedia.get(musicIndex).getPath());
-                mp.prepare();
-            } catch (IOException e) {
-                Log.e("hint", "can't get to the song IOException" + e);
-                e.printStackTrace();
+            if (mListMedia.get(musicIndex).getUri() != null) {
+                try {
+                    mp = new MediaPlayer();
+                    mp.setDataSource(this, mListMedia.get(musicIndex).getUri());
+                    mp.prepare();
+                } catch (IOException e) {
+                    mMediaPlayerIsReady = false;
+                    Log.e("hint", "can't get to the song IOException" + e);
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    mp = new MediaPlayer();
+                    mp.setDataSource(mListMedia.get(musicIndex).getPath());
+                    mp.prepare();
+                } catch (IOException e) {
+                    mMediaPlayerIsReady = false;
+                    Log.e("hint", "can't get to the song IOException" + e);
+                    e.printStackTrace();
+                }
+
             }
+            // 初始化示波器
             mMediaPlayerIsReady = true;
             setupEqualizer();
             setupVisualizer();
             setupPresetReverb();
-            // 初始化示波器
-
         }
+
     }
 
     public String getMusicAlbums() {

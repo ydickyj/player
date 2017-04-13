@@ -80,7 +80,9 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+
         return mValues.get(position).id;
+
     }
 
     @Override

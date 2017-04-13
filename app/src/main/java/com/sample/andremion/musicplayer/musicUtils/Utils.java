@@ -64,9 +64,10 @@ public class Utils {
                 mediaEntity.duration = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
                 mediaEntity.size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE));
                 mediaEntity.durationStr = IntToStrTime(mediaEntity.duration);
-                if (!checkIsMusic(mediaEntity.duration, mediaEntity.size)) {
-                    continue;
-                }
+//                if (!checkIsMusic(mediaEntity.duration, mediaEntity.size)) {
+//                    continue;
+//                }
+                mediaEntity.setUri(null);
                 mediaEntity.artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                 mediaEntity.path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                 Log.e(TAG, "PATH:" + mediaEntity.path);
