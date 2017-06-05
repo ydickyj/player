@@ -1,0 +1,6 @@
+[{"appId":1,"appName":"app1","md5":12312,"urlPath":"xxxxx"},
+{"appId":2,"appName":"app2","md5":12312,"urlPath":"xxxxx"},
+{"appId":3,"appName":"app3","md5":12312,"urlPath":"xxxxx"},
+{"appId":4,"appName":"app4","md5":12312,"urlPath":"xxxxx"},
+{"appId":5,"appName":"app5","md5":12312,"urlPath":"xxxxx"},
+{"appId":6,"appName":"app6","md5":12312,"urlPath":"xxxxx"}]
